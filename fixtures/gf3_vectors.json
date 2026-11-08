@@ -1,0 +1,97 @@
+{
+  "schema_version": 1,
+  "description": "Independent GF(3) fixed vectors for first QEC-ADA kernel; no physical error-correction claims.",
+  "trits": [
+    0,
+    1,
+    2
+  ],
+  "add": [
+    {
+      "a": 0,
+      "b": 0,
+      "out": 0
+    },
+    {
+      "a": 1,
+      "b": 2,
+      "out": 0
+    },
+    {
+      "a": 2,
+      "b": 2,
+      "out": 1
+    }
+  ],
+  "multiply": [
+    {
+      "a": 0,
+      "b": 2,
+      "out": 0
+    },
+    {
+      "a": 1,
+      "b": 2,
+      "out": 2
+    },
+    {
+      "a": 2,
+      "b": 2,
+      "out": 1
+    }
+  ],
+  "dot": [
+    {
+      "a": [
+        1,
+        2,
+        1
+      ],
+      "b": [
+        2,
+        0,
+        1
+      ],
+      "out": 0
+    },
+    {
+      "a": [
+        1,
+        1,
+        1
+      ],
+      "b": [
+        1,
+        1,
+        1
+      ],
+      "out": 0
+    },
+    {
+      "a": [
+        2,
+        2,
+        2
+      ],
+      "b": [
+        2,
+        1,
+        0
+      ],
+      "out": 0
+    },
+    {
+      "a": [
+        1,
+        0,
+        2
+      ],
+      "b": [
+        1,
+        2,
+        2
+      ],
+      "out": 2
+    }
+  ]
+}

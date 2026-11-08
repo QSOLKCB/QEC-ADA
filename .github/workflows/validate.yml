@@ -1,0 +1,37 @@
+name: QEC-ADA correctness
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Verify original Git blob identities
+        run: python3 scripts/qecada.py verify
+      - name: Check docs CLI and browser-only source
+        run: python3 -m unittest discover -s tests -v
+      - name: Install native Ada toolchain
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y gnat gprbuild
+      - name: Build Ada project (not a formal proof)
+        run: gprbuild -p -P qec_ada.gpr
+      - name: Execute native finite-field selftest
+        run: ./build/bin/qec_ada selftest
+      - name: Re-run tests against native CLI binary
+        run: python3 -m unittest discover -s tests -v
+      - name: Negative-input smoke test
+        run: |
+          if ./build/bin/qec_ada gf3 add 3 0; then
+            echo "invalid trit accepted" >&2
+            exit 1
+          fi

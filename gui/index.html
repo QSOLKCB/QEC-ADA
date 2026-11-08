@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <meta name="description" content="QEC-ADA offline research and finite-field desk.">
+  <title>QEC-ADA | Local Research Desk</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="catalog.js" defer></script>
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="topbar">
+    <div class="identity">
+      <span class="sigil" aria-hidden="true">⊕</span>
+      <div><strong>QEC-ADA</strong><small>QSOL-IMC / INDEPENDENT NATIVE RESEARCH</small></div>
+    </div>
+    <span class="online"><span class="dot" aria-hidden="true"></span>LOCAL • OFFLINE</span>
+  </header>
+  <div class="shell">
+    <aside class="rail" aria-label="Navigation and capability status">
+      <p class="eyebrow">RESEARCH DESK</p>
+      <nav>
+        <a class="navlink" href="#catalog">01 — Reference library</a>
+        <a class="navlink" href="#field">02 — GF(3) workbench</a>
+        <a class="navlink" href="#boundaries">03 — Evidence boundaries</a>
+      </nav>
+      <section class="health" aria-label="Implementation facts">
+        <p class="eyebrow">CURRENT STATE</p>
+        <div><span>QEC documents mirrored</span><strong>103</strong></div>
+        <div><span>Excluded assets</span><strong>2</strong></div>
+        <div><span>Native capability</span><strong>GF(3)</strong></div>
+        <div><span>Formal proof results</span><strong class="neutral">NOT RUN</strong></div>
+      </section>
+      <p class="rail-foot">No accounts. No telemetry.<br>No remote assets. No build step.</p>
+    </aside>
+    <main id="main">
+      <section class="hero" aria-labelledby="hero-heading">
+        <div class="section-kicker">DETERMINISTIC SYSTEMS / EXACT ARITHMETIC / REPLAYABLE EVIDENCE</div>
+        <h1 id="hero-heading">New engine.<br><em>Old evidence.</em><br>Independent answers.</h1>
+        <p>A native Ada/SPARK project built against a frozen QEC reference.
+          Explore preserved documentation and trial small mathematical operations
+          without confusing a demonstration with a verified decoder.</p>
+        <div class="hero-stats" aria-label="Current scope">
+          <span><b>103</b> source-identical files</span>
+          <span><b>GF(3)</b> first kernel</span>
+          <span><b>0</b> unearned proof claims</span>
+        </div>
+      </section>
+      <section id="catalog" class="panel" aria-labelledby="catalog-title">
+        <div class="panel-title">
+          <div><p class="eyebrow">01 / PRIMARY LIBRARY</p><h2 id="catalog-title">QEC reference catalogue</h2></div>
+          <span class="outline-tag">PINNED • IMMUTABLE</span>
+        </div>
+        <p>Files are byte-identical to the pinned QEC originals. Search indexes
+          document <strong>paths and titles</strong>, not full text. Open a result
+          to view its local source file; the first-level directory structure is preserved.</p>
+        <div class="search-controls">
+          <label for="search">Search documents</label>
+          <input id="search" type="search" placeholder="Try: decoder, qutrit, acoustic, switching…" autocomplete="off">
+          <label for="category">Research category</label>
+          <select id="category"><option value="all">All categories</option></select>
+        </div>
+        <p class="results-count" id="results-count" role="status" aria-live="polite"></p>
+        <ul id="results" class="results" aria-label="Matching historical documents"></ul>
+        <p class="minor">Pinned source: QSOLKCB/QEC — 27bbc798c4e3… • Large
+          release-history JSON and JPEG map are excluded from this local mirror.</p>
+      </section>
+      <section id="field" class="panel" aria-labelledby="field-title">
+        <div class="panel-title">
+          <div><p class="eyebrow">02 / MATHEMATICAL WORKBENCH</p><h2 id="field-title">GF(3) parity-check demonstrator</h2></div>
+          <span class="outline-tag">EDUCATIONAL DEMO</span>
+        </div>
+        <p>Enter two three-trit strings. The browser computes the dot product
+          modulo three. Reproduce the same vector in the Ada CLI. This is
+          <strong>not</strong> evidence of quantum error-correction performance,
+          Ada execution, or a discharged SPARK proof.</p>
+        <form id="field-form" class="field-form">
+          <div><label for="coefficients">Check coefficients</label>
+            <input id="coefficients" maxlength="3" required inputmode="numeric" pattern="[012]{3}" value="121"
+             title="Exactly three digits from 0, 1, 2"></div>
+          <div><label for="errors">Error symbols</label>
+            <input id="errors" maxlength="3" required inputmode="numeric" pattern="[012]{3}" value="201"
+             title="Exactly three digits from 0, 1, 2"></div>
+          <button type="submit">Compute syndrome <span aria-hidden="true">→</span></button>
+        </form>
+        <div class="output-panel"><div><span class="eyebrow">SYNDROME</span><output id="syndrome" aria-live="polite">—</output></div>
+          <code id="formula">Awaiting input</code></div>
+        <p class="minor">Corresponding CLI: <code>qec_ada syndrome 1 2 1 2 0 1</code></p>
+      </section>
+      <section id="boundaries" class="panel" aria-labelledby="bounds-title">
+        <p class="eyebrow">03 / EVIDENCE BOUNDARIES</p><h2 id="bounds-title">What this edition does—and doesn't—establish</h2>
+        <div class="bound-grid">
+          <article><span class="state">PRESENT</span><h3>Source provenance</h3>
+            <p>103 copied artifacts with original Git blob identities and a local re-verification command.</p></article>
+          <article><span class="state">SOURCE</span><h3>Ada core</h3>
+            <p>GF(3) source, a small syndrome boundary and a CLI. Compilers and environments require independent validation.</p></article>
+          <article><span class="state caution">NOT RUN</span><h3>Formal verification</h3>
+            <p>SPARK annotations are candidate proof obligations. This UI claims no GNATprove proof results.</p></article>
+          <article><span class="state caution">NOT TESTED</span><h3>Physical QEC</h3>
+            <p>No experimental hardware, physical thresholds or general decoder equivalence claims.</p></article>
+        </div>
+      </section>
+      <footer>QEC-ADA / QSOL-IMC <span>Independent research • MPL-2.0 • Local execution first</span></footer>
+    </main>
+  </div>
+</body>
+</html>
