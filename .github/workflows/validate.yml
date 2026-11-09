@@ -127,6 +127,14 @@ jobs:
           if-no-files-found: error
           retention-days: 30
 
+      - name: Observe sparse native memory scaling (Linux peak RSS, analytic rho)
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 scripts/phase1e_memory.py --checks 8 --variables 16
+          python3 scripts/phase1e_memory.py --checks 16 --variables 24
+          python3 scripts/phase1e_memory.py --checks 32 --variables 64
+
       - name: Observational paired OPT benchmark (no speedup gate)
         run: python3 scripts/bench_qutrit.py --trials 7
 
