@@ -74,33 +74,57 @@ adjacency and computes SCC/Perron modes in Python's standard library
 for each experiment graph. The experiment **fails** on disagreement
 with native rho/IPR/EEEC, SCC identity or top ranked-energy constraints.
 
-`scripts/phase1e_memory.py` records Linux subprocess peak RSS and
-process time at multiple K(m,n) sizes while checking the analytic
-spectral-radius formula. These are *observational runner measurements*:
-runtime and RSS are not portable deterministic fixtures. The comparison
-to a hypothetical dense float64 B matrix is explicitly a storage-model
-comparison, not a measured competitor implementation.
+`scripts/phase1e_memory.py` now requests an **opt-in Ada-native,
+post-exec VmHWM** via `qec_scale inspect GRAPH --native-rss`. The
+already-executing Ada process reads Linux `/proc/self/status` and reports
+`native_post_exec_peak_rss_kib_linux` (memory observation schema v2).
+It includes the Ada executable, runtime and loader, but **not the
+Python parent's inherited pre-exec address space**. Unlike
+`resource.getrusage(RUSAGE_CHILDREN).ru_maxrss`, the reading is taken
+inside the native program's own new Linux memory mapping.
 
-## Executed sparse-memory observations
+The benchmark verifies the analytic K(m,n) spectral-radius formula.
+These are *observational runner measurements*: runtime and RSS are not
+portable deterministic fixtures. The hypothetical dense float64 B
+comparison remains a storage-model calculation, **not** a measured
+competitor implementation. The normal two-argument `qec_scale inspect`
+output is unchanged; `--native-rss` is strictly opt-in and Linux-only.
+Missing/malformed VmHWM fails closed instead of publishing an estimate.
+`tests/test_phase1e_memory.py` explicitly tests this against an 80 MiB
+Python-parent memory allocation.
 
-GitHub Actions run `42568151303` at commit
-`ebbeb8f923c65fa4bac8101d25e40623b479cd3c` recorded one
-native Ada process per complete-bipartite graph on hosted Ubuntu Linux.
-Each row independently checked the known K(m,n) spectral radius.
+## Executed sparse-memory observations — corrected native measurements
 
-| Input | Edges / directed edges | Native peak RSS | Hypothetical dense float64 B values | Process elapsed |
+GitHub Actions run **`42582761067`** on Phase 1E PR #7, commit
+`d31671910697e31a5120a212016c287933a7b05a`, executed the
+new Linux in-process `VmHWM` measurement method and verified the
+known K(m,n) non-backtracking spectral radius for each graph.
+
+| Input | Edges / directed edges | Ada post-exec peak VmHWM | Hypothetical dense float64 B values | Process elapsed |
 | --- | ---: | ---: | ---: | ---: |
-| K₈,₁₆ | 128 / 256 | 17,964 KiB | 0.5 MiB | 4.54 ms |
-| K₁₆,₂₄ | 384 / 768 | 17,968 KiB | 4.5 MiB | 24.42 ms |
-| K₃₂,₆₄ | 2,048 / 4,096 | **18,416 KiB** | **128 MiB** | 454.42 ms |
+| K₈,₁₆ | 128 / 256 | **4,920 KiB** | 0.5 MiB | 3.69 ms |
+| K₁₆,₂₄ | 384 / 768 | **4,924 KiB** | 4.5 MiB | 15.24 ms |
+| K₃₂,₆₄ | 2,048 / 4,096 | **4,928 KiB** | **128 MiB** | 296.53 ms |
 
-The dense column is **hypothetical allocation for B's float64 values
-alone** (`8*(2*edges)^2` bytes), not an executed dense baseline.
-The process RSS includes runtime/loader overhead and the fixed-capacity
-Ada arrays, so this table does not measure an end-to-end speedup over
-any particular dense implementation. CPU time, allocations and memory
-will vary across environments. The source and graph identities are
-retained in the CI logs and `scripts/phase1e_memory.py`.
+The dense column is a **hypothetical** allocation for a dense float64
+Hashimoto matrix's values alone (`8*(2*edges)^2` bytes). It is
+not an executed dense baseline. VmHWM includes native loader/runtime
+memory, fixed-capacity Ada arrays and everything else in the Ada
+process since exec, so this table is *not* a pure algorithmic heap
+allocation measurement or a demonstrated speedup against dense
+solvers. RSS and runtime can vary across hosts, ASLR, compiler
+versions, and system load. Graph/source identities remain in CI logs.
+
+### Superseded measurement methodology
+
+**The earlier numbers 17,964 / 17,968 / 18,416 KiB**, reported in
+run `42568151303` at `ebbeb8f923c65fa4bac8101d25e40623b479cd3c`,
+came from Linux `resource.getrusage(RUSAGE_CHILDREN).ru_maxrss`.
+Because that reading may include the Python launcher's memory footprint
+before `execve`, **those figures were not isolated Ada executable
+peak RSS and must not be cited as such**. They remain in the
+historical CI logs, and the memory evidence schema was advanced
+from v1 to v2 to distinguish the corrected measurements.
 
 ## Controlled BP experiment — precise scientific model
 
@@ -143,8 +167,12 @@ Model selection uses training-graph labels only. A balanced-accuracy
 threshold is selected with a deterministic conservative tie policy;
 the held-out graphs cannot be reused for tuning. The report includes
 AUROC, average precision, graph-level Spearman correlation and
-held-out confusion matrices. Values with only one outcome class
-are **null**, not guessed as a perfect or zero classifier.
+held-out confusion matrices. AUROC **and average precision (AP)**
+are **null whenever either class is absent**, including the
+all-positive case. In particular, one-class evaluation must never
+publish AP=1.0 as though held-out discrimination were demonstrated.
+Train-only thresholds and the negative preregistered finding remain
+unchanged.
 
 The comparison is observational and exploratory. BP trials within a
 graph are dependent; there are only four held-out graphs. The report

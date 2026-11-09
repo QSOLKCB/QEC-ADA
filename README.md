@@ -205,3 +205,17 @@ uv run --no-project python scripts/phase1e_experiment.py verify \
 [Full Phase 1E methods, results, limits and evidence](docs/PHASE1E_SCALED_SPECTRAL_BP.md).
 The earlier small-graph decoder, SPECTRAL sonification, Strowger receipts
 and independent QEC donor provenance are preserved.
+
+### Phase 1E measurement correction (post-exec RSS)
+
+`scripts/phase1e_memory.py` now obtains Linux `VmHWM` **inside the
+executing Ada binary**, not through a potentially contaminated
+`RUSAGE_CHILDREN` high-water mark. Normal `qec_scale inspect`
+output remains unchanged; the benchmark opts in with `--native-rss`.
+Earlier CI readings obtained from the Python parent were **not isolated
+native RSS measurements** and are superseded by v2 evidence. See the
+[corrected measurements and limitations](docs/PHASE1E_SCALED_SPECTRAL_BP.md).
+
+The same Phase 1E audit also makes average precision undefined (`null`)
+when a held-out dataset contains only failures or only successes,
+matching the AUROC missing-class policy.
