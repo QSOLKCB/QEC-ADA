@@ -26,7 +26,7 @@ package body QEC_NB_Spectral is
 
    function Reachable
      (E : Directed_Array; Count : Natural; Start : Index;
-      Reverse : Boolean) return Membership is
+      Is_Reverse : Boolean) return Membership is
       Seen : Membership := (others => False);
       Queue : Queue_Array := (others => 0);
       Head : Natural := 1;
@@ -40,9 +40,9 @@ package body QEC_NB_Spectral is
          begin
             for J in 1 .. Count loop
                if not Seen (Index (J)) then
-                  if (not Reverse and then Allowed (E, Current, Index (J)))
+                  if (not Is_Reverse and then Allowed (E, Current, Index (J)))
                     or else
-                     (Reverse and then Allowed (E, Index (J), Current))
+                     (Is_Reverse and then Allowed (E, Index (J), Current))
                   then
                      Seen (Index (J)) := True;
                      Tail := Tail + 1;
