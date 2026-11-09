@@ -77,6 +77,41 @@ The output is canonical UTF-8 JSON with a separate SHA-256 identity,
 the parent file and receipt digests, every per-noise observed statistic,
 paired resample ranges and missing-class counts.
 
+## A2. Prespecified independent-seed replication (40 graphs)
+
+This additional Phase 1F cohort was specified **before inspecting any
+cohort output**. It uses the unchanged Phase 1E data generator and
+pre-registered risk/evaluation logic with these distinct, fixed inputs:
+
+| Field | Prespecified value |
+| --- | --- |
+| Seed | `qecada-phase1f-cohort40-001` |
+| Variables/checks per graph | 32 / 24 |
+| Graphs | 40 distinct synthetic source identities |
+| Training / held-out graph counts | 32 / 8 |
+| Held-out IDs | 0, 5, 10, 15, 20, 25, 30, 35 |
+| Error rates | 4%, **8% primary**, 12% |
+| Noise trials per graph/rate | 12 |
+| Total classical BP evaluations | **1,440** |
+| Primary feature | IPR, larger predicts more failures |
+| Baseline | Graph edge density |
+| Frozen signal threshold | Held-out AUROC ≥ 0.65 and ≥0.05 above density |
+| Cluster resampling | 512 deterministic draws of whole held-out graphs |
+| Graph permutations | Exact 8! permutations (if graph rates vary) |
+
+The source graph generator and fixed four structural families are the
+same as Phase 1E; the seed and graph identifiers are new. This is a
+**distinct deterministic synthetic cohort**, not independently sourced
+physical/QLDPC data. The original 20-graph 720-trial evidence and its
+negative outcome remain immutable. Even eight held-out graphs do not
+provide a generalizable performance guarantee or valid quantum threshold.
+
+CI records `evidence/phase1f/cohort40.json` and
+`evidence/phase1f/cohort40-inference.json` as separate 30-day
+artifacts after **complete offline replay of both records**. The
+Phase 1F output must retain negative or null results without modifying
+thresholds in response.
+
 ## B. Actual pinned QEC BP decoder comparison
 
 QEC has its **own genuine** frozen `bp_decode` reference in
