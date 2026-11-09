@@ -10,3 +10,6 @@ __pycache__/
 .idea/
 .vscode/
 .DS_Store
+
+# Independent donor checkout for provenance CI
+.donor-qec/

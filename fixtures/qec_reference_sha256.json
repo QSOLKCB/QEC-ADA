@@ -1,0 +1,420 @@
+{
+  "schema_version": 1,
+  "source_commit": "27bbc798c4e38138ca5b0fff70b15c3271a1917d",
+  "mirror_root": "docs/reference/qec",
+  "algorithm": "SHA-256",
+  "files": [
+    {
+      "path": "ACOUSTIC_CHANNEL_CONTRACT.md",
+      "sha256": "6263f93f89456d819661c4d76613290369bdc1cb2fc87f125ffb889f11afa42c"
+    },
+    {
+      "path": "ACOUSTIC_COMPARATIVE_EVIDENCE.md",
+      "sha256": "8af7e0cbb864ff38a8a28906445f839296fc056ee04f54d4853eda8a66f5cf8f"
+    },
+    {
+      "path": "ACOUSTIC_NOISE_AND_CANCELLATION.md",
+      "sha256": "d0bad08c3da9fb25027ae7b804f8b334935c3757a307cedbc284be74d133e8d3"
+    },
+    {
+      "path": "ACOUSTIC_OFFLINE_LAB.md",
+      "sha256": "42b3540e9d9a305f8f68242b484c0599d0d81c2e6aecaf6666532188838194da"
+    },
+    {
+      "path": "ACOUSTIC_RECEIVER.md",
+      "sha256": "b260317ec7d29e0dd19fc8c79316f1098bd9dbb0c6b11546b8dcb1405dffd64d"
+    },
+    {
+      "path": "ACOUSTIC_SYNDROME_BRIDGE.md",
+      "sha256": "ebe8152e285801ebcbd08c89962a71dbdb24c6ae57310fa710d109d84f23baaf"
+    },
+    {
+      "path": "ACOUSTIC_TRANSPORT_REPLAY.md",
+      "sha256": "5c714906d832d6e404a816ecdfd0521f9a782df6d6565def40934dca0dcd6b70"
+    },
+    {
+      "path": "architecture/ALGORITHM_PATTERNS.md",
+      "sha256": "3fea729ef4f38b598aca7008eac1703dbcadc7519246ed0b192ab4318f57a0e9"
+    },
+    {
+      "path": "architecture/API_CONTRACT.md",
+      "sha256": "8682784cc303b7067d4c0cdf6b3a1d3263d0f101450aab02512f16888d1023d9"
+    },
+    {
+      "path": "architecture/ARCHITECTURE.md",
+      "sha256": "8ec8f8865c76ac563a5cd2271bf1df3e19bcdca625621c01d63e383070eeb2f3"
+    },
+    {
+      "path": "architecture/IMPLEMENTATION.md",
+      "sha256": "806ea0333fc40925c2a77c9df748e9adb88b7774e66fd623ba391a62bfeb8485"
+    },
+    {
+      "path": "architecture/INV.md",
+      "sha256": "c0ab3d2b0b0393f714b747d9d23f91fa6cce74e78566c9f7e82317000625d384"
+    },
+    {
+      "path": "architecture/INVARIANTS.md",
+      "sha256": "c4f89318372c055dc6fd9702029a4dea39c691d7cd23985fb9d1449a79e6d4e2"
+    },
+    {
+      "path": "architecture/SYSTEM.md",
+      "sha256": "73205fe457755cad00dc690f7b5cc186530da687104cbf1aeadba55fb879af58"
+    },
+    {
+      "path": "architecture/THEORY.md",
+      "sha256": "0d0d85bb02a141665136f3001240f2578eb8e521fa2a26b93488217c31d7fb78"
+    },
+    {
+      "path": "archive/README_BEFORE_V177_1_CLEANUP.md",
+      "sha256": "84bb99e1fc2ad4290cec6faa061a3432750950c2b5976377be1dbc423c97045d"
+    },
+    {
+      "path": "archive/ROADMAP_PRE_V170.md",
+      "sha256": "d470a56d4b8e7388db21ad1014471cb4403f18ba39b0d605a67b8074c565508a"
+    },
+    {
+      "path": "BULK_MERGE_FORK_GUIDE.md",
+      "sha256": "ab3589640f36ae6cbc5106c34238a337f3141133d525d029600d4677419e0c20"
+    },
+    {
+      "path": "CAPABILITIES.md",
+      "sha256": "fc68027acf834c0953ac334b9a5c5065b128d40d8946b8fec6899beb3013e781"
+    },
+    {
+      "path": "CI_VALIDATION_BOUNDARIES.md",
+      "sha256": "5441ed2895fa1a812f4a9f275ad1adbc1c393e346fe849b899ba1e2a7c443c2f"
+    },
+    {
+      "path": "CITATION_AND_ATTRIBUTION.md",
+      "sha256": "58096777cdcc46d3d35b661138d3ef2c5420fb90b48d292dbb0177f83f897462"
+    },
+    {
+      "path": "contributing/AUDIT_CHECKLIST.md",
+      "sha256": "8ad71adfbcd8e9fc4ca85948d00df33621d672acb061d2e7f5e42e8a49901e1a"
+    },
+    {
+      "path": "contributing/IMPLEMENTATION_RULES.md",
+      "sha256": "48279e237eac4220a7fc1f3d6e8cb83f5e0754d5234c499028cc4d1613d922f0"
+    },
+    {
+      "path": "contributing/UPGRADE_CHECKLIST.md",
+      "sha256": "0180b2b125927365a9c0827e839da2a7d13439390e3ce738cf9978e488238290"
+    },
+    {
+      "path": "CROSS_ERA_MIGRATION_AND_SELECTION.md",
+      "sha256": "97dd1af1f300f39d32ef0e3acd7a444e236aed8ffa5c0c2a7bd3e9ee66307d88"
+    },
+    {
+      "path": "CROSSBAR_COMMON_CONTROL.md",
+      "sha256": "8cb083319d334756725016ba4d3f69865ed5a72fe25d3b6f2fa537f218e2c666"
+    },
+    {
+      "path": "CROSSBAR_CONTENTION.md",
+      "sha256": "887ea47002a1ab2666bd4e3c4793545e2cb4ef037c50af0b945fe618196d973f"
+    },
+    {
+      "path": "CROSSBAR_CONTINUITY.md",
+      "sha256": "fa2dd2c2e48adb780046f9fd0fbdfdb7258b3aa73ffa87e4cf9cb0f577ffc3a8"
+    },
+    {
+      "path": "CROSSBAR_COORDINATE_MATRIX.md",
+      "sha256": "828cab46226ebbbf8c1600ecf66da4b24e71a8ef68430902b97e60949f472313"
+    },
+    {
+      "path": "CROSSBAR_MULTISTAGE_SELECTION.md",
+      "sha256": "2e57bcd5bdb876f65363855dd2508f9e44250281d3edbbf3dfd9ba042c4981dd"
+    },
+    {
+      "path": "DIGITAL_TIME_DIVISION_SWITCHING.md",
+      "sha256": "9b3fefa6834abe8c018bf020e6ecbaf2f3e682d4015e04eb5e942a61ed0258ea"
+    },
+    {
+      "path": "ESS_CALL_PROCESSING.md",
+      "sha256": "15379c8501d89383127ba9a109eab5dbc7fc95a280e13aa5658370109d503256"
+    },
+    {
+      "path": "ESS_STORED_PROGRAM_SKELETON.md",
+      "sha256": "f686c228f5dad09e45b127999590b2e5608af5667db277c79557bf4f54221828"
+    },
+    {
+      "path": "experiments.md",
+      "sha256": "66587ba7085afe1cd4ba31145a746a6fc1fca93a5edea9233c7afbfaadc3bb3a"
+    },
+    {
+      "path": "guides/EXPERIMENTS.md",
+      "sha256": "df1f8b46ccd26b658a589f1fb070895a3f24ef10bba754d98131142e7eaeee79"
+    },
+    {
+      "path": "guides/INSTALL.md",
+      "sha256": "fa6454022a84def374905c40f2fe5802fa59ab58a05d56292271ae1a649cbca3"
+    },
+    {
+      "path": "guides/QISKIT_INTEGRATION.md",
+      "sha256": "84e6325f14aaebf650465e9a462fb90c0dbaf1009b5d63043735f707b55e8beb"
+    },
+    {
+      "path": "guides/QUICKSTART.md",
+      "sha256": "772a46b7ae4706d313e15634e0bf0e213887eadf21a593b6b0620a7d544bb914"
+    },
+    {
+      "path": "guides/USAGE_GUIDE.md",
+      "sha256": "db494f62673b5d823ef5fb67329c1a377aa7ddfab85b65a4f0a45f9f02eb6428"
+    },
+    {
+      "path": "guides/USAGE.md",
+      "sha256": "d48ade06e43c7f6a0260799da8178b7a535eb835980bf1a9fb06c99c115c7136"
+    },
+    {
+      "path": "INTEROP_POLICY.md",
+      "sha256": "3cd7cb33972df38cc13e8a5d54553d9378b4bf2250dd8ba1551923a4ede80b0a"
+    },
+    {
+      "path": "IRC_BOT_GUIDE.md",
+      "sha256": "356910ea0707a91af125714d17ecadfead1f94e59602c9ed5d035643fc76c8c0"
+    },
+    {
+      "path": "labs/acoustic-evidence.html",
+      "sha256": "c89e47074a9ec56cc5caec20b1b47017cd27bcb1f915dbaafeb21e305a3dedf0"
+    },
+    {
+      "path": "labs/acoustic-evidence.js",
+      "sha256": "895db9c0a904f6ea2bf36413e167c4ce230a6a1d0ac5e3a2fb7bbeb25acb3471"
+    },
+    {
+      "path": "labs/digital/index.html",
+      "sha256": "5b89658aa34422d50c4ee70dbf93762c14ef04543d383198b4e28e03caa2c2f8"
+    },
+    {
+      "path": "labs/packet/index.html",
+      "sha256": "01e02748b6a46cf1ff171223553609d19a69d0d568d507fe849096cb70794b09"
+    },
+    {
+      "path": "LEGAL_THIRD_PARTY.md",
+      "sha256": "03011a24c724c7e7d80b23ae6c01c8c5cd7e81073dfbe04f033e8494c567cbe3"
+    },
+    {
+      "path": "migration_v3.0.1.md",
+      "sha256": "e42c500baca982874f039e836210e439a61669ff4235cf591720e0cdbe1729cf"
+    },
+    {
+      "path": "MIRROR_REPOS_GUIDE.md",
+      "sha256": "0988d9a125db2ad5b82db8413716d4949082070b8422cb41e13cd73d0280a86a"
+    },
+    {
+      "path": "NB_EIGENSOLVER_REPRODUCIBILITY.md",
+      "sha256": "88f17e6c5ad08dd73194bbf52da1c54f60fba161a0fa7d01558274adb5c0e02a"
+    },
+    {
+      "path": "nb_gradient_mutation.md",
+      "sha256": "94186e72ce1b550acdd9f13a8eb2164b5875f963d77c00142ec92a80614485f3"
+    },
+    {
+      "path": "NEXUS_QEC_BRIDGE.md",
+      "sha256": "0b321f7750bf2b1d15a5b7566a4b580e53819e81f6211f29064cd3ba8f2a71d7"
+    },
+    {
+      "path": "nvidia_coherent_memory.md",
+      "sha256": "f7193bc2ce6d779ede799cf3495ffce3dc30994acf8f3c0b571774aeaeccd1ba"
+    },
+    {
+      "path": "PACKET_FABRIC_AND_SOFTSWITCH.md",
+      "sha256": "40dc659dfe2a7518bd47856d488af74e090f55e5e919dcb5920f26f6041f5201"
+    },
+    {
+      "path": "PANEL_SEPARATED_CONTROL_EXCHANGE.md",
+      "sha256": "a8ab6b375e970c63d5cd05254b408f5f8d9a811db11c68dcc0164f2ecd19c464"
+    },
+    {
+      "path": "phase_diagrams.md",
+      "sha256": "b8176453b62f915b58ea0f2acb471fad4f37f39e83b1b9e02c0954aeebc5aab5"
+    },
+    {
+      "path": "proof_artifact_schema.md",
+      "sha256": "f4d259fa2d70e927b05310d986ee1bd0a8d198defd6dbc489d5bb9fcb5ae6ce5"
+    },
+    {
+      "path": "QEC_v1.6_Benchmarking_Overview.md",
+      "sha256": "4741a8627796152b612d5e480fc875e1c3ec19bb1f2aafa115aa63902322c9b8"
+    },
+    {
+      "path": "QUQUART_FER_BATTERY.md",
+      "sha256": "e83c99f1b370f77b36d4ac6a8421de3eacb0de25d4addd2888b7fe532ebebc6a"
+    },
+    {
+      "path": "QUQUART_FOUR_STATE_QEC.md",
+      "sha256": "3b947fcd81b65b00c75eac106a0c113f382e4404ccb36b5390fcde61d6afef8f"
+    },
+    {
+      "path": "QUTRIT_CONSTRUCTION_BENCHMARK.md",
+      "sha256": "2d56b7a4d1e8da11d61823faad4425ef866197ad3f9338b11a7c1f46be476324"
+    },
+    {
+      "path": "QUTRIT_DECODER_BENCHMARKS.md",
+      "sha256": "ed7867cd8e0542565c2ee9f20a6e8e1a82c8170448493bb9ee7e8d6723236c2f"
+    },
+    {
+      "path": "QUTRIT_HARMONIC_QEC.md",
+      "sha256": "5c7eaa2a6aca2db3c7ae6a3b06054919bce32548378e5a3bf2d26d3c4eb0921a"
+    },
+    {
+      "path": "README.md",
+      "sha256": "b413383b59e794e2833c8970104b0540fc76352bad8cb4e8eabe4eecfc2e5f73"
+    },
+    {
+      "path": "releases/CHANGELOG.md",
+      "sha256": "10cfbad5b4e4d4ab8ab054d0f890e7e53ae6edf3dd69eebfab3c64a8536c0a38"
+    },
+    {
+      "path": "releases/RELEASE_NOTES.md",
+      "sha256": "5b3982694d7e03f357f052914435dda50c89d761369f10d58aecb497541881dd"
+    },
+    {
+      "path": "replications/NEXUS_HISTORICAL_SOURCE_BOUNDARY.md",
+      "sha256": "d3155096513e68d30255aba05cfb2421e5bad8c89ea049fb472780cd2c175ac2"
+    },
+    {
+      "path": "replications/nexus_v4_0_1_qbraid_receipt.json",
+      "sha256": "026e0743fd424c5e2b2afd10a417ad4e944c599b86f42911da3be40133efad47"
+    },
+    {
+      "path": "replications/NEXUS_V4_0_1_QBRAID.md",
+      "sha256": "c1bb04394eaafdf3be2a1c75643666b1de8548abf0a5c238f84c32dc5e5dac0e"
+    },
+    {
+      "path": "replications/qbraid_v170_1_0_receipt.json",
+      "sha256": "e00da1746a942ec233ab7f1568865f65b72ac9937d9cc8e3fb4f12e89f1ba04e"
+    },
+    {
+      "path": "replications/QBRAID_V170_1_0_REPLICATION.md",
+      "sha256": "6a59d846c2b20632da0be3fa7155e944896a4800318f0e9c88589cb130bf5b8d"
+    },
+    {
+      "path": "reports/v5.5_spectral_boundary_alignment.md",
+      "sha256": "60bfffd4b6fc24e944fcd3978e9078f70da2e34655ea003060498c27a1b9f096"
+    },
+    {
+      "path": "reports/v5.6_spectral_trapping_sets.md",
+      "sha256": "074ce68d07530ed79ee6734b3028a1ad5d93d3f149057054d9879e283d94496c"
+    },
+    {
+      "path": "reports/v5.7_bp_phase_space_and_ternary_topology.md",
+      "sha256": "4bca59adbfdbd40ca63c86706d789d7299f40c8bdfe87602dd69e5e0daf47949"
+    },
+    {
+      "path": "reports/v5.8_ternary_basin_analysis.md",
+      "sha256": "800392436828013f0ff74cf0687b998c512d69c2518055303b635298e3181255"
+    },
+    {
+      "path": "reports/v5.9_decoder_phase_diagrams.md",
+      "sha256": "49fa6e9c3c3fb0bdef50dc5b1f7644b48bf21f2fad40211b81ba7e4dca49b0f9"
+    },
+    {
+      "path": "reports/v6_bp_stability_spectra.md",
+      "sha256": "5849f2935ff785c7c4d00c5429821136bf690356f787d7d3392114739710a2c2"
+    },
+    {
+      "path": "REPRODUCIBILITY.md",
+      "sha256": "557c36facdd5526b2d34b62fd00867e87237b7a9c2673b85148a1cf8dac44d7c"
+    },
+    {
+      "path": "research/CSS_AND_DELIVERY_EXPERIMENTS.md",
+      "sha256": "2aa9eef4b43e24ec9f250456d6fe4d7e0661c2a8389d8196add524adab2771df"
+    },
+    {
+      "path": "research/qec-v170.3.0-independent-fer-verification/CITATION.cff",
+      "sha256": "3812538743783bd25f5f04700ab9f6bdce280af4e77ad2c39833d5c0bdd6aa37"
+    },
+    {
+      "path": "research/qec-v170.3.0-independent-fer-verification/package_manifest.json",
+      "sha256": "125e6be19b4f3b40094cf99c1ac0800e79f42904e8ef7c9cf235b59672644beb"
+    },
+    {
+      "path": "research/qec-v170.3.0-independent-fer-verification/README.md",
+      "sha256": "b3e79de640de3c4ae76dc810ca69e3c3eb118ed3d420e0ec7288503203e9cb32"
+    },
+    {
+      "path": "research/qec-v170.3.0-independent-fer-verification/REPORT.md",
+      "sha256": "504caa37c16ff866e5f6e62fd3863fa364fa25486f366f3862638838bb1c1017"
+    },
+    {
+      "path": "research/qec-v170.3.0-independent-fer-verification/verification_receipt.json",
+      "sha256": "8e9a902fd28f396aa53ed37696507716dd899e0589dfb24079c08d7fd9a857f7"
+    },
+    {
+      "path": "research/qec-v170.3.0-independent-fer-verification/zenodo_metadata.json",
+      "sha256": "622a4b5a242f14af8750cc0e3cb78a01acf296b0884e69c05bb553e96924c3a2"
+    },
+    {
+      "path": "research/qec-v170.3.0-independent-fer-verification/ZENODO_UPLOAD_GUIDE.md",
+      "sha256": "17cb81f5f4c285efa3c6518a0824be792d82d5d8e6972a4d3d1a1a1feffaa7e2"
+    },
+    {
+      "path": "research/qec-v170.3.0-independent-fer-verification/ZENODO_UPLOAD_SHA256.txt",
+      "sha256": "1a731daf26e0c9d5304d4a284c2ce35296e2c960c9a2a92ac878dc4d38572a1e"
+    },
+    {
+      "path": "research/QUTRIT_CSS_DECOUPLING_CONFORMANCE.md",
+      "sha256": "66145a95e2cf2f131e36ad8880b811d826f622c5614775a066b9ba8a99c1dede"
+    },
+    {
+      "path": "roadmap/ROADMAP.md",
+      "sha256": "a5c9f3afa5607941dfeee1a8001c3e62bb5bdf76d053335fdb2a51ddcbb8f315"
+    },
+    {
+      "path": "roadmap/SWITCHING_ARTIFACT_REGISTRY.md",
+      "sha256": "3afc677309e19c7bbbb2a465882ee8c4fdb66608709471c96e103455cce316cb"
+    },
+    {
+      "path": "roadmap/SWITCHING_SAFETY_AND_ACCEPTANCE.md",
+      "sha256": "5a3d6ef4d0401bedf0779069390c3f0c2195ba489e9c7178baca00fa22b4ef5c"
+    },
+    {
+      "path": "roadmap/TELECOM_SWITCHING_REFERENCES.md",
+      "sha256": "8dacd5d18125b841fe0f209e089325a6fbcf36ddb8ca11b140f2c574b917f5ef"
+    },
+    {
+      "path": "security/PHASE621_OPERATIONAL_TRUST_ENFORCEMENT.md",
+      "sha256": "1aa821397fce110c19b00f7055658e5e71b6b7e8a1a22df4313128cd6765defa"
+    },
+    {
+      "path": "security/PHASE622_REPLAY_AND_REVOCATION.md",
+      "sha256": "c1346a65bb4e514a259280c431d681d5bc54228f714da5481aee7c230ea2045a"
+    },
+    {
+      "path": "security/PHASE623_END_TO_END_ADVERSARIAL_TRIAL.md",
+      "sha256": "111974f61280ba50373eae21f6f9ee9ee058b8a3a9aae9efe331f6a1fba39e42"
+    },
+    {
+      "path": "sonification/COSMOVIRUS_E8_PHI_SONIFICATION.md",
+      "sha256": "295a10da9327d0dc5fc63106b39e81e0e6ebf88d6fb454b4b183f3b723449b6e"
+    },
+    {
+      "path": "spectral_basin_visualization.md",
+      "sha256": "07318218d43de675ec9df6b9b36b3821247fe0d7e73e5f849e0f0ce85d0d4646"
+    },
+    {
+      "path": "STROWGER_SYNDROME_EXCHANGE.md",
+      "sha256": "d5a62b93cf11dcbaaa37a782ed413cc79e9af9bad3e2bc823d58bb5bc5db2aa7"
+    },
+    {
+      "path": "surface_memory_correlation.md",
+      "sha256": "e464c1db61127f45e318a63a4596ef4582fd7b49b25c8d8db43a0615e72e3db2"
+    },
+    {
+      "path": "SWITCH_EQUIVALENCE_BATTERY.md",
+      "sha256": "1b4b72276e50b47e60049c6f074a9f83d913e21030f438d460d860ab426a1c11"
+    },
+    {
+      "path": "trapping_set_prediction.md",
+      "sha256": "d8effd9b25b4f018336b4373548bf25b17e17d19f7b22441cbec032374d0cf33"
+    },
+    {
+      "path": "v3.8.0_structural_geometry_plan.md",
+      "sha256": "0ba0d1daa8a49178c74ffd6e1847a936a1f3136b43eb526444f47d13d471930d"
+    },
+    {
+      "path": "v3.8.1_structural_geometry_evaluation.md",
+      "sha256": "9b9e61e9773f258c6a91d663a743646fb0651f7111e328a0b0c75a22a89f26a8"
+    }
+  ]
+}

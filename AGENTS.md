@@ -43,3 +43,15 @@ gprbuild -p -P qec_ada.gpr
 GNATprove, if installed, is a separate proof gate. Report success, failures
 and environment restrictions precisely; never imply proof or GPU execution
 when only static or Python checks have run.
+
+## Provenance and archive-content review
+
+Protect changes to the reference manifest, SHA-256 inventory, the two
+verification scripts, imported reference files, the GUI source viewer and
+GitHub workflows. CI checks a separate QEC donor checkout at a fixed commit;
+its result is stronger than local manifest consistency, but a malicious
+workflow edit can bypass either check without enforced owner review.
+Use CODEOWNERS and branch protection requiring owner approvals.
+
+Never link archived HTML/JS as runnable pages from the GUI. Render copies as
+inert escaped text, with a restrictive CSP and no outbound connections.

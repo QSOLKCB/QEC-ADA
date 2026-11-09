@@ -2,35 +2,47 @@
 
 - Donor: `QSOLKCB/QEC`
 - Pinned source commit: `27bbc798c4e38138ca5b0fff70b15c3271a1917d`
-- Docs tree: `fbbe3123f79964a26176539f47a6c68c68280553`
-- Original roots: `docs/`
+- Donor docs tree: `fbbe3123f79964a26176539f47a6c68c68280553`
+- Original root: `docs/`
 - Mirrored root: `docs/reference/qec/`
-- Preserved: 103 files with exact matching Git blob SHA-1 values (92 Markdown and
-  11 supporting text/lab/receipt files).
-- Excluded: `releases/release_history.json` (2,866,122 bytes, large archival
-  dataset) and `roadmap/QEC_DETERMINISTIC_SWITCHING_MIND_MAP.jpg` (binary JPEG).
-  Both remain available from the pinned original repository; they have **not**
-  been reconstructed, replaced or declared present.
+- Included: 103 byte-identical files (92 Markdown, 11 other text/lab files).
+- Excluded (present in donor but **not** copied):
+  `releases/release_history.json` (2,866,122 bytes) and
+  `roadmap/QEC_DETERMINISTIC_SWITCHING_MIND_MAP.jpg` (12,524 bytes).
 
-The full inventory is in
-[`fixtures/qec_reference_manifest.json`](../fixtures/qec_reference_manifest.json).
-Every included file records its original path, byte size and Git blob SHA-1.
-The `verify` command checks all copied bytes using Git's exact blob hashing.
+## Two different integrity checks
 
-### Important interpretation
+**Local self-consistency:**
+`uv run --no-project python scripts/qecada.py verify`
+checks the local SHA-1 Git blob IDs, independently recorded SHA-256 digests,
+expected membership, paths and file types. This does **not** independently
+establish source provenance because both inventories live in this repository.
 
-The mirror is historical **reference data**, not an Ada/SPARK implementation.
-Paths in mirrored Markdown may refer to the donor repository root, historical
-CI, Python scripts or archived files. These links are not rewritten, because
-doing so would break exact byte identity. Use the pinned original repository
-to resolve any references not contained in this snapshot.
+**Pinned donor comparison (CI security gate):**
+`uv run --no-project python scripts/verify_donor.py --donor .donor-qec`
+compares against a separate checkout of the original QEC repository at the
+hard-coded commit/tree shown above. It checks `git ls-tree` path/mode/size/blob
+IDs for **all 105 donor files** (including the two exclusions), then compares
+actual source bytes against mirrored bytes and their recorded SHA-256 digests
+for **all 103 included files**. CI never executes donor files.
 
-### Rebuild or audit
+The combined check detects modifications to mirror + both manifests made
+without modifying the independent donor source. It is **not** a guarantee
+against an attacker who can alter the verifier/workflow and approve that
+change. For meaningful protection, require owner review on critical paths
+using `.github/CODEOWNERS` and configure branch protection to enforce
+that policy. CODEOWNERS by itself does not enforce anything.
 
-~~~sh
-uv run --no-project python scripts/qecada.py verify
-uv run --no-project python scripts/qecada.py docs list --json
-~~~
+## Historical interpretation
 
-Never silently update the mirror to a moving `main`. A future refresh must
-identify a new donor commit and produce a new checked manifest.
+Reference documents describe the original Python QEC project, **not**
+functionality implemented in QEC-ADA. Their links and text remain byte-exact
+to their donor origin; paths may refer outside this snapshot. Do not mutate
+the mirror to fix old documentation. New interpretations go in `docs/`.
+
+Historical HTML and JS labs are preserved as source but displayed as **inert
+text** by the offline GUI. Opening their underlying files directly in a
+browser is outside the GUI's safety boundary.
+
+Never silently track moving donor `main`. A refreshed snapshot must pin a
+new commit and pass both identity and source-byte comparisons.

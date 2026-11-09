@@ -1,0 +1,9 @@
+# Provenance and security-sensitive paths.
+# Enforce CODEOWNER review in branch protection: this file alone is advisory.
+/.github/workflows/ @EmergentMonk
+/scripts/qecada.py @EmergentMonk
+/scripts/verify_donor.py @EmergentMonk
+/fixtures/qec_reference_manifest.json @EmergentMonk
+/fixtures/qec_reference_sha256.json @EmergentMonk
+/docs/reference/qec/ @EmergentMonk
+/gui/ @EmergentMonk
