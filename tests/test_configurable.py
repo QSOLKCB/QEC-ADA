@@ -125,16 +125,22 @@ class ConfiguredDecoderTests(unittest.TestCase):
     def test_product_state_all_81_error_vectors(self):
         rows = ("0010", "0001")  # n=2; independent commuting Z stabilizers
         table = representatives(2, rows)
-        self.assertEqual(9, len(table))
+        self.assertEqual(5, len(table))
         for symbols in itertools.product(range(3), repeat=4):
             ex, ez = symbols[:2], symbols[2:]
             p = run("decode", 2, encode(ex), encode(ez), *rows)
-            self.assertEqual(0, p.returncode, (symbols, p.stderr))
             data = lines(p.stdout)
-            self.assertEqual("9", data["leaders"])
-            self.assertEqual("CORRECTED", data["status"])
+            self.assertEqual("5", data["leaders"])
             self.assertEqual(encode(syndrome(2, rows, ex, ez)), data["syndrome"])
             self.assertEqual(data["syndrome"], data["opt_syndrome"])
+            if syndrome(2, rows, ex, ez) not in table:
+                # Four syndrome words require errors of weight two:
+                # those are outside the declared radius-one decoder.
+                self.assertNotEqual(0, p.returncode, (symbols, p.stderr))
+                self.assertEqual("NO_REPRESENTATIVE", data["status"])
+                continue
+            self.assertEqual(0, p.returncode, (symbols, p.stderr))
+            self.assertEqual("CORRECTED", data["status"])
             correction_x = tuple(map(int, data["correction_x"]))
             correction_z = tuple(map(int, data["correction_z"]))
             self.assertEqual(

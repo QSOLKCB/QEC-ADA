@@ -74,8 +74,8 @@ nonzero status. Input and code validation failures emit an explicit status.
 
 The independent Python standard-library oracle reconstructs each code
 mathematically without importing the original QEC decoder or Ada sources.
-It checks the 40 cyclic single-site errors, all 81 errors of a two-qutrit
-product-state code, all nine errors in a one-qutrit degenerate code,
+It checks the 40 cyclic single-site errors, all 81 error vectors of a two-qutrit
+product-state code, including radius-one rejection, all nine errors in a one-qutrit degenerate code,
 ambiguous radius-one sets, noncommutation, rank deficiency, input
 rejection and code-context switches.
 

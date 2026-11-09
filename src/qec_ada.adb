@@ -299,7 +299,7 @@ procedure QEC_ADA is
             raise Program_Error with "cyclic-5 reprepare status";
          elsif QEC_Configurable.Leader_Count (First) /= 41 then
             raise Program_Error with "cyclic-5 leader count";
-         elsif QEC_Configurable.Leader_Count (Second) /= 9 then
+         elsif QEC_Configurable.Leader_Count (Second) /= 5 then
             raise Program_Error with "product-2 leader count";
          elsif not QEC_Configurable.Exhaustive_Parity (First) then
             raise Program_Error with "cyclic-5 scalar/OPT parity";
