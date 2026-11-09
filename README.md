@@ -219,3 +219,29 @@ native RSS measurements** and are superseded by v2 evidence. See the
 The same Phase 1E audit also makes average precision undefined (`null`)
 when a held-out dataset contains only failures or only successes,
 matching the AUROC missing-class policy.
+
+## Phase 1F — Graph-cluster uncertainty and pinned QEC BP comparison
+
+Phase 1F keeps the original 720-trial negative result intact. Its
+**deterministic graph-blocked bootstrap** resamples held-out Tanner graph
+identities (not correlated BP trials), reports missing-class draws and
+conditional AUROC ranges, and independently replays all evidence.
+
+A separately opt-in reference lane executes the **actual pinned QEC
+`bp_decode`** on matched binary H/BSC inputs. The two decoders have
+different numerical updates: this is a controlled agreement comparison,
+not a claim of correction or algorithm parity. The initial 24 matched
+cases agreed on the frame-failure label 23 times; stronger conclusions
+require more independent graphs and code families.
+
+~~~sh
+uv run --no-project python scripts/phase1f_blocked_inference.py create \
+  /tmp/qecada-phase1e.json /tmp/qecada-phase1f-blocked.json --resamples 512
+uv run --no-project python scripts/phase1f_blocked_inference.py verify \
+  /tmp/qecada-phase1e.json /tmp/qecada-phase1f-blocked.json
+~~~
+
+The QEC reference lane requires a separately pinned donor checkout,
+NumPy and the explicit `--execute-pinned-donor` opt-in; no new
+dependency is added to the native executable or normal stdlib
+research path. See [Phase 1F source/protocol/evidence](docs/PHASE1F_GRAPH_BLOCKED_QEC_BP.md).

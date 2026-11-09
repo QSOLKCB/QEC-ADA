@@ -124,3 +124,23 @@ Average precision and AUROC must be `None` for either all-positive
 or all-negative evaluation samples. Keep deterministic one-class
 held-out regression fixtures and the unchanged 720-trial negative
 predictive result.
+
+## Phase 1F cross-graph uncertainty and pinned donor execution
+
+The Phase 1E 720-trial negative result and SHA-256 must not be
+overwritten, reselected or recategorized to improve performance.
+Bootstrap **whole held-out graph clusters**, keep correlated trials
+within each sampled graph, and mark one-class replicates undefined.
+Do not call conditional percentiles rigorous frequentist coverage
+with only four graph clusters.
+
+The QEC BP bridge is executable external reference code: require
+the full pinned QEC commit **and** exact Git blob verification, explicit
+opt-in, no persisted CI checkout credentials and a separate optional
+NumPy dependency. Reexecute the pinned reference for validation;
+a rehashed decoded word is not sufficient evidence.
+
+The phase compares two **different** classical BP algorithms on shared
+H/channel inputs. Similar frame-failure labels are not correction parity
+or evidence about quantum-hardware performance. Keep all differences,
+exact source identity and independent replay receipts.

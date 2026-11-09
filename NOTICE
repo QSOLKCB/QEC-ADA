@@ -69,3 +69,13 @@ QSOLKCB/OPT
 (7556dd36acd53ed3ed538fd03b1db44e5c1ec869, Apache-2.0).
 No upstream implementation code is copied. The classical BP experiment
 does not claim equivalence with QEC's protected decoder.
+
+Phase 1F adds original MPL-2.0 Python-standard-library graph-blocked
+inference, canonical evidence replay and a controlled reference-source
+runner. The latter *executes, but does not copy into QEC-ADA*, the
+`bp_decode` implementation in QSOLKCB/QEC
+commit 27bbc798c4e38138ca5b0fff70b15c3271a1917d,
+Git blob 266dc35c7162adf6a895eb796760e2bc6724eff4.
+That executable donor remains governed by its original repository
+license and is only activated via explicit opt-in with its separately
+installed NumPy dependency.

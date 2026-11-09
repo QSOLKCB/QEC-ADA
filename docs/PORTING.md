@@ -74,6 +74,18 @@ No incidental mutation of QEC's frozen baseline.
   full source-bound trial corpus and offline replay.
 - [Phase 1E methods, results and limitations](PHASE1E_SCALED_SPECTRAL_BP.md).
 
+
+## Phase 1F — Cross-topology uncertainty and source-pinned QEC BP bridge
+
+- Preserve the original Phase 1E negative IPR prediction result.
+- Resample complete held-out graph clusters, not correlated trials; retain
+  undefined class draws and report exploratory paired AUROC ranges.
+- Execute actual pinned QEC `bp_decode` on matched binary Tanner/channel
+  inputs in a separate, explicitly opted-in NumPy reference lane.
+- Record full source/file provenance, actual decoder outputs and
+  byte-reproducible reruns; do not assert algorithmic/physical parity.
+- [Phase 1F method, receipt formats and limitations](PHASE1F_GRAPH_BLOCKED_QEC_BP.md).
+
 ## Phase 3 — Formal proofs
 
 Use GNATprove on explicit SPARK proof obligations for finite ranges,
