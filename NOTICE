@@ -35,3 +35,13 @@ syndrome lookup and immutable code-definition-bound OPT contributions.
 The algorithm references QEC's public qutrit finite-field and coset-leader
 models at 27bbc798c4e38138ca5b0fff70b15c3271a1917d.
 No third-party source copied from OPT or Python donor.
+
+Phase 1C uses research design context from multimodalas/fusion-qec
+commit a390f57d3da2647ef8d835a7407ad0eb03d03093 (CC BY 4.0),
+QSOLKCB/SPECTRAL commit 49401fa010ed673e3d3977ccd5e06d66b0d65096 (MIT), and
+QSOLKCB/QEC Strowger source at commit
+27bbc798c4e38138ca5b0fff70b15c3271a1917d (MPL-2.0).
+The Tanner graph, non-backtracking fourth moment and native
+classical switching pilot are independently implemented; no donor
+source is copied. Credit and scopes are recorded in
+docs/PHASE1C_TANNER_SPECTRAL.md.

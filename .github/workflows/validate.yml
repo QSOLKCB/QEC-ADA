@@ -67,6 +67,24 @@ jobs:
       - name: Re-run tests against native CLI binary
         run: python3 -m unittest discover -s tests -v
 
+      - name: Native research CLI regression tests (Tanner and Strowger)
+        run: python3 -m unittest discover -s tests -v
+
+      - name: End-to-end canonical Strowger and SPECTRAL WAV/manifest CLI
+        shell: bash
+        run: |
+          set -euo pipefail
+          out="$(mktemp -d)"
+          trap 'rm -rf "$out"' EXIT
+          python3 scripts/strowger_receipt.py create "$out/route.json" \
+            1020 3333 1100 0100 0010 none --request-id ci-route --epoch 7
+          python3 scripts/strowger_receipt.py verify "$out/route.json"
+          python3 scripts/tanner_spectral_export.py \
+            2 1100 0012 --output "$out/tanner.json"
+          python3 scripts/tanner_sonify.py \
+            2 1100 0012 --wav "$out/tanner.wav" \
+            --manifest "$out/tanner.manifest.json"
+
       - name: Observational paired OPT benchmark (no speedup gate)
         run: python3 scripts/bench_qutrit.py --trials 7
 

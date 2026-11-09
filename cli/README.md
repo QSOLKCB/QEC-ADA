@@ -16,3 +16,12 @@ For automation, prefer `docs list --json` to parsing formatted text, and
 
 These are separate binaries: the Python companion does not interpret Ada
 results, and the GUI does not execute native Ada code.
+
+## Native observational research executable
+
+`qec_research` is built separately from `qec_ada` by the same GPRbuild
+project. Commands: `tanner N ROW...` and
+`strowger DDDD RRRR LLLL AAAA BBBB FAULT`.
+The first returns exact Tanner support/degree/four-cycle/NB fourth-moment
+records; the second returns deterministic bounded classical route events.
+No decoder correction is modified.

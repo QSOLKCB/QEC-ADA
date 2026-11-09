@@ -104,3 +104,40 @@ provide cross-code validation.
 An isolated GNATprove 16.1.0 GF(3) arithmetic proof target completed
 **28/28 checks**. See [proof receipt](docs/PHASE1B_SPARK_PROOF.md).
 This does not certify the configurable decoder, OPT cache, or hardware QEC.
+
+## Phase 1C — Observational SPECTRAL/Tanner + deterministic Strowger
+
+The separately compiled `qec_research` CLI adds **exact bounded Tanner
+graphs**, non-backtracking 4th-moment calculations, and a classical
+Strowger event-stream pilot.
+
+~~~sh
+gprbuild -p -P qec_ada.gpr
+./build/bin/qec_research tanner 2 1100 0012
+./build/bin/qec_research strowger 1020 3333 1100 0100 0010 none
+~~~
+
+See [Phase 1C scope and evidence boundaries](docs/PHASE1C_TANNER_SPECTRAL.md).
+Observational diagnostics do not alter decoder execution. No universal
+eigensolver or physical QEC / audible physics claim is made.
+
+### SPECTRAL export, 24-bit sonification and Strowger receipt replay
+
+~~~sh
+uv run --no-project python scripts/tanner_spectral_export.py \
+  2 1100 0012 --output /tmp/qecada-tanner.json
+uv run --no-project python scripts/tanner_sonify.py \
+  2 1100 0012 --wav /tmp/qecada-tanner.wav \
+  --manifest /tmp/qecada-tanner-audio.json
+
+uv run --no-project python scripts/strowger_receipt.py create \
+  /tmp/qecada-route.json 1020 3333 1100 0100 0010 none \
+  --request-id demo-001
+uv run --no-project python scripts/strowger_receipt.py verify \
+  /tmp/qecada-route.json
+~~~
+
+The graph-to-audio demonstration produces **48 kHz signed 24-bit PCM**,
+not 16-bit, and is deliberately distinct from SPECTRAL QEC/APP's separate
+decoder event-import and render-receipt protocol. All receipt verification
+remains offline with the Python standard library.
