@@ -228,6 +228,7 @@ procedure QEC_ADA is
       Put_Line ("  qec_ada qutrit decode XXXXX ZZZZZ");
       Put_Line ("  qec_ada qutrit lookup SSSS");
       Put_Line ("  qec_ada route D1 D2 D3 D4 LLLL AAAA BBBB");
+      Put_Line ("  qec_ada benchmark qutrit scalar|opt");
       Put_Line ("TRIT and D1..D4 are 0/1/2; masks use 1=free, 0=busy.");
    end Usage;
 
@@ -250,6 +251,19 @@ begin
      and then Argument (2) = "route"
    then
       Check_Routing;
+   elsif Argument_Count = 3
+     and then Argument (1) = "benchmark"
+     and then Argument (2) = "qutrit"
+     and then (Argument (3) = "scalar" or else Argument (3) = "opt")
+   then
+      declare
+         Use_OPT : constant Boolean := Argument (3) = "opt";
+         Checksum : constant Natural := QEC_Qutrit.Workload_Checksum (Use_OPT);
+      begin
+         Put_Line ("workload=59049");
+         Put_Line ("path=" & (if Use_OPT then "opt" else "scalar"));
+         Put_Line ("checksum=" & Number_String (Checksum));
+      end;
    elsif Argument_Count = 4
      and then Argument (1) = "gf3"
      and then Argument (2) = "add"

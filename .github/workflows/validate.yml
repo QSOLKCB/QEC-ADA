@@ -64,6 +64,9 @@ jobs:
       - name: Re-run tests against native CLI binary
         run: python3 -m unittest discover -s tests -v
 
+      - name: Observational paired OPT benchmark (no speedup gate)
+        run: python3 scripts/bench_qutrit.py --trials 7
+
       - name: Negative-input smoke test
         run: |
           if ./build/bin/qec_ada gf3 add 3 0; then

@@ -40,4 +40,5 @@ package QEC_Qutrit is
    function Correct (Error : Pauli) return Decode_Result;
    function Leader_Count return Natural;
    function Exhaustive_Parity return Boolean;
+   function Workload_Checksum (Optimized : Boolean) return Natural;
 end QEC_Qutrit;

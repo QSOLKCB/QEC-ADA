@@ -258,4 +258,35 @@ package body QEC_Qutrit is
       return Correct (Zero).Success;
    end Exhaustive_Parity;
 
+   function Workload_Checksum (Optimized : Boolean) return Natural is
+      --  Exact fixed workload for external timing: no clocks or output inside
+      --  the pure math loop. Same order and checksum for both paths.
+      Trial : Pauli;
+      Counter : Natural;
+      S : Syndrome_Vector;
+      Result : Natural := 0;
+   begin
+      for Number in 0 .. 59_048 loop
+         Trial := Zero;
+         Counter := Number;
+         for Site in Site_Index loop
+            Trial.X (Site) := Trit (Counter mod 3);
+            Counter := Counter / 3;
+         end loop;
+         for Site in Site_Index loop
+            Trial.Z (Site) := Trit (Counter mod 3);
+            Counter := Counter / 3;
+         end loop;
+         if Optimized then
+            S := OPT_Syndrome (Trial);
+         else
+            S := Scalar_Syndrome (Trial);
+         end if;
+         for Row in Check_Index loop
+            Result := (Result * 3 + Natural (S (Row))) mod 65_521;
+         end loop;
+      end loop;
+      return Result;
+   end Workload_Checksum;
+
 end QEC_Qutrit;

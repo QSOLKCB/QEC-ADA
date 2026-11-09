@@ -108,3 +108,25 @@ Complete general GF(2)/GF(4) field kernels and multiple independent
 code definitions, then support configurable stabilizer tables with explicit
 identity binding. Add native receipt schema and deterministic event replay
 only once their full input and rejection contracts are specified.
+
+## OPT observational benchmark
+
+Two native entry points run exactly the same ordered workload of 59,049
+five-qutrit error vectors and fold every four-trit syndrome into a bounded
+checksum. `benchmark qutrit scalar` calls the original scalar path;
+`benchmark qutrit opt` uses the immutable contribution plan. Both must
+produce **checksum 33457**. This benchmark checksum is a coverage witness,
+**not** a cryptographic receipt.
+
+~~~sh
+./build/bin/qec_ada benchmark qutrit scalar
+./build/bin/qec_ada benchmark qutrit opt
+uv run --no-project python scripts/bench_qutrit.py --trials 7
+~~~
+
+The stdlib harness runs warmups and paired, alternating measurements and
+reports raw end-to-end process durations, environment and medians as JSON.
+Those observations include process startup and are valid only for the stated
+runner/toolchain; they do not establish a universal native speedup or end-to-end
+QEC throughput improvement. Correctness parity is required independently
+before considering any performance result.

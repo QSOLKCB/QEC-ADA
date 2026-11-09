@@ -127,6 +127,17 @@ class QutritParityTests(unittest.TestCase):
             with self.subTest(cmd=cmd):
                 self.assertNotEqual(0, run(*cmd).returncode)
 
+    def test_bench_paths_equal_independent_expected_checksum(self):
+        outputs = []
+        for path in ("scalar", "opt"):
+            p = run("benchmark", "qutrit", path)
+            self.assertEqual(0, p.returncode, p.stderr)
+            self.assertEqual({
+                "workload": "59049", "path": path, "checksum": "33457"
+            }, mapped(p.stdout))
+            outputs.append(mapped(p.stdout)["checksum"])
+        self.assertEqual(outputs[0], outputs[1])
+
     def test_zero_error(self):
         p = run("qutrit", "decode", "00000", "00000")
         self.assertEqual(0, p.returncode)
