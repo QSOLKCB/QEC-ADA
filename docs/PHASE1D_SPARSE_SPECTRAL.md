@@ -147,3 +147,51 @@ upstream dependency or a physical QEC result.
   floating-point error enclosures.
 - Live SPECTRAL browser observation and waveform integration; native
   audio still uses separately bounded Phase 1C graph metrics.
+
+## Canonical spectral observation / independent replay
+
+After building native Ada, create and verify a new source-bound receipt:
+
+~~~sh
+uv run --no-project python scripts/nb_spectral_export.py create \
+  /tmp/qecada-nb-k23.json 3 111000 000111
+
+uv run --no-project python scripts/nb_spectral_export.py verify \
+  /tmp/qecada-nb-k23.json
+~~~
+
+`scripts/nb_spectral_export.py` is a Python-standard-library adapter,
+**not** an alternative production eigensolver or a rewrite of native Ada.
+Creation first obtains the existing Phase 1C graph observation and new
+native Phase 1D spectrum, then checks the result against an independent
+finite-graph Python oracle. It emits sorted-key compact UTF-8 JSON under
+schema `qec-ada.nb-spectral-receipt.v1` with SHA-256 over the unsigned
+canonical object and original source-graph identity.
+
+Offline `verify` is fully independent of the native executable. It
+reconstructs edge topology, exact four-cycle counts, SCC membership,
+block spectral radii, selected-mode energy and ranking, numerical
+convergence constraints, and **both nested graph and outer receipt
+digests** from the declared source. A self-consistently rehashed forged
+eigenvalue, selected component or graph must fail semantic replay.
+
+This is **self-contained software consistency evidence**, not
+authenticity from a separately signed external witness. Replacing both
+the source input and receipt cannot establish source provenance without
+an independently pinned trusted source. No decoder or physical quantum
+claim derives from the receipt.
+
+Files are written exclusively as new files (`xb`) and are not
+overwritten. JSON verification rejects duplicate keys, noncanonical
+bytes, Boolean/integer substitutions, changed claim boundaries,
+non-finite/invalid decimal values and malformed graph identities.
+Floating values are decimal *strings* with twelve fractional digits,
+avoiding platform JSON binary float serialization ambiguity.
+
+No extra runtime dependencies are introduced. Source references are
+recorded above, and this code remains MPL-2.0.
+
+**CI evidence:** Phase 1D native correctness plus the independent
+spectrum replay suite and two end-to-end create/verify runs are required
+for the exact PR head. Do not infer proof of this algorithm from the
+separate 28/28 Phase 1B SPARK GF(3) arithmetic proof.

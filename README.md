@@ -160,3 +160,18 @@ not modify the decoder or produce hardware-QEC evidence. Its mode
 vectors are local to the selected recurrent SCC, not necessarily global
 eigenvectors on reducible graphs. See
 [Phase 1D method and test contract](docs/PHASE1D_SPARSE_SPECTRAL.md).
+
+### Auditable spectral observation
+
+~~~sh
+uv run --no-project python scripts/nb_spectral_export.py create \
+  /tmp/qecada-nb-k23.json 3 111000 000111
+uv run --no-project python scripts/nb_spectral_export.py verify \
+  /tmp/qecada-nb-k23.json
+~~~
+
+This makes a canonical SHA-256 receipt binding source Tanner rows,
+independently checked exact graph metrics and the native SCC-local
+numerical spectrum. The verifier reconstructs the result from the
+declared source using only Python's standard library, no Ada binary.
+It is not a hardware-QEC certificate.

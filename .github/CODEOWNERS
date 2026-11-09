@@ -12,3 +12,8 @@
 /spark/ @EmergentMonk
 /scripts/prove_spark.sh @EmergentMonk
 /docs/PHASE1B_SPARK_PROOF.md @EmergentMonk
+
+# Phase 1D numerical modes and canonical evidence paths (enforce via rulesets).
+/spectral/ @EmergentMonk
+/scripts/nb_spectral_export.py @EmergentMonk
+/docs/PHASE1D_SPARSE_SPECTRAL.md @EmergentMonk
