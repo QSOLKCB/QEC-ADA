@@ -1,11 +1,12 @@
 #!/usr/bin/env python3
 # SPDX-License-Identifier: MPL-2.0
-"""Observational peak-RSS evidence for a bounded native sparse Tanner graph.
+"""Native post-exec RSS evidence for a bounded sparse Tanner graph on Linux.
 
-Uses only Python stdlib and Linux getrusage(RUSAGE_CHILDREN). Every invocation
-executes ONE Ada child, so maxrss is that child's process maximum. Numbers
-depend on runner/kernel/loader and are NOT reproducible hardware-independent
-benchmarks. Analytic K(m,n) rho checks numerical correctness as well.
+Ada reads /proc/self/status VmHWM *inside the executable after execve*.
+Linux RUSAGE_CHILDREN.ru_maxrss is intentionally NOT used: it may include
+the Python parent's pre-exec memory footprint (even with posix_spawn).
+The reported VmHWM includes the native executable's runtime/loader memory
+but not the Python launcher. No cross-machine benchmark claim is made.
 """
 from __future__ import annotations
 
@@ -14,7 +15,7 @@ import hashlib
 import json
 import math
 from pathlib import Path
-import resource
+import re
 import subprocess
 import sys
 import tempfile
@@ -40,7 +41,7 @@ def run(checks: int, variables: int) -> dict:
         path.write_bytes(source)
         start = time.perf_counter_ns()
         completed = subprocess.run(
-            [str(native), "inspect", str(path)],
+            [str(native), "inspect", str(path), "--native-rss"],
             text=True, capture_output=True, check=False, timeout=90,
         )
         elapsed = time.perf_counter_ns() - start
@@ -55,6 +56,12 @@ def run(checks: int, variables: int) -> dict:
         if key in fields:
             raise ValueError("duplicate native field")
         fields[key] = value
+    rss_text = fields.pop("native_post_exec_peak_rss_kib_linux", None)
+    if rss_text is None or re.fullmatch(r"[1-9][0-9]*", rss_text) is None:
+        raise ValueError(
+            "native Ada post-exec VmHWM field missing or malformed"
+        )
+    native_rss_kib = int(rss_text)
     if fields["status"] != "CONVERGED_NUMERIC":
         raise ValueError("unexpected nonconverged complete graph")
     observed = float(fields["spectral_radius"])
@@ -66,7 +73,7 @@ def run(checks: int, variables: int) -> dict:
         raise ValueError("native directed edge count mismatch")
 
     return {
-        "schema": "qec-ada.phase1e.memory-observation.v1",
+        "schema": "qec-ada.phase1e.memory-observation.v2",
         "graph": f"K_{checks}_{variables}",
         "input_source_sha256": hashlib.sha256(source).hexdigest(),
         "variables": variables,
@@ -76,10 +83,10 @@ def run(checks: int, variables: int) -> dict:
         "expected_rho": expected,
         "observed_rho": observed,
         "dense_float64_matrix_bytes_hypothetical": 8 * directed**2,
-        "native_peak_rss_kib_linux": resource.getrusage(
-            resource.RUSAGE_CHILDREN).ru_maxrss,
+        "native_post_exec_peak_rss_kib_linux": native_rss_kib,
+        "rss_measurement_source": "linux_proc_self_status_VmHWM_read_inside_Ada_after_exec",
         "native_process_elapsed_ns": elapsed,
-        "memory_claim_boundary": "one-child observational peak RSS; sparse arrays O(V+E) by code structure; no general speed guarantee",
+        "memory_claim_boundary": "Linux native post-exec high-water RSS includes Ada runtime/loader; excludes Python launcher/pre-exec pages; one-process observation, not a dense benchmark or speed guarantee",
     }
 
 

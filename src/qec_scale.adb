@@ -156,10 +156,61 @@ procedure QEC_Scale is
       end;
    end Inspect;
 
+   --  Linux /proc/self/status belongs to the *already exec'd Ada process*.
+   --  VmHWM is the kernel high-water mark for this process's current mm.
+   --  Unlike wait4/ru_maxrss it excludes the Python launcher and the
+   --  pre-exec inherited Python address space. Opt-in and Linux-only.
+   function Native_Peak_RSS_KiB return Natural is
+      Status_File : File_Type;
+      Header : constant String := "VmHWM:";
+   begin
+      Open (Status_File, In_File, "/proc/self/status");
+      while not End_Of_File (Status_File) loop
+         declare
+            Line : constant String := Get_Line (Status_File);
+         begin
+            if Line'Length > Header'Length
+              and then Line (Line'First ..
+                Line'First + Header'Length - 1) = Header
+            then
+               declare
+                  Value : constant String := Ada.Strings.Fixed.Trim
+                    (Line (Line'First + Header'Length .. Line'Last),
+                     Ada.Strings.Both);
+                  Separator : constant Natural :=
+                    Ada.Strings.Fixed.Index (Value, " ");
+               begin
+                  if Separator <= Value'First
+                    or else Value (Separator .. Value'Last) /= " kB"
+                  then
+                     raise Invalid_Input with
+                       "unexpected /proc/self/status VmHWM unit";
+                  end if;
+                  declare
+                     Peak : constant Natural := Natural'Value
+                       (Value (Value'First .. Separator - 1));
+                  begin
+                     if Peak = 0 then
+                        raise Invalid_Input with "zero VmHWM";
+                     end if;
+                     Close (Status_File);
+                     return Peak;
+                  end;
+               end;
+            end if;
+         end;
+      end loop;
+      Close (Status_File);
+      raise Invalid_Input with
+        "native VmHWM unavailable; refusing inherited child rusage";
+   end Native_Peak_RSS_KiB;
+
    procedure Usage is
    begin
       Put_Line ("QEC-ADA scaled spectral observatory (bounded, read-only)");
       Put_Line ("  qec_scale inspect <canonical-graph-file>");
+      Put_Line ("  qec_scale inspect <canonical-graph-file> --native-rss");
+      Put_Line ("  --native-rss reads Linux /proc/self/status VmHWM in Ada");
       Put_Line ("  QECADA-TANNER-EDGES-V1");
       Put_Line ("  variables=N");
       Put_Line ("  checks=M");
@@ -173,6 +224,13 @@ begin
       Usage;
    elsif Argument_Count = 2 and then Argument (1) = "inspect" then
       Inspect (Argument (2));
+   elsif Argument_Count = 3
+     and then Argument (1) = "inspect"
+     and then Argument (3) = "--native-rss"
+   then
+      Inspect (Argument (2));
+      Put_Line ("native_post_exec_peak_rss_kib_linux=" &
+        Text (Native_Peak_RSS_KiB));
    else
       Usage;
       Set_Exit_Status (Failure);

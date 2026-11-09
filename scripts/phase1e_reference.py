@@ -327,8 +327,14 @@ def auroc(pairs: list[tuple[float, bool]]) -> float | None:
 
 
 def average_precision(pairs: list[tuple[float, bool]]) -> float | None:
+    """Return undefined when either class is missing, as for AUROC.
+
+    In particular, all-positive held-out samples must not report a
+    seemingly perfect AP=1.0 without any negative comparison cases.
+    """
     positives = sum(bool(y) for _, y in pairs)
-    if positives == 0:
+    negatives = len(pairs) - positives
+    if positives == 0 or negatives == 0:
         return None
     cumulative_pos = 0
     cumulative_count = 0
