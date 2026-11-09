@@ -42,3 +42,17 @@ documentation browser. Neither one assumes authority over the other.
 Keep source metadata and baseline hashes immutable. No wall-clock or ambient
 randomness in mathematics. Optional benchmarks must identify hardware,
 compiler, and measurement limitations.
+
+## Bounded native decoder + immutable routing extension
+
+- `codes/qec_qutrit.*` contains the cyclic five-qutrit stabilizer checks,
+  scalar and OPT-equivalent syndrome calculations, a fixed coset-leader
+  table and independent stabilizer-span membership.
+- `routing/qec_routing.*` implements first-free selection from explicit
+  availability snapshots. It does not update state or create QEC receipts.
+- Scalar parity, exhaustive optimization equivalence and negative-case
+  checks are part of CI; reference identity is tied to the pinned QEC donor.
+- The CLI is the only composition boundary. The offline GUI remains an
+  educational document and GF(3) demonstration, not a native Ada decoder UI.
+
+See [Phase 1A](PHASE1A_DECODER_ROUTING.md).

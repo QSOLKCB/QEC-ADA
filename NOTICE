@@ -17,3 +17,14 @@ For QEC provenance, see docs/reference/qec/CITATION_AND_ATTRIBUTION.md and
 the donor repository's LICENCE and NOTICE records. Where a cited historical
 reference requires a source path, interpret it relative to the pinned QEC
 commit, not the QEC-ADA repository root.
+
+The fixed cyclic [[5,1,3]]_3 qutrit decoder is an independently written Ada
+implementation of the mathematical model and bounded enumeration in QEC
+src/qec/decoder/qutrit/{gf3,stabilizer,codes,exact}.py at
+27bbc798c4e38138ca5b0fff70b15c3271a1917d, under MPL-2.0.
+
+The precomputed one-site contributions and identity-site skipping adapt
+the general mechanisms OPT-INV-001 and OPT-REDUCE-001 from QSOLKCB/OPT,
+Apache-2.0. No OPT source is copied. There is no universal performance
+claim. The new classical selector follows QEC Strowger's first-free
+ordering concept but does not claim complete Strowger equivalence or receipts.

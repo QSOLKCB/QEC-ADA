@@ -3,16 +3,19 @@
 **Independent native Ada/SPARK implementation of selected, deterministic QEC kernels.**
 
 QEC-ADA is a new project, not a fork of QSOLKCB/QEC and not a declaration that the
-Python research programme has been ported. The initial deliverable contains a
-small GF(3) mathematical kernel, a three-term syndrome demo, frozen reference
-documents, a reproducible documentation catalogue and a local browser UI.
+Python research programme has been ported. The initial deliverable contains a GF(3) mathematical kernel, a three-term
+syndrome demo, frozen reference documents, and a local browser UI. The next
+native phase adds a **fixed cyclic [[5,1,3]]₃ bounded coset-leader decoder**
+and an immutable-snapshot classical first-free routing pilot. These are bounded
+research implementations, not general QEC or full Strowger switching.
 
 - **Reference:** [QSOLKCB/QEC](https://github.com/QSOLKCB/QEC) at pinned commit
   `27bbc798c4e38138ca5b0fff70b15c3271a1917d`.
 - **Documentation:** [docs/README.md](docs/README.md), including the verbatim
   mirror in [docs/reference/qec/](docs/reference/qec/).
-- **Source layout:** `codes/` finite fields; `decode/` syndrome boundary;
-  `invariants/` verification contracts; `research/` proposed experiments.
+- **Source layout:** `codes/` finite fields and fixed qutrit code; `decode/`
+  syndrome boundary; `routing/` deterministic selection; `invariants/`
+  verification contracts; `research/` proposed experiments.
 - **Fixtures:** `fixtures/qec_reference_manifest.json` records Git blob
   hashes of 103 preserved reference files; two support assets are explicitly
   excluded (see [reference note](docs/REFERENCE.md)).
@@ -33,7 +36,18 @@ gprbuild -p -P qec_ada.gpr
 ./build/bin/qec_ada syndrome 1 2 1 2 0 1
 ~~~
 
-On Windows use `build\bin\qec_ada.exe`. The syndrome demo accepts a
+For the fixed qutrit code and routing pilot:
+
+~~~sh
+./build/bin/qec_ada selftest qutrit
+./build/bin/qec_ada qutrit decode 10000 00000
+./build/bin/qec_ada qutrit lookup 0002
+./build/bin/qec_ada route 1 2 0 1 0101 0011 1010
+~~~
+
+[Algorithm, OPT design and limits](docs/PHASE1A_DECODER_ROUTING.md).
+
+On Windows use `build\bin\qec_ada.exe`. The original syndrome demo accepts a
 three-term check vector followed by a three-term error vector; it does **not**
 run a general quantum decoder.
 
