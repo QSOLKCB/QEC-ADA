@@ -183,6 +183,54 @@ A new `uv` isolated run can use the documented exact version as
 a starting environment; its evidence SHA might differ if it uses a
 different Python/NumPy/compiler combination.
 
+## Executed Phase 1G evidence — no predictive advantage
+
+GitHub Actions `42596870426` on PR #9 head
+`f37c100b29a7e5abcbb21e612ad54bc24d3390f3` completed the
+actual QEC source-generator execution, binary CSS admission,
+native spectral oracle, dual BP experiments, fully source-bound
+receipt reexecution and **10/10** dedicated Phase 1G tests.
+
+**Candidate admission:** 24 fixed, preregistered CSS constructions
+yielded **23 unique admissible `H_Z` Tanner topologies**. One
+exact topology duplicate occurred inside the rate-0.50 source
+family; its `(family,lift,seed)` identity and original first
+admission are retained in the receipt. No duplicated graph was
+counted twice in BP trials. Effective split:
+**15 training topologies / 8 held-out rate-0.75 topologies**.
+
+**Controlled evidence:** 23 unique topologies × 3 BSC rates ×
+4 trials = **276** actual integer min-sum BP trial traces.
+All **48** actual pinned QEC floating BP cases executed on matched
+heldout binary H/error inputs and their **frame-failure labels agreed
+48/48** with the Phase 1E pilot. This is not bitwise correction parity
+or proof of a quantum decoder.
+
+| Held-out BSC rate | Integer BP failures | IPR AUROC | Density AUROC | Pinned-QEC failure-label agreement |
+| --- | ---: | ---: | ---: | ---: |
+| 4% | 12 / 32 | 0.500000 | 0.566667 | 16 / 16 |
+| **8% primary** | **29 / 32** | **0.500000** | **0.224138** | **16 / 16** |
+| 12% | 31 / 32 | 0.500000 | 0.241935 | 16 / 16 |
+
+The predeclared **IPR AUROC ≥0.65 and ≥0.05 over density** criterion
+was **not met**. The complete family-blocked cohort has only
+8 admitted held-out graphs from one QEC-generated code-rate family;
+as in Phase 1E/1F, no statistical significance, causal spectral
+failure predictor, independent published benchmark replication or
+physical fault-tolerance result is claimed.
+
+Canonical receipt SHA-256:
+`65cfc54031be205eb483941a031c3b2bdbb2905175241c85a6ce01d1225ac4c3`.
+
+[Successful integration run](https://github.com/QSOLKCB/QEC-ADA/actions/runs/42596870426);
+[complete 30-day cohort artifact](https://github.com/QSOLKCB/QEC-ADA/actions/runs/42596870426/artifacts/13663477786).
+
+The original Phase 1E 720-trial and Phase 1F 1,440-trial negative
+findings remain independent, unchanged reference baselines.
+Any further topology admission must use **genuinely separate
+source datasets** with immutable provenance rather than changing
+held-out QEC seeds after observing these results.
+
 ## Future independent gates
 
 - Truly independently published Tanner/QLDPC topology datasets with

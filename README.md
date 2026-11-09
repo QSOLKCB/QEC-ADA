@@ -281,3 +281,17 @@ uv run --no-project --with numpy==1.26.4 python \
 [Phase 1G scientific protocol and evidence boundaries](docs/PHASE1G_QEC_CSS_FAMILY.md).
 The original Phase 1E/1F negative outcomes and the native
 Ada GF(3) decoder, Strowger and SPECTRAL work remain unchanged.
+
+### Executed Phase 1G finding
+
+GitHub Actions verified **23 unique Tanner graphs from 24 pinned QEC
+construction candidates** (one exact within-family duplicate removed
+*before* any trials), **276** integer BP traces and **48** actual
+source-pinned QEC BP executions. The frame-failure labels agreed
+48/48 but **not** under equivalent numerical update equations.
+
+The prespecified 8% heldout-family IPR AUROC was **0.500**, failing
+the unchanged predictive advantage criterion. All source, graph,
+spectrum, decoder and numerical evaluation evidence is independently
+reexecuted and retained under PR #9. See
+[the Phase 1G results and receipt](docs/PHASE1G_QEC_CSS_FAMILY.md).
