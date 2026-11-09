@@ -55,8 +55,17 @@ jobs:
       - name: Execute native finite-field selftest
         run: ./build/bin/qec_ada selftest
 
+      - name: Exhaustive scalar versus OPT qutrit equivalence (3^10 inputs)
+        run: ./build/bin/qec_ada selftest qutrit
+
+      - name: Native deterministic route selftest
+        run: ./build/bin/qec_ada selftest route
+
       - name: Re-run tests against native CLI binary
         run: python3 -m unittest discover -s tests -v
+
+      - name: Observational paired OPT benchmark (no speedup gate)
+        run: python3 scripts/bench_qutrit.py --trials 7
 
       - name: Negative-input smoke test
         run: |

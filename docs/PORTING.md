@@ -8,9 +8,22 @@
 - Separate GUI for document browsing and educational computation.
 - CI compile/test baseline; no automatic web publication.
 
+## Phase 1A — Fixed qutrit decoding and routing pilot (additive)
+
+- Independently implement the cyclic [[5,1,3]]₃ stabilizer code and
+  deterministic weight-one bounded syndrome lookup in native Ada.
+- Preserve the scalar syndrome path; add immutable OPT one-site contributions
+  with exhaustive 3^10 exact-equality gating, never heuristic equivalence.
+- Introduce a bounded classical first-free selector pilot based on QEC's
+  Strowger ordering without claiming its receipt or pulse protocol.
+- Run independent oracle and native executable tests on CI.
+- [Implementation scope and limitations](PHASE1A_DECODER_ROUTING.md).
+
 ## Phase 1 — Algebraic correctness
 
-Specify and independently implement GF(2), GF(3), GF(4) algebra. GF(4)
+Specify and independently implement GF(2), GF(3), GF(4) algebra.
+The fixed GF(3) qutrit slice is an additive pilot; standalone GF(2) and
+GF(4) implementations remain pending. GF(4)
 requires an irreducible polynomial and must **not** be implemented as
 integers modulo four. Compare exhaustive small cases with an independently
 generated mathematical oracle.
