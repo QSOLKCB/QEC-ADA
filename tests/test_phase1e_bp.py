@@ -76,6 +76,32 @@ class ExactReferenceTests(unittest.TestCase):
         self.assertEqual(0.5, ref.average_precision(equal))
         self.assertIsNone(ref.auroc([(0.5, True)]))
         self.assertIsNone(ref.average_precision([(0.5, False)]))
+        self.assertIsNone(ref.average_precision([(0.5, True)]))
+        self.assertIsNone(ref.average_precision([(0.1, True), (0.9, True)]))
+        self.assertIsNone(ref.average_precision([(0.1, False), (0.9, False)]))
+        self.assertIsNone(ref.average_precision([]))
+        self.assertIsNone(ref.auroc([(0.1, True), (0.9, True)]))
+        self.assertIsNone(ref.auroc([(0.1, False), (0.9, False)]))
+
+    def test_one_class_heldout_ap_is_null_in_full_report(self):
+        # Two distinct held-out graphs (IDs 0 and 5) have only positive
+        # outcomes; training graphs retain both classes.
+        graphs = [{"spectral": {
+            name: (i + 1) / 10.0
+            for name in pilot.PREDICTORS
+        }} for i in range(10)]
+        records = [{
+            "graph_id": i, "noise_bps": 5000,
+            "bp": {"frame_failure": i % 5 == 0 or i % 2 == 0},
+        } for i in range(10)]
+        config = {"noise_bps": [5000], "primary_noise_bps": 5000}
+        report = pilot.scores_report(records, graphs, config)
+        self.assertEqual("NOT_EVALUABLE", report["primary"]["verdict"])
+        held = report["per_noise"]["5000"]["features"]
+        for name in pilot.PREDICTORS:
+            self.assertIsNone(held[name]["heldout_auroc"])
+            self.assertIsNone(held[name]["heldout_average_precision"])
+        self.assertIsNotNone(held["ipr"]["train_auroc"])
 
     def test_config_and_source_fail_closed(self):
         cfg = {
