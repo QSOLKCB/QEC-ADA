@@ -52,10 +52,12 @@ class PinnedQECBaselineTests(unittest.TestCase):
             k: v for k, v in forged.items() if k != "sha256"
         }))
         with self.assertRaisesRegex(ValueError, "re-execution mismatch"):
-            bridge.verify(self.parent, bridge.canonical(forged) + b"\n")
+            bridge.verify(self.parent, bridge.canonical(forged) + b"\n", DONOR)
 
     def test_wrong_donor_checkout_rejected(self):
-        with self.assertRaises((ValueError, OSError, Exception)):
+        import subprocess
+        with self.assertRaises((ValueError, OSError,
+                                subprocess.CalledProcessError)):
             bridge.checked_source(ROOT)
 
 
