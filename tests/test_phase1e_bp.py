@@ -152,6 +152,29 @@ class ReproducibleExperimentTests(unittest.TestCase):
         with patch.object(pilot, "SCALE", ROOT / "binary-not-present"):
             self.assertEqual(a, pilot.verify_bytes(raw))
 
+    def test_supported_all_failure_holdout_has_null_ap(self):
+        # Reproduce the reported P2 case through the actual supported
+        # graph/noise/BP pipeline; do not use synthetic result labels.
+        config = {
+            "graphs": 10, "trials": 2, "variables": 128, "checks": 8,
+            "seed": "abc-123", "noise_bps": [5000],
+            "primary_noise_bps": 5000, "max_iterations": 2,
+        }
+        artifact = pilot.generate(config)
+        held = artifact["analysis"]["per_noise"]["5000"]
+        self.assertEqual(4, held["heldout_trials"])
+        self.assertEqual(4, held["heldout_failures"])
+        for name in pilot.PREDICTORS:
+            self.assertIsNone(held["features"][name]["heldout_auroc"])
+            self.assertIsNone(
+                held["features"][name]["heldout_average_precision"])
+        self.assertEqual("NOT_EVALUABLE",
+                         artifact["analysis"]["primary"]["verdict"])
+        self.assertEqual(
+            artifact,
+            pilot.verify_bytes(pilot.canonical(artifact) + b"\n"),
+        )
+
     def test_byte_identical_repeated_experiment(self):
         self.assertEqual(pilot.canonical(self.artifact),
                          pilot.canonical(pilot.generate(self.config)))
