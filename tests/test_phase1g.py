@@ -75,7 +75,7 @@ class PureAdmissionTests(unittest.TestCase):
 
     def test_css_orthogonality_detects_true_noncommutation(self):
         self.assertTrue(css.css_orthogonal([0b1111], [0b1111]))
-        self.assertFalse(css.css_orthogonal([0b1110], [0b1010]))
+        self.assertFalse(css.css_orthogonal([0b1110], [0b1000]))
         self.assertTrue(css.css_orthogonal([0b1100, 0b0011],
                                           [0b0011, 0b1100]))
 
