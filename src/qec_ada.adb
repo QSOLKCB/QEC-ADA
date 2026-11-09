@@ -279,6 +279,30 @@ procedure QEC_ADA is
       Product_State.Rows := 2;
       Product_State.Z (1) (1) := 1;
       Product_State.Z (2) (2) := 1;
+      --  Reject noncanonical inactive slots, which the textual CLI never
+      --  exposes but a native library caller can supply.
+      declare
+         Invalid : QEC_Configurable.Code_Definition;
+      begin
+         Invalid.Sites := 1;
+         Invalid.Rows := 1;
+         Invalid.Z (1) (1) := 1;
+         Invalid.Z (1) (2) := 1;
+         if QEC_Configurable.Status_Of
+              (QEC_Configurable.Prepare (Invalid)) /=
+                QEC_Configurable.Noncanonical_Padding
+         then
+            raise Program_Error with "noncanonical site padding";
+         end if;
+         Invalid.Z (1) (2) := 0;
+         Invalid.Z (2) (1) := 1;
+         if QEC_Configurable.Status_Of
+              (QEC_Configurable.Prepare (Invalid)) /=
+                QEC_Configurable.Noncanonical_Padding
+         then
+            raise Program_Error with "noncanonical generator padding";
+         end if;
+      end;
       declare
          First : constant QEC_Configurable.Prepared_Code :=
            QEC_Configurable.Prepare (Cyclic);

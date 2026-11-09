@@ -7,3 +7,8 @@
 /fixtures/qec_reference_sha256.json @EmergentMonk
 /docs/reference/qec/ @EmergentMonk
 /gui/ @EmergentMonk
+
+# Formal proof sources, prover driver and arithmetic proof records.
+/spark/ @EmergentMonk
+/scripts/prove_spark.sh @EmergentMonk
+/docs/PHASE1B_SPARK_PROOF.md @EmergentMonk

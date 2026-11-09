@@ -101,5 +101,6 @@ provide cross-code validation.
 
 [Phase 1B implementation and limits](docs/PHASE1B_CONFIGURABLE.md).
 
-Formal GNATprove proofs, if any, are scoped separately to the declared
-SPARK model; these code changes alone do not certify the decoder.
+An isolated GNATprove 16.1.0 GF(3) arithmetic proof target completed
+**28/28 checks**. See [proof receipt](docs/PHASE1B_SPARK_PROOF.md).
+This does not certify the configurable decoder, OPT cache, or hardware QEC.

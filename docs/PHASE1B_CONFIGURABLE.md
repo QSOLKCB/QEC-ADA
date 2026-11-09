@@ -83,10 +83,11 @@ The native `selftest config` also constructs code A → code B → code A
 and runs exhaustive scalar/OPT parity checks, ensuring reusable
 precomputation does not escape its immutable code snapshot.
 
-**Separate verification milestone:** the SPARK pilot concerns elementary
-GF(3) arithmetic, not the entire decoder. Compiler success is not
-GNATprove proof discharge. Version, exact proof target, and results must
-be recorded before asserting proof coverage.
+**Completed initial proof pilot:** GNATprove 16.1.0 proved 28/28 checks
+in the separate GF(3) arithmetic model at commit `4f5db297...`.
+See [SPARK-GF3-001](PHASE1B_SPARK_PROOF.md) for executed tool versions and
+scope. This is **not** formal proof of the configurable decoder or OPT
+tables; those remain bounded-test validated.
 
 ## Attribution
 

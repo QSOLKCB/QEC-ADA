@@ -26,7 +26,8 @@
 - Reject duplicate/linearly dependent or noncommuting checks and ambiguous
   bounded error sets rather than inventing representative choices.
 - Prove scalar and precomputed path parity across every effective Pauli input.
-- Introduce a separate, narrow SPARK GF(3) mathematical proof harness.
+- Introduce and execute a separate, narrow SPARK GF(3) mathematical proof
+  harness (28 checks proved; configurable decoder not proved).
 - [Phase 1B contract](PHASE1B_CONFIGURABLE.md).
 
 ## Phase 1 — Algebraic correctness
