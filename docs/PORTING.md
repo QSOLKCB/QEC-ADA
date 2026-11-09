@@ -19,6 +19,17 @@
 - Run independent oracle and native executable tests on CI.
 - [Implementation scope and limitations](PHASE1A_DECODER_ROUTING.md).
 
+## Phase 1B — Configurable code definitions and exact OPT binding
+
+- Bound 1–5 qutrit sites, 1–4 commuting independent generators and an exact
+  radius-one syndrome table to an immutable code snapshot.
+- Reject duplicate/linearly dependent or noncommuting checks and ambiguous
+  bounded error sets rather than inventing representative choices.
+- Prove scalar and precomputed path parity across every effective Pauli input.
+- Introduce and execute a separate, narrow SPARK GF(3) mathematical proof
+  harness (28 checks proved; configurable decoder not proved).
+- [Phase 1B contract](PHASE1B_CONFIGURABLE.md).
+
 ## Phase 1 — Algebraic correctness
 
 Specify and independently implement GF(2), GF(3), GF(4) algebra.
@@ -34,6 +45,14 @@ Pin a specific source commit, identify narrow interfaces and immutable QEC
 fixtures. Port one small decoder operation at a time. Validate syndrome,
 representative selection, invalid-input rejection and byte-level outputs.
 No incidental mutation of QEC's frozen baseline.
+
+## Phase 1C — Classical Strowger replay (proposed)
+
+- Use explicit immutable topology and source-bound initial state.
+- Add canonical event streams, deterministic pulses, no hidden work,
+  route/dark/check tone verification and independent receipt replay.
+- See [Phase 1C proposal](PHASE1C_STROWGER_PLAN.md).
+- No physical quantum-routing claim or automatic decoder replacement.
 
 ## Phase 3 — Formal proofs
 

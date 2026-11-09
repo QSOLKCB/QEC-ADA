@@ -84,3 +84,23 @@ a formal proof. See [porting plan](docs/PORTING.md) and [CI policy](AGENTS.md).
 4. Keep execution and proof separate. SPARK annotations are not proof results.
 5. Local-first, reproducible, no Docker, Node, CDN or cloud dependency.
 6. Maintain reviewable PRs; no automatic release, merge or public GUI deployment.
+
+## Phase 1B — Configurable stabilizer-code pilot
+
+A separate bounded Ada decoder now accepts **1–5 qutrit sites and 1–4
+independent, commuting stabilizer checks**. It validates finite-field
+symplectic constraints, syndrome collision degeneracy, and radius-one
+correctability. OPT contributions are immutable and held together with the
+exact code-definition snapshot. A scalar path and independent Python tests
+provide cross-code validation.
+
+~~~sh
+./build/bin/qec_ada selftest config
+./build/bin/qec_ada config decode 2 10 01 0010 0001
+~~~
+
+[Phase 1B implementation and limits](docs/PHASE1B_CONFIGURABLE.md).
+
+An isolated GNATprove 16.1.0 GF(3) arithmetic proof target completed
+**28/28 checks**. See [proof receipt](docs/PHASE1B_SPARK_PROOF.md).
+This does not certify the configurable decoder, OPT cache, or hardware QEC.

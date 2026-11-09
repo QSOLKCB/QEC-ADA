@@ -28,3 +28,10 @@ the general mechanisms OPT-INV-001 and OPT-REDUCE-001 from QSOLKCB/OPT,
 Apache-2.0. No OPT source is copied. There is no universal performance
 claim. The new classical selector follows QEC Strowger's first-free
 ordering concept but does not claim complete Strowger equivalence or receipts.
+
+Phase 1B introduces a new bounded, independently written Ada implementation
+of configurable GF(3) stabilizer-code validation, radius-one exact
+syndrome lookup and immutable code-definition-bound OPT contributions.
+The algorithm references QEC's public qutrit finite-field and coset-leader
+models at 27bbc798c4e38138ca5b0fff70b15c3271a1917d.
+No third-party source copied from OPT or Python donor.

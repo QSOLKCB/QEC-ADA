@@ -1,0 +1,60 @@
+name: QEC-ADA SPARK GF(3) proof
+
+on:
+  pull_request:
+    paths:
+      - 'spark/**'
+      - 'scripts/prove_spark.sh'
+      - '.github/workflows/proof.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: qec-ada-spark-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+jobs:
+  prove-field-arithmetic-only:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - name: Checkout without persisted credentials
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          persist-credentials: false
+
+      - name: Install GNAT and GPRbuild (CI-only)
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y gnat gprbuild unzip
+
+      - name: Install checksum-verified Alire 2.1.1 (CI-only)
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl --fail --location --retry 3 \
+            https://github.com/alire-project/alire/releases/download/v2.1.1/alr-2.1.1-bin-x86_64-linux.zip \
+            --output "$RUNNER_TEMP/alire.zip"
+          echo "09c66bcd8c35dd4b97b72c3d9b76e44caa6964a2db35aba069f396f00f1f64c7  $RUNNER_TEMP/alire.zip" | sha256sum -c -
+          mkdir -p "$RUNNER_TEMP/alire"
+          unzip -q "$RUNNER_TEMP/alire.zip" -d "$RUNNER_TEMP/alire"
+          alr_path="$(find "$RUNNER_TEMP/alire" -type f -name alr -print -quit)"
+          test -n "$alr_path"
+          chmod +x "$alr_path"
+          echo "$(dirname "$alr_path")" >> "$GITHUB_PATH"
+
+      - name: Install pinned GNATprove 16.1.0 (CI-only)
+        shell: bash
+        run: |
+          set -euo pipefail
+          alr --version
+          alr -n install gnatprove=16.1.0 --prefix="$RUNNER_TEMP/gnatprove"
+          echo "$RUNNER_TEMP/gnatprove/bin" >> "$GITHUB_PATH"
+
+      - name: Prove isolated SPARK GF(3) target
+        shell: bash
+        run: |
+          set -euo pipefail
+          sh scripts/prove_spark.sh

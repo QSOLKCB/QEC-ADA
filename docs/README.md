@@ -8,6 +8,7 @@ QEC reference material**. The original QEC documents have not been rewritten.
 | [ARCHITECTURE.md](ARCHITECTURE.md) | Native design, execution and proof boundaries |
 | [PORTING.md](PORTING.md) | Incremental QEC-to-Ada migration sequence |
 | [PHASE1A_DECODER_ROUTING.md](PHASE1A_DECODER_ROUTING.md) | Fixed qutrit decoder, OPT reuse and classical deterministic routing |
+| [PHASE1B_CONFIGURABLE.md](PHASE1B_CONFIGURABLE.md) | Configurable GF(3) stabilizer validation, OPT binding and tests |
 | [GUI.md](GUI.md) | Universal offline browser UI and its limits |
 | [REFERENCE.md](REFERENCE.md) | Donor source, exact-copy policy and omissions |
 | [reference/qec/](reference/qec/) | Verbatim QEC documentation and labs |
