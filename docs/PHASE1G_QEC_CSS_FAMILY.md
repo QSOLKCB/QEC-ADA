@@ -106,8 +106,9 @@ remain unchanged.
 
 For each BSC trial, the all-zero classical codeword is transmitted;
 deterministic SHA-256-based errors are applied and **the original**
-Phase 1E integer min-sum BP computes actual decisions, syndrome
-weights and per-round traces. The at-most-48 selected held-out trials are
+Phase 1E integer min-sum BP implementation computes actual
+decisions, syndrome weights and per-round traces **on the new Phase 1G
+source-generated CSS topologies and errors**. The at-most-48 selected held-out trials are
 replayed through the **actual pinned QEC `bp_decode`**, also in
 classical binary `mode=min_sum`, `schedule=flooding` without
 postprocessing, on identical `H_Z`/flip inputs.
@@ -203,8 +204,12 @@ counted twice in BP trials. Effective split:
 4 trials = **276** actual integer min-sum BP trial traces.
 All **48** actual pinned QEC floating BP cases executed on matched
 heldout binary H/error inputs and their **frame-failure labels agreed
-48/48** with the Phase 1E pilot. This is not bitwise correction parity
-or proof of a quantum decoder.
+48/48 with Phase 1G's integer min-sum BP results on those same inputs**.
+Phase 1G reuses the integer min-sum *implementation* introduced in
+Phase 1E, but these are newly generated Phase 1G CSS-family trials,
+**not comparisons against the separate Phase 1E pilot cohort**.
+Agreement does not establish bitwise correction parity or proof of a
+quantum decoder.
 
 | Held-out BSC rate | Integer BP failures | IPR AUROC | Density AUROC | Pinned-QEC failure-label agreement |
 | --- | ---: | ---: | ---: | ---: |
