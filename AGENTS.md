@@ -92,3 +92,21 @@ dominant radius. Record numerical convergence and local recurrent
 mode support. A low-order moment is not an eigenvalue; a component
 eigenvector may not be a full reducible-operator eigenvector.
 Independent tiny-graph oracles must remain separate and CI-enforced.
+
+## Phase 1E evidence and inference limits
+
+Keep the `qec_scale` sparse observer and the classical GF(2) min-sum BP
+reference strictly separate from the protected native GF(3) decoder.
+Maintain exact Phase 1A–1D small fixtures. Never infer full-graph
+eigenvectors from a selected recurrent SCC, or promote numerical Collatz
+estimates to rigorous enclosures.
+
+Hold out **whole graphs**, not random trials. Predeclare predictor
+direction, train-only thresholds and evaluation criteria, and preserve
+negative findings and missing-class metrics as null. Do not tune
+thresholds or graph families against held-out labels.
+
+For any Phase 1E evidence claim, retain the full canonical corpus,
+its SHA-256, exact source commit, independent Ada/reference parity and
+offline replay. Never call this a QEC BP parity result or hardware
+fault-tolerance validation.

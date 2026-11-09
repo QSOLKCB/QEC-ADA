@@ -175,3 +175,33 @@ independently checked exact graph metrics and the native SCC-local
 numerical spectrum. The verifier reconstructs the result from the
 declared source using only Python's standard library, no Ada binary.
 It is not a hardware-QEC certificate.
+
+## Phase 1E — Scaled sparse spectral observatory and controlled BP validation
+
+A separate native Ada executable, `qec_scale`, handles up to **128
+variables, 128 check nodes and 2,048 canonical Tanner edges**. A
+deterministic SCC-aware matrix-free non-backtracking solver reports
+numerical recurrent-block spectral radii, IPR and edge-energy metrics.
+
+A separate Python-standard-library experiment runs real **classical GF(2)
+min-sum BP** on deterministic synthetic graph/noise ensembles and records
+replayable per-iteration failures. Evaluation is **graph-blocked**: no
+shared topology between training and held-out predictive testing.
+
+The first 20-graph, 720-trial study **did not meet the preregistered
+IPR predictive threshold**. At the primary 8% noise level, held-out
+IPR AUROC was 0.595238 vs a 0.383598 edge-density baseline. This is
+a negative experimental observation, not a physical quantum prediction.
+
+~~~sh
+gprbuild -p -P qec_ada.gpr
+uv run --no-project python scripts/phase1e_experiment.py run \
+  /tmp/qecada-phase1e.json --graphs 20 --trials 12 \
+  --variables 32 --checks 24 --seed qecada-phase1e-001
+uv run --no-project python scripts/phase1e_experiment.py verify \
+  /tmp/qecada-phase1e.json
+~~~
+
+[Full Phase 1E methods, results, limits and evidence](docs/PHASE1E_SCALED_SPECTRAL_BP.md).
+The earlier small-graph decoder, SPECTRAL sonification, Strowger receipts
+and independent QEC donor provenance are preserved.

@@ -64,6 +64,16 @@ No incidental mutation of QEC's frozen baseline.
   bit identity or a full reducible-graph eigenvector.
 - [Phase 1D implementation and limitations](PHASE1D_SPARSE_SPECTRAL.md).
 
+## Phase 1E — Scaled spectral diagnosis and controlled BP failure tests
+
+- Native read-only sparse observatory beyond the five-qutrit pilot;
+  128×128 nodes and 2,048 edges with independent analytic eigenvalues.
+- Controlled deterministic classical GF(2) min-sum decoding trials
+  separate from the protected native GF(3) decoder.
+- Prespecified graph-blocked holdout and honest AUROC/AP/negative outcomes;
+  full source-bound trial corpus and offline replay.
+- [Phase 1E methods, results and limitations](PHASE1E_SCALED_SPECTRAL_BP.md).
+
 ## Phase 3 — Formal proofs
 
 Use GNATprove on explicit SPARK proof obligations for finite ranges,

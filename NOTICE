@@ -55,3 +55,17 @@ QSOLKCB/SPECTRAL at 49401fa010ed673e3d3977ccd5e06d66b0d65096
 (MIT), and QSOLKCB/OPT at
 7556dd36acd53ed3ed538fd03b1db44e5c1ec869 (Apache-2.0).
 No implementation code copied from any donor repository.
+
+Phase 1E extends QEC-ADA with independently implemented MPL-2.0
+sparse native Ada spectral analysis and a deterministic synthetic
+classical GF(2) min-sum BP research harness. It references mathematical
+and engineering ideas from QSOLKCB/QEC
+(27bbc798c4e38138ca5b0fff70b15c3271a1917d),
+multimodalas/fusion-qec
+(a390f57d3da2647ef8d835a7407ad0eb03d03093, CC BY 4.0),
+QSOLKCB/SPECTRAL
+(49401fa010ed673e3d3977ccd5e06d66b0d65096, MIT), and
+QSOLKCB/OPT
+(7556dd36acd53ed3ed538fd03b1db44e5c1ec869, Apache-2.0).
+No upstream implementation code is copied. The classical BP experiment
+does not claim equivalence with QEC's protected decoder.

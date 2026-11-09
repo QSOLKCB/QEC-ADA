@@ -35,3 +35,5 @@ them as stable IDs independently of working directory. No network required.
 Only the initial bounded GF(3) arithmetic and demo syndrome calculation are
 native implementation candidates. All other documentation is source context
 until separately ported, tested and verified.
+
+| [PHASE1E_SCALED_SPECTRAL_BP.md](PHASE1E_SCALED_SPECTRAL_BP.md) | Scaled native sparse modes, independent BP trial corpus, held-out evaluation and negative result |
