@@ -104,3 +104,19 @@ provide cross-code validation.
 An isolated GNATprove 16.1.0 GF(3) arithmetic proof target completed
 **28/28 checks**. See [proof receipt](docs/PHASE1B_SPARK_PROOF.md).
 This does not certify the configurable decoder, OPT cache, or hardware QEC.
+
+## Phase 1C — Observational SPECTRAL/Tanner + deterministic Strowger
+
+The separately compiled `qec_research` CLI adds **exact bounded Tanner
+graphs**, non-backtracking 4th-moment calculations, and a classical
+Strowger event-stream pilot.
+
+~~~sh
+gprbuild -p -P qec_ada.gpr
+./build/bin/qec_research tanner 2 1100 0012
+./build/bin/qec_research strowger 1020 3333 1100 0100 0010 none
+~~~
+
+See [Phase 1C scope and evidence boundaries](docs/PHASE1C_TANNER_SPECTRAL.md).
+Observational diagnostics do not alter decoder execution. No universal
+eigensolver or physical QEC / audible physics claim is made.

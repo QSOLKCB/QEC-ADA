@@ -1,6 +1,8 @@
 # Phase 1C proposal — deterministic Strowger routing and replay receipts
 
-**Status:** prospective; not implemented or authorized by Phase 1B merge.
+**Status:** bounded native event-stream pilot implemented on Phase 1C branch.
+Full QEC-compatible hash-chained Strowger receipts and advanced operator
+controls remain roadmap tasks; see [Phase 1C implementation](PHASE1C_TANNER_SPECTRAL.md).
 
 The next distinct phase can reproduce the **classical** switching semantics
 of QEC's Strowger syndrome exchange, without treating switching as quantum

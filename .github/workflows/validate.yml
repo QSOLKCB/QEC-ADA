@@ -67,6 +67,9 @@ jobs:
       - name: Re-run tests against native CLI binary
         run: python3 -m unittest discover -s tests -v
 
+      - name: Native research CLI regression tests (Tanner and Strowger)
+        run: python3 -m unittest discover -s tests -v
+
       - name: Observational paired OPT benchmark (no speedup gate)
         run: python3 scripts/bench_qutrit.py --trials 7
 
