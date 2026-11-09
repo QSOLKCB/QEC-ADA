@@ -47,7 +47,8 @@ class ClusterInferencePrimitives(unittest.TestCase):
             "1234", 800, 8, 1, 2))
 
     def test_quantile_algorithm_and_missing_values(self):
-        self.assertEqual([0.075, 2.925], phase1f.intervals([0, 1, 2, 3]))
+        self.assertAlmostEqual(0.075, phase1f.intervals([0, 1, 2, 3])[0])
+        self.assertAlmostEqual(2.925, phase1f.intervals([0, 1, 2, 3])[1])
         self.assertIsNone(phase1f.intervals([]))
         with self.assertRaises(ValueError):
             phase1f.draw_cluster("x", 800, 0, 0, 0)
