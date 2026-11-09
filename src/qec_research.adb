@@ -12,6 +12,7 @@ procedure QEC_Research is
    use Ada.Command_Line;
    use Ada.Text_IO;
    use type QEC_Configurable.Trit;
+   use type QEC_Strowger.Route_Outcome;
    Invalid : exception;
 
    function Number (Value : Natural) return String is
