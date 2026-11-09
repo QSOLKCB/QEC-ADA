@@ -174,21 +174,36 @@ procedure QEC_Scale is
                 Line'First + Header'Length - 1) = Header
             then
                declare
-                  Value : constant String := Ada.Strings.Fixed.Trim
-                    (Line (Line'First + Header'Length .. Line'Last),
-                     Ada.Strings.Both);
-                  Separator : constant Natural :=
-                    Ada.Strings.Fixed.Index (Value, " ");
+                  First_Digit : Natural := 0;
+                  Last_Digit : Natural := 0;
                begin
-                  if Separator <= Value'First
-                    or else Value (Separator .. Value'Last) /= " kB"
+                  --  procfs normally separates the label and digits with
+                  --  tabs, which Ada.Strings.Fixed.Trim does not strip.
+                  for I in Line'First + Header'Length .. Line'Last loop
+                     if Line (I) in '0' .. '9' then
+                        if First_Digit = 0 then
+                           First_Digit := I;
+                        end if;
+                        Last_Digit := I;
+                     elsif First_Digit /= 0 then
+                        exit;
+                     elsif Line (I) /= ' '
+                       and then Line (I) /= Character'Val (9)
+                     then
+                        raise Invalid_Input with "invalid VmHWM prefix";
+                     end if;
+                  end loop;
+                  if First_Digit = 0 or else Last_Digit = Line'Last
+                    or else Ada.Strings.Fixed.Trim
+                      (Line (Last_Digit + 1 .. Line'Last),
+                       Ada.Strings.Both) /= "kB"
                   then
                      raise Invalid_Input with
                        "unexpected /proc/self/status VmHWM unit";
                   end if;
                   declare
                      Peak : constant Natural := Natural'Value
-                       (Value (Value'First .. Separator - 1));
+                       (Line (First_Digit .. Last_Digit));
                   begin
                      if Peak = 0 then
                         raise Invalid_Input with "zero VmHWM";
