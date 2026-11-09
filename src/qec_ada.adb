@@ -6,6 +6,7 @@ with Ada.Strings;
 with Ada.Strings.Fixed;
 with Ada.Text_IO;
 with QEC_Decode;
+with QEC_Configurable;
 with QEC_GF3;
 with QEC_Invariants;
 with QEC_Qutrit;
