@@ -22,3 +22,15 @@ spectral receipt and validates it independently of the Ada executable.
 The read-only adapter rejects altered model scores, SCCs, float
 encoding and forged self-consistent JSON hashes. It is not a live
 SPECTRAL/APP render recipe nor an authenticated physical measurement.
+
+## Phase 1E — Larger sparse Tanner graphs
+
+`qec_scaled_spectral.ads/.adb` uses bounded O(V+E) arrays for canonical
+Tanner edge lists, sparse in/out adjacency, iterative SCC decomposition and
+recurrent-block Perron modes up to 128+128 nodes and 2,048 edges.
+`src/qec_scale.adb` is a separate, read-only native CLI.
+
+It does not modify the existing small-graph `qec_nb_spectral`, GF(3)
+decoder or SPECTRAL WAV/receipt engine. Analytical K(m,n) and long-cycle
+fixtures are enforced by `tests/test_phase1e_scale.py`.
+See [methods](../docs/PHASE1E_SCALED_SPECTRAL_BP.md).

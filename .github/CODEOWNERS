@@ -17,3 +17,12 @@
 /spectral/ @EmergentMonk
 /scripts/nb_spectral_export.py @EmergentMonk
 /docs/PHASE1D_SPARSE_SPECTRAL.md @EmergentMonk
+
+# Phase 1E source, predictive evaluation and evidence contracts.
+/spectral/qec_scaled_spectral.ads @EmergentMonk
+/spectral/qec_scaled_spectral.adb @EmergentMonk
+/src/qec_scale.adb @EmergentMonk
+/scripts/phase1e_reference.py @EmergentMonk
+/scripts/phase1e_experiment.py @EmergentMonk
+/scripts/phase1e_memory.py @EmergentMonk
+/docs/PHASE1E_SCALED_SPECTRAL_BP.md @EmergentMonk

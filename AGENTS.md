@@ -92,3 +92,35 @@ dominant radius. Record numerical convergence and local recurrent
 mode support. A low-order moment is not an eigenvalue; a component
 eigenvector may not be a full reducible-operator eigenvector.
 Independent tiny-graph oracles must remain separate and CI-enforced.
+
+## Phase 1E evidence and inference limits
+
+Keep the `qec_scale` sparse observer and the classical GF(2) min-sum BP
+reference strictly separate from the protected native GF(3) decoder.
+Maintain exact Phase 1A–1D small fixtures. Never infer full-graph
+eigenvectors from a selected recurrent SCC, or promote numerical Collatz
+estimates to rigorous enclosures.
+
+Hold out **whole graphs**, not random trials. Predeclare predictor
+direction, train-only thresholds and evaluation criteria, and preserve
+negative findings and missing-class metrics as null. Do not tune
+thresholds or graph families against held-out labels.
+
+For any Phase 1E evidence claim, retain the full canonical corpus,
+its SHA-256, exact source commit, independent Ada/reference parity and
+offline replay. Never call this a QEC BP parity result or hardware
+fault-tolerance validation.
+
+## Phase 1E post-exec RSS and one-class AP regressions
+
+Only the native `qec_scale inspect FILE --native-rss` opt-in may
+provide `native_post_exec_peak_rss_kib_linux`. On Linux it reads
+`/proc/self/status` VmHWM after exec in Ada. Do not replace it with
+`RUSAGE_CHILDREN.ru_maxrss` or a launcher-level estimate; those can
+include the Python parent's inherited memory. Preserve the previous
+v1 CI observations as superseded/launch-inclusive, not native RSS.
+
+Average precision and AUROC must be `None` for either all-positive
+or all-negative evaluation samples. Keep deterministic one-class
+held-out regression fixtures and the unchanged 720-trial negative
+predictive result.

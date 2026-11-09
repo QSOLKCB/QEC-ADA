@@ -104,6 +104,38 @@ jobs:
             3 110000 011000 101000
           python3 scripts/nb_spectral_export.py verify "$out/cycle6.json"
 
+      - name: Scaled native sparse spectral analytic and memory-capacity tests
+        run: python3 -m unittest discover -s tests -p test_phase1e_scale.py -v
+
+      - name: Controlled binary BP experiments and graph-blocked evidence replay
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -m unittest discover -s tests -p test_phase1e_bp.py -v
+          mkdir -p evidence/phase1e
+          python3 scripts/phase1e_experiment.py run evidence/phase1e/evidence.json \
+            --graphs 20 --trials 12 --variables 32 --checks 24 \
+            --seed qecada-phase1e-001 --noise-bps 400,800,1200
+          python3 scripts/phase1e_experiment.py verify evidence/phase1e/evidence.json
+          sha256sum evidence/phase1e/evidence.json
+
+      - name: Retain synthetic Phase 1E research evidence (30 days)
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: qec-ada-phase1e-${{ github.sha }}
+          path: evidence/phase1e/evidence.json
+          if-no-files-found: error
+          retention-days: 30
+
+      - name: Verify native post-exec VmHWM measurement and sparse memory scaling
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -m unittest discover -s tests -p test_phase1e_memory.py -v
+          python3 scripts/phase1e_memory.py --checks 8 --variables 16
+          python3 scripts/phase1e_memory.py --checks 16 --variables 24
+          python3 scripts/phase1e_memory.py --checks 32 --variables 64
+
       - name: Observational paired OPT benchmark (no speedup gate)
         run: python3 scripts/bench_qutrit.py --trials 7
 
