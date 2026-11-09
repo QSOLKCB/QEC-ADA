@@ -106,6 +106,37 @@ physical/QLDPC data. The original 20-graph 720-trial evidence and its
 negative outcome remain immutable. Even eight held-out graphs do not
 provide a generalizable performance guarantee or valid quantum threshold.
 
+### Observed replication outcome — no predictive advantage
+
+CI run **`42588553007`**, implementation commit
+`22b7db12e6076e46e0ef4545474f5820518963d0` executed all **1,440
+BP runs** and performed full independent offline replay.
+
+| BSC noise | Heldout failures | IPR AUROC | IPR AP | Edge-density AUROC |
+| --- | ---: | ---: | ---: | ---: |
+| 4% | 8/96 | 0.414773 | 0.081845 | 0.678977 |
+| **8% primary** | **33/96** | **0.485570** | **0.362915** | **0.520202** |
+| 12% | 68/96 | 0.449580 | 0.692052 | 0.531513 |
+
+The original fixed primary threshold was **not** met. The
+conditional 512-resample **graph-cluster** IPR AUROC percentile range
+at 8% was **0.333107–0.587824**, with **zero undefined resamples** in
+this executed cohort. Graph-level IPR/failure Spearman at 8% was
+**0.048493**. These diagnostics do not establish significant
+correlation or causal effects.
+
+Full cohort JSON receipt:
+`2801e2cd4e1124f8eb13b3f64cf529954c9605b51f7433bab2837cdca7b5bbad`
+(experiment's canonical internal digest).
+Graph-blocked inference receipt:
+`2a2d54ae3ed0ca0da6f69eabb4ad93eda9c6e9641776d17a05e9be7d0323f688`.
+Both verified offline. The whole artifact is retained in GitHub Actions
+(run `42588553007`, artifact `13660047398`) for 30 days.
+
+The comparison is deliberately shown alongside the original
+20-graph negative result rather than replacing it. A second
+synthetic seed is **not** external-topology validation.
+
 CI records `evidence/phase1f/cohort40.json` and
 `evidence/phase1f/cohort40-inference.json` as separate 30-day
 artifacts after **complete offline replay of both records**. The
@@ -161,13 +192,18 @@ cross-decoder observation**, not a quantum CSS code validation.
   output record, rejecting altered decoded words even if all hashes
   are recomputed. It is not a standalone no-source verification claim.
 
-**Executed preliminary result**, CI `42587318495`: actual pinned
-QEC BP ran successfully on all 24 matched held-out inputs and agreed
-with the Phase 1E **frame-failure labels on 23/24 cases**. That is
-outcome-label agreement on one small set, not decoder equivalence or
-an accuracy certification. The subsequent test fixture failure was
-a missing test call argument, not a failure of those actual QEC BP
-executions; acceptance requires a later fully green CI run.
+**Executed and independently reexecuted**, successful CI
+`42588553007`: the actual pinned QEC BP ran on all **24 matched
+held-out cases**, agreeing with the Phase 1E frame-failure labels on
+**23/24 cases**. One disagreement is retained in the full output rather
+than normalized away. That is a tiny source-bound same-input
+observation, **not** decoder correction parity or accuracy certification.
+
+Canonical cross-decoder receipt SHA-256:
+`365711d210b8dc42bfeb3b2774f9108a43c85903176c248e6dc1c524b7076b60`.
+An independently rerun source-verified QEC decoder reproduced the
+exact receipt. The 24-case artifact is retained as Actions artifact
+`13659394635` under CI run `42588553007`.
 
 Run with a **separately checked-out pinned donor**:
 
