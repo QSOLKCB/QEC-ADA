@@ -95,17 +95,33 @@ class ExecutedPinnedCSSStudies(unittest.TestCase):
         self.assertEqual(css.BASELINE_SHA, item["baseline_phase1e_sha256"])
         self.assertEqual(css.qec.DONOR_COMMIT, item["generator"]["commit"])
         self.assertEqual(css.qec.SOURCE_BLOB, item["generator"]["git_blob_sha1"])
-        self.assertEqual(24, len(item["topologies"]))
-        self.assertEqual(24 * 3 * css.TRIALS, len(item["bp_trials"]))
-        self.assertEqual(8 * 3 * css.QEC_TRIALS, len(item["qec_reference_records"]))
-        self.assertEqual(8, sum(c["split"] == "heldout"
-                                for c in item["topologies"]))
+        self.assertEqual(24, item["generator"]["candidate_configurations"])
+        self.assertEqual(24, len(item["topologies"]) +
+                         len(item["duplicate_candidates"]))
+        self.assertEqual(len(item["topologies"]), 
+                         item["generator"]["admitted_unique_topologies"])
+        self.assertEqual(len(item["duplicate_candidates"]), 
+                         item["generator"]["duplicate_configurations_excluded"])
+        self.assertEqual(len(item["topologies"]) * 3 * css.TRIALS,
+                         len(item["bp_trials"]))
+        heldout = sum(c["split"] == "heldout" for c in item["topologies"])
+        self.assertGreaterEqual(heldout, 4)
+        self.assertEqual(heldout * 3 * css.QEC_TRIALS,
+                         len(item["qec_reference_records"]))
         self.assertTrue(all(c["family"] == "rate_0.75"
                             for c in item["topologies"]
                             if c["split"] == "heldout"))
         self.assertTrue(all(c["css_orthogonal"] for c in item["topologies"]))
         hashes = [c["hz_graph_sha256"] for c in item["topologies"]]
         self.assertEqual(len(set(hashes)), len(hashes))
+        for exclusion in item["duplicate_candidates"]:
+            owner = item["topologies"][exclusion["same_as_admitted_code_id"]]
+            self.assertEqual(owner["family"], exclusion["family"])
+            self.assertEqual(owner["hz_graph_sha256"],
+                             exclusion["hz_graph_sha256"])
+            self.assertEqual("EXACT_DUPLICATE_TOPOLOGY_PRE_TRIAL",
+                             exclusion["reason"])
+        self.assertTrue(item["claim_boundary"]["duplicate_topologies_pretrial_deduplicated"])
         self.assertFalse(item["claim_boundary"]["physical_quantum_hardware_evidence"])
 
     def test_folded_family_metrics_and_qec_label_coverage(self):
@@ -115,9 +131,12 @@ class ExecutedPinnedCSSStudies(unittest.TestCase):
             "NO_PRE_REGISTERED_ADVANTAGE_DETECTED"))
         for noise in css.NOISE_BPS:
             values = item["evaluation"]["per_noise"][str(noise)]
-            self.assertEqual(16 * css.TRIALS, values["train_trials"])
-            self.assertEqual(8 * css.TRIALS, values["heldout_trials"])
-            self.assertEqual(8 * css.QEC_TRIALS, values["qec_reference_cases"])
+            self.assertEqual(values["train_code_instances"] * css.TRIALS,
+                             values["train_trials"])
+            self.assertEqual(values["heldout_code_instances"] * css.TRIALS,
+                             values["heldout_trials"])
+            self.assertEqual(values["heldout_code_instances"] * css.QEC_TRIALS,
+                             values["qec_reference_cases"])
             b = values["blocked"]
             self.assertEqual(css.BOOTSTRAPS,
                              b["defined_replicates"] +
