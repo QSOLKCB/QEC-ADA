@@ -188,3 +188,27 @@ claim a physical quantum threshold or erase the negative Phase
 only with explicit execution approval and in the isolated reference
 lane. Verify the whole external-source dataset and source-dependent
 BP result, not just a rehashed JSON receipt.
+
+## Phase 1I syndrome-only CSS Pauli / logical-coset invariants
+
+Never pass physical Pauli error sites, planted error masks or
+actual logical labels into the Phase 1I syndrome correction engine.
+Only X/Z ideal measured check syndromes, the corresponding
+original CSS check topology and an explicit fixed message prior
+are authorized inputs. Ensure Y maps to BOTH X and Z components.
+
+A zero residual syndrome is **not a success gate**: require exact
+X residual membership in rowspace H_X and Z residual membership
+in rowspace H_Z. Nonzero residual syndrome means
+DETECTED_UNRESOLVED and logical labels MUST be null; never turn
+unresolved into a measured nontrivial logical fault. Preserve
+degenerate stabilizer successes and zero-syndrome logical-fault
+counterexamples as mandatory independent regression fixtures.
+
+External matrix provider code remains inert, raw unlicensed parity
+matrices are not committed or put in artifacts, and full source
+reexecution (not a self-consistent hash) is required to validate
+Phase 1I's evidence. Its ideal-syndrome phenomenological
+results cannot be described as fault-tolerant circuit/noisy
+measurement/hardware performance. The original Phase 1E–H
+negative predictor results and native GF(3) decoder are protected.

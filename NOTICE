@@ -113,3 +113,16 @@ neither redistributes its raw matrices nor asserts a licence
 to do so. Source Git blobs and attribution are recorded in
 fixtures/phase1h_external_css_sources.json. QEC's separate,
 opt-in pinned BP reference remains under its original licence.
+
+Phase 1I's independent MPL-2.0 Python-standard-library CSS Pauli
+syndrome decoder and exact GF(2) stabilizer-coset classifier use
+previously pinned Phase 1H matrix source definitions only,
+without copying data-provider implementations or raw parity
+matrices. Source rights, authors and exact Git blob IDs are
+attributed in fixtures/phase1h_external_css_sources.json and
+docs/PHASE1H_EXTERNAL_CSS.md. The explicitly unlicensed
+external matrix collection remains read-only and is **not**
+redistributed by the Phase 1I code or CI artifacts.
+The native Ada GF(3) mathematical code and third-party
+QEC reference executable are unchanged and not dependencies
+of the Phase 1I pure mathematical decoder.

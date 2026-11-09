@@ -119,6 +119,24 @@ No incidental mutation of QEC's frozen baseline.
   post-exec memory measurement.
 - [Phase 1H source provenance, results and reproducibility](PHASE1H_EXTERNAL_CSS.md).
 
+
+## Phase 1I — Ideal-syndrome CSS Pauli decoding and logical-fault observatory
+
+- Admit exact external H_X/H_Z sources through the existing
+  pinned Phase 1H provenance and GF(2) commutation checks.
+- Construct a deterministic phenomenological depolarizing X/Y/Z
+  channel; Y corresponds to *correlated* X and Z components.
+- Decode **only ideal measured X/Z check syndromes** using a bounded
+  independent CSS integer-min-sum pilot (no true-error position leak).
+- Identify logical faults by GF(2) residual stabilizer coset tests,
+  not solely by syndrome zero; report unresolved detected faults
+  as a distinct outcome, never falsely as a measured logical failure.
+- Reexecute complete source/Pauli/correction/evaluation receipts
+  while retaining third-party raw-matrix rights boundaries.
+- Keep the old GF(3) native decoder and negative IPR predictor
+  results unchanged; no circuit-level or physical quantum claims.
+- [Phase 1I methodology and limitations](PHASE1I_CSS_PAULI_LOGICAL.md).
+
 ## Phase 3 — Formal proofs
 
 Use GNATprove on explicit SPARK proof obligations for finite ranges,
