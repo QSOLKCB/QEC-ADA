@@ -299,6 +299,28 @@ jobs:
           if-no-files-found: error
           retention-days: 30
 
+      - name: Phase 1I syndrome-only CSS Pauli and exact logical-frame evidence
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p evidence/phase1i
+          python3 scripts/phase1i_experiment.py create \
+            evidence/phase1i/css_pauli.json \
+            --simula .donor-nisqec --explicit .donor-explicit-qldpc
+          python3 scripts/phase1i_experiment.py verify \
+            evidence/phase1i/css_pauli.json \
+            --simula .donor-nisqec --explicit .donor-explicit-qldpc
+          python3 -m unittest discover -s tests -p test_phase1i.py -v
+          sha256sum evidence/phase1i/css_pauli.json
+
+      - name: Retain derived-only Phase 1I logical-frame corpus (30 days)
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: qec-ada-phase1i-${{ github.sha }}
+          path: evidence/phase1i/css_pauli.json
+          if-no-files-found: error
+          retention-days: 30
+
       - name: Observational paired OPT benchmark (no speedup gate)
         run: python3 scripts/bench_qutrit.py --trials 7
 
