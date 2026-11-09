@@ -23,3 +23,14 @@ replicates, deterministic inference and hash-forgery rejection.
 genuine QEC BP execution and replay are exercised only in a separate
 CI lane with verified `.donor-qec-bp` and optional NumPy. They never
 change the core Ada regression tests.
+
+## Phase 1G source admission acceptance
+
+`test_phase1g.py` covers integer-GF(2) CSS commutation, exact row
+rank, source pin/admission failure, opt-in gating and whole-family
+split/missing-class behavior. CI additionally executes actual
+QEC-generated CSS matrices and both BP implementations, then
+independently **reexecutes** the exact-source-bound cohort. These
+integration tests activate only with a separately pinned QEC checkout,
+NumPy and a completed receipt, without modifying core Ada regression
+results.

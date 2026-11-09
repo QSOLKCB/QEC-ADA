@@ -33,3 +33,8 @@
 /tests/test_phase1f_inference.py @EmergentMonk
 /tests/test_phase1f_qec_bp.py @EmergentMonk
 /docs/PHASE1F_GRAPH_BLOCKED_QEC_BP.md @EmergentMonk
+
+# Phase 1G pinned QEC CSS generator boundary and new evidence.
+/scripts/phase1g_pinned_css.py @EmergentMonk
+/tests/test_phase1g.py @EmergentMonk
+/docs/PHASE1G_QEC_CSS_FAMILY.md @EmergentMonk

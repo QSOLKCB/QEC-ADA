@@ -245,3 +245,53 @@ The QEC reference lane requires a separately pinned donor checkout,
 NumPy and the explicit `--execute-pinned-donor` opt-in; no new
 dependency is added to the native executable or normal stdlib
 research path. See [Phase 1F source/protocol/evidence](docs/PHASE1F_GRAPH_BLOCKED_QEC_BP.md).
+
+## Phase 1G — Pinned QEC CSS code-family evaluation
+
+Phase 1G admits Tanner matrices from QEC's exact source-pinned
+`create_code` rather than only our synthetic graph generator. For
+**24 predeclared GF(8)-protograph CSS construction candidates** it checks both
+`H_X` and `H_Z` binary matrices, independent GF(2) CSS orthogonality,
+canonical graph identity and deterministic pretrial de-duplication
+within each source family. Cross-family graph-identity duplicates
+fail closed. Only the classical
+X-error/`H_Z` slice is fed to the existing native sparse observatory
+and two *different* controlled BP implementations.
+
+The `rate_0.75` code family is held out completely. Fixed code seeds,
+lifts and BSC rates are frozen; **up to 288** integer BP trials
+and **up to 48** actual QEC reference cases run on uniquely
+admitted graph topologies. All duplicate exclusions and effective
+sample counts are retained in the source-bound SHA-256 cohort.
+A full verifier reexecutes the pinned generator and decoders rather
+than approving a self-consistent hash. This remains research evidence
+**from the existing QEC generator**, not a new independent published
+QLDPC dataset or quantum-hardware result.
+
+~~~sh
+gprbuild -p -P qec_ada.gpr
+uv run --no-project --with numpy==1.26.4 python \
+  scripts/phase1g_pinned_css.py create /tmp/qecada-css.json \
+  --donor /path/to/pinned/QEC --execute-pinned-donor
+uv run --no-project --with numpy==1.26.4 python \
+  scripts/phase1g_pinned_css.py verify /tmp/qecada-css.json \
+  --donor /path/to/pinned/QEC --execute-pinned-donor
+~~~
+
+[Phase 1G scientific protocol and evidence boundaries](docs/PHASE1G_QEC_CSS_FAMILY.md).
+The original Phase 1E/1F negative outcomes and the native
+Ada GF(3) decoder, Strowger and SPECTRAL work remain unchanged.
+
+### Executed Phase 1G finding
+
+GitHub Actions verified **23 unique Tanner graphs from 24 pinned QEC
+construction candidates** (one exact within-family duplicate removed
+*before* any trials), **276** integer BP traces and **48** actual
+source-pinned QEC BP executions. The frame-failure labels agreed
+48/48 but **not** under equivalent numerical update equations.
+
+The prespecified 8% heldout-family IPR AUROC was **0.500**, failing
+the unchanged predictive advantage criterion. All source, graph,
+spectrum, decoder and numerical evaluation evidence is independently
+reexecuted and retained under PR #9. See
+[the Phase 1G results and receipt](docs/PHASE1G_QEC_CSS_FAMILY.md).

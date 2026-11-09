@@ -144,3 +144,22 @@ The phase compares two **different** classical BP algorithms on shared
 H/channel inputs. Similar frame-failure labels are not correction parity
 or evidence about quantum-hardware performance. Keep all differences,
 exact source identity and independent replay receipts.
+
+## Phase 1G CSS source admission and family-blocked research
+
+Executable QEC generator/decoder source may be loaded **only** after
+verification of HEAD, pinned source blob, checked-out bytes and
+containment, and with explicit opt-in. NumPy belongs exclusively to
+this optional lane; core Ada and stdlib tests retain no new dependency.
+
+Treat QEC `H_X` and `H_Z` as distinct binary support objects,
+check `H_X H_Z^T == 0 (mod 2)` with independent exact GF(2)
+integer parity, and reject duplicate graph identities. Evaluate only
+the declared classical `H_Z`/X-error component; do not claim
+the full quantum joint CSS decoder or depolarizing channel.
+
+Hold out the entire `rate_0.75` code family, never just individual
+noise trials. Preserve Phase 1E and 1F negative results, report
+undefined metrics as null, retain all corrections and disagreements,
+and require complete pinned-source reexecution of each receipt.
+Rate/size confounding precludes causal attribution to IPR.

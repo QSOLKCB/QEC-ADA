@@ -13,6 +13,7 @@ QEC reference material**. The original QEC documents have not been rewritten.
 | [PHASE1D_SPARSE_SPECTRAL.md](PHASE1D_SPARSE_SPECTRAL.md) | SCC-aware recurrent-block spectral modes, IPR and edge energy |
 | [PHASE1E_SCALED_SPECTRAL_BP.md](PHASE1E_SCALED_SPECTRAL_BP.md) | Scaled sparse observatory, classical BP failures and retained negative result |
 | [PHASE1F_GRAPH_BLOCKED_QEC_BP.md](PHASE1F_GRAPH_BLOCKED_QEC_BP.md) | Topology-blocked uncertainty and actual pinned QEC BP comparison |
+| [PHASE1G_QEC_CSS_FAMILY.md](PHASE1G_QEC_CSS_FAMILY.md) | Source-pinned CSS/QLDPC Tanner admission and family-blocked BP |
 | [GUI.md](GUI.md) | Universal offline browser UI and its limits |
 | [REFERENCE.md](REFERENCE.md) | Donor source, exact-copy policy and omissions |
 | [reference/qec/](reference/qec/) | Verbatim QEC documentation and labs |
