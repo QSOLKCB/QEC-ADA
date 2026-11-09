@@ -112,6 +112,198 @@ procedure QEC_ADA is
       return Result;
    end Parse_Mask;
 
+   function Parse_Config_Definition
+      return QEC_Configurable.Code_Definition is
+      Result : QEC_Configurable.Code_Definition;
+      Count  : Natural;
+   begin
+      if Argument_Count < 6 or else Argument_Count > 9 then
+         raise Invalid_Input;
+      end if;
+      declare
+         Text : constant String := Argument (3);
+      begin
+         if Text'Length /= 1 or else Text (Text'First) not in '1' .. '5' then
+            raise Invalid_Input;
+         end if;
+         Result.Sites :=
+           QEC_Configurable.Site_Index
+             (Character'Pos (Text (Text'First)) - Character'Pos ('0'));
+      end;
+      Count := Argument_Count - 5;
+      if Count > QEC_Configurable.Max_Checks then
+         raise Invalid_Input;
+      end if;
+      Result.Rows := QEC_Configurable.Check_Index (Count);
+      for Row in 1 .. Result.Rows loop
+         declare
+            Text : constant String := Argument (5 + Natural (Row));
+         begin
+            if Text'Length /= 2 * Natural (Result.Sites) then
+               raise Invalid_Input;
+            end if;
+            for Site in 1 .. Result.Sites loop
+               Result.X (Row) (Site) := One_Trit (Text (Natural (Site)));
+               Result.Z (Row) (Site) :=
+                 One_Trit (Text (Natural (Result.Sites) + Natural (Site)));
+            end loop;
+         end;
+      end loop;
+      return Result;
+   end Parse_Config_Definition;
+
+   function Parse_Config_Error
+     (Definition : QEC_Configurable.Code_Definition)
+       return QEC_Configurable.Error_Vector is
+      X_Text : constant String := Argument (4);
+      Z_Text : constant String := Argument (5);
+      Result : QEC_Configurable.Error_Vector := QEC_Configurable.Zero;
+   begin
+      if X_Text'Length /= Natural (Definition.Sites)
+        or else Z_Text'Length /= Natural (Definition.Sites)
+      then
+         raise Invalid_Input;
+      end if;
+      for Site in 1 .. Definition.Sites loop
+         Result.X (Site) := One_Trit (X_Text (Natural (Site)));
+         Result.Z (Site) := One_Trit (Z_Text (Natural (Site)));
+      end loop;
+      return Result;
+   end Parse_Config_Error;
+
+   function Config_Syndrome_String
+     (Values : QEC_Configurable.Syndrome_Vector;
+      Count : QEC_Configurable.Check_Index) return String is
+      Result : String (1 .. Natural (Count));
+   begin
+      for Row in 1 .. Count loop
+         Result (Natural (Row)) := Trit_String (Values (Row)) (1);
+      end loop;
+      return Result;
+   end Config_Syndrome_String;
+
+   function Config_Linear_String
+     (Values : QEC_Configurable.Trit_Row;
+      Width : QEC_Configurable.Site_Index) return String is
+      Result : String (1 .. Natural (Width));
+   begin
+      for Site in 1 .. Width loop
+         Result (Natural (Site)) := Trit_String (Values (Site)) (1);
+      end loop;
+      return Result;
+   end Config_Linear_String;
+
+   procedure Dispatch_Config is
+      Definition : constant QEC_Configurable.Code_Definition :=
+        Parse_Config_Definition;
+      Error : constant QEC_Configurable.Error_Vector :=
+        Parse_Config_Error (Definition);
+      Model : constant QEC_Configurable.Prepared_Code :=
+        QEC_Configurable.Prepare (Definition);
+      State : constant QEC_Configurable.Preparation_Status :=
+        QEC_Configurable.Status_Of (Model);
+   begin
+      if State /= QEC_Configurable.Ready then
+         Put_Line ("status=" &
+           QEC_Configurable.Preparation_Status'Image (State));
+         Set_Exit_Status (Failure);
+         return;
+      end if;
+
+      if Argument (2) /= "syndrome" and then Argument (2) /= "decode" then
+         raise Invalid_Input;
+      end if;
+
+      declare
+         Scalar : constant QEC_Configurable.Syndrome_Vector :=
+           QEC_Configurable.Scalar_Syndrome (Model, Error);
+         Optimized : constant QEC_Configurable.Syndrome_Vector :=
+           QEC_Configurable.OPT_Syndrome (Model, Error);
+      begin
+         if Scalar /= Optimized then
+            raise Program_Error with "configurable scalar/OPT disagreement";
+         end if;
+         Put_Line ("code_sites=" & Number_String (Natural (Definition.Sites)));
+         Put_Line ("code_checks=" & Number_String (Natural (Definition.Rows)));
+         Put_Line ("leaders=" &
+           Number_String (QEC_Configurable.Leader_Count (Model)));
+         Put_Line ("syndrome=" &
+           Config_Syndrome_String (Scalar, Definition.Rows));
+         Put_Line ("opt_syndrome=" &
+           Config_Syndrome_String (Optimized, Definition.Rows));
+      end;
+      if Argument (2) = "decode" then
+         declare
+            Answer : constant QEC_Configurable.Decode_Result :=
+              QEC_Configurable.Correct (Model, Error);
+         begin
+            if not Answer.Found then
+               Put_Line ("status=NO_REPRESENTATIVE");
+               Set_Exit_Status (Failure);
+               return;
+            end if;
+            Put_Line ("correction_x=" &
+              Config_Linear_String (Answer.Correction.X, Definition.Sites));
+            Put_Line ("correction_z=" &
+              Config_Linear_String (Answer.Correction.Z, Definition.Sites));
+            Put_Line ("residual_x=" &
+              Config_Linear_String (Answer.Residual.X, Definition.Sites));
+            Put_Line ("residual_z=" &
+              Config_Linear_String (Answer.Residual.Z, Definition.Sites));
+            if Answer.Success then
+               Put_Line ("status=CORRECTED");
+            else
+               Put_Line ("status=DETECTED_UNCORRECTED");
+               Set_Exit_Status (Failure);
+            end if;
+         end;
+      else
+         Put_Line ("status=READY");
+      end if;
+   end Dispatch_Config;
+
+   procedure Check_Configurable is
+      Cyclic : QEC_Configurable.Code_Definition;
+      Product_State : QEC_Configurable.Code_Definition;
+   begin
+      Cyclic.Sites := 5;
+      Cyclic.Rows := 4;
+      for Row in QEC_Qutrit.Check_Index loop
+         for Site in QEC_Qutrit.Site_Index loop
+            Cyclic.X (Row) (Site) := QEC_Qutrit.Check_X (Row, Site);
+            Cyclic.Z (Row) (Site) := QEC_Qutrit.Check_Z (Row, Site);
+         end loop;
+      end loop;
+      Product_State.Sites := 2;
+      Product_State.Rows := 2;
+      Product_State.Z (1) (1) := 1;
+      Product_State.Z (2) (2) := 1;
+      declare
+         First : constant QEC_Configurable.Prepared_Code :=
+           QEC_Configurable.Prepare (Cyclic);
+         Second : constant QEC_Configurable.Prepared_Code :=
+           QEC_Configurable.Prepare (Product_State);
+         Again : constant QEC_Configurable.Prepared_Code :=
+           QEC_Configurable.Prepare (Cyclic);
+      begin
+         if QEC_Configurable.Status_Of (First) /= QEC_Configurable.Ready
+           or else QEC_Configurable.Status_Of (Second) /= QEC_Configurable.Ready
+           or else QEC_Configurable.Status_Of (Again) /= QEC_Configurable.Ready
+           or else QEC_Configurable.Leader_Count (First) /= 41
+           or else QEC_Configurable.Leader_Count (Second) /= 9
+           or else not QEC_Configurable.Exhaustive_Parity (First)
+           or else not QEC_Configurable.Exhaustive_Parity (Second)
+           or else not QEC_Configurable.Exhaustive_Parity (Again)
+           or else not QEC_Configurable.Same_Definition (First, Again)
+           or else QEC_Configurable.Same_Definition (First, Second)
+         then
+            raise Program_Error with "code snapshot or OPT equivalence";
+         end if;
+      end;
+      Put_Line
+        ("PASS CONFIGURABLE: cyclic-5 and Z-product-2, scalar/OPT parity");
+   end Check_Configurable;
+
    procedure Put_Result (Value : QEC_GF3.Trit) is
    begin
       Put_Line (Trit_String (Value));
@@ -232,6 +424,8 @@ procedure QEC_ADA is
       Put_Line ("  qec_ada qutrit lookup SSSS");
       Put_Line ("  qec_ada route D1 D2 D3 D4 LLLL AAAA BBBB");
       Put_Line ("  qec_ada benchmark qutrit scalar|opt");
+      Put_Line ("  qec_ada config syndrome|decode N X Z ROW1 [ROW2..ROW4]");
+      Put_Line ("  qec_ada selftest config");
       Put_Line ("TRIT and D1..D4 are 0/1/2; masks use 1=free, 0=busy.");
    end Usage;
 
@@ -254,6 +448,16 @@ begin
      and then Argument (2) = "route"
    then
       Check_Routing;
+   elsif Argument_Count = 2
+     and then Argument (1) = "selftest"
+     and then Argument (2) = "config"
+   then
+      Check_Configurable;
+   elsif Argument_Count >= 6
+     and then Argument_Count <= 9
+     and then Argument (1) = "config"
+   then
+      Dispatch_Config;
    elsif Argument_Count = 3
      and then Argument (1) = "benchmark"
      and then Argument (2) = "qutrit"

@@ -1,0 +1,8 @@
+project QEC_Field is
+   for Languages use ("Ada");
+   for Source_Dirs use (".");
+   for Object_Dir use ("../build/spark");
+   package Compiler is
+      for Default_Switches ("Ada") use ("-gnat2022");
+   end Compiler;
+end QEC_Field;
