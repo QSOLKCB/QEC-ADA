@@ -46,3 +46,16 @@ traces and the **full source-reexecution** of the receipt.
 The raw third-party matrices are never committed or uploaded;
 the derived-only artifact is not a redistribution grant for
 unlicensed source data.
+
+## Phase 1I exact stabilizer / logical classification
+
+`test_phase1i.py` includes a **brute-force independent small
+GF(2) stabilizer-span oracle**, exact CSS [[2,0]] and [[4,2]]
+counterexamples, correlated Y errors, equal-syndrome/different-
+physical-error nondisclosure, zero-syndrome nontrivial logical
+operators and detected unresolved syndromes. With the two
+verified external matrix checkouts and a completed receipt,
+it also checks all 216 full source-bound Pauli trials and
+rejects self-consistently rehashed false logical labels.
+The external providers' raw matrices are never copied into
+the committed or archived artifact.

@@ -44,3 +44,9 @@
 /scripts/phase1h_external_css.py @EmergentMonk
 /tests/test_phase1h.py @EmergentMonk
 /docs/PHASE1H_EXTERNAL_CSS.md @EmergentMonk
+
+# Phase 1I source-bound CSS Pauli mathematics and evidence.
+/scripts/phase1i_css_pauli.py @EmergentMonk
+/scripts/phase1i_experiment.py @EmergentMonk
+/tests/test_phase1i.py @EmergentMonk
+/docs/PHASE1I_CSS_PAULI_LOGICAL.md @EmergentMonk

@@ -340,3 +340,39 @@ uv run --no-project --with numpy==1.26.4 python \
 
 [Phase 1H admission manifest, executed results and limitations](docs/PHASE1H_EXTERNAL_CSS.md).
 Original Phase 1E/1F/1G negative findings remain immutable.
+
+## Phase 1I — Ideal-syndrome CSS Pauli and exact logical faults
+
+A new, separate Python-standard-library mathematical module performs
+**CSS Pauli X/Y/Z decoding** using **only measured X and Z syndromes**,
+then tests the correction residuals against exact GF(2) stabilizer
+row spaces. It separates stabilizer-equivalent successes, nontrivial
+zero-syndrome logical faults and **detected but unresolved syndromes**.
+A zero syndrome alone is not considered successful recovery.
+
+The experiment uses nine existing, externally pinned Phase 1H H_X/H_Z
+matrix pairs, with a deterministic depolarizing channel and
+**216 source-bound Pauli trials** (three probabilities, eight trials
+per code/rate). Y errors set correlated X and Z components.
+The results include complete syndrome-only decoding traces,
+exact logical classifications, source hashes and full offline
+reexecution. Third-party raw matrices are **never redistributed**.
+
+~~~sh
+gprbuild -p -P qec_ada.gpr
+uv run --no-project python scripts/phase1i_experiment.py create \
+  /tmp/qecada-phase1i.json \
+  --simula /path/to/pinned/nisqec \
+  --explicit /path/to/pinned/explicit-qldpc
+uv run --no-project python scripts/phase1i_experiment.py verify \
+  /tmp/qecada-phase1i.json \
+  --simula /path/to/pinned/nisqec \
+  --explicit /path/to/pinned/explicit-qldpc
+~~~
+
+[Phase 1I CSS mathematics, limits and evidence](docs/PHASE1I_CSS_PAULI_LOGICAL.md).
+This is an **ideal-syndrome phenomenological model**, not a
+fault-tolerant circuit, joint correlated BP decoder, physical QEC
+threshold or independent hardware measurement. The existing
+native Ada GF(3) code and Phase 1E–H negative IPR evidence
+are left unchanged.

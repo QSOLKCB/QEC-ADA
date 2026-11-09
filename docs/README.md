@@ -15,6 +15,7 @@ QEC reference material**. The original QEC documents have not been rewritten.
 | [PHASE1F_GRAPH_BLOCKED_QEC_BP.md](PHASE1F_GRAPH_BLOCKED_QEC_BP.md) | Topology-blocked uncertainty and actual pinned QEC BP comparison |
 | [PHASE1G_QEC_CSS_FAMILY.md](PHASE1G_QEC_CSS_FAMILY.md) | Source-pinned CSS/QLDPC Tanner admission and family-blocked BP |
 | [PHASE1H_EXTERNAL_CSS.md](PHASE1H_EXTERNAL_CSS.md) | Independently published CSS source matrices, licensing, publisher holdout and executed evidence |
+| [PHASE1I_CSS_PAULI_LOGICAL.md](PHASE1I_CSS_PAULI_LOGICAL.md) | Syndrome-only Pauli CSS decoding, stabilizer coset/logical outcomes and source-bound replay |
 | [GUI.md](GUI.md) | Universal offline browser UI and its limits |
 | [REFERENCE.md](REFERENCE.md) | Donor source, exact-copy policy and omissions |
 | [reference/qec/](reference/qec/) | Verbatim QEC documentation and labs |

@@ -65,3 +65,19 @@ as raw matrices. Source/publisher is the holdout boundary; the
 small, heterogeneous cohort and negative IPR result cannot validate
 a universal quantum-decoder failure predictor. See
 [Phase 1H](../docs/PHASE1H_EXTERNAL_CSS.md).
+
+## Phase 1I — Exact CSS logical-frame classification
+
+`scripts/phase1i_css_pauli.py` adds a separate independent
+phenomenological X/Y/Z Pauli model, ideally measured syndrome-only
+X/Z CSS min-sum decoder with deterministic one-site fallback,
+and **exact GF(2) stabilizer-coset classification**. Pauli Y couples
+the X/Z component errors; planted positions are not decoder inputs.
+
+`scripts/phase1i_experiment.py` reuses the original third-party
+Phase 1H CSS source pins for a bounded 216-trial mathematical
+experiment. It independently verifies each source, recomputes
+all local syndrome corrections and logical outcomes and retains
+a derived-only SHA-256 receipt. The data does **not** establish
+hardware faults, correction thresholds or a general spectral
+predictor. See [Phase 1I](../docs/PHASE1I_CSS_PAULI_LOGICAL.md).
