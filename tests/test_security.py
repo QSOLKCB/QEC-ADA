@@ -88,10 +88,14 @@ class SecurityTests(unittest.TestCase):
 
     def test_ci_pins_checkout_and_prevents_credential_persistence(self):
         workflow = (ROOT / ".github/workflows/validate.yml").read_text(encoding="utf-8")
-        self.assertEqual(2, workflow.count(
+        # Two original source/provenance checkouts plus the explicit
+        # pinned Phase 1F QEC BP donor checkout. No credential persistence.
+        self.assertEqual(3, workflow.count(
             "actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683"
         ))
-        self.assertEqual(2, workflow.count("persist-credentials: false"))
+        self.assertEqual(3, workflow.count("persist-credentials: false"))
+        self.assertIn("path: .donor-qec-bp", workflow)
+        self.assertIn("src/qec_qldpc_codes.py", workflow)
         self.assertIn("scripts/verify_donor.py --donor .donor-qec", workflow)
         self.assertIn("timeout-minutes: 20", workflow)
         self.assertIn("ref: 27bbc798c4e38138ca5b0fff70b15c3271a1917d", workflow)

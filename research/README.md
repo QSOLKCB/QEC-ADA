@@ -20,3 +20,19 @@ iteration and prediction outputs as a single canonical replayable corpus.
 The initial result **did not** meet the preregistered IPR held-out
 prediction criterion. The negative result and limitations are retained
 in [Phase 1E](../docs/PHASE1E_SCALED_SPECTRAL_BP.md).
+
+## Phase 1F independent inference and QEC reference lane
+
+`scripts/phase1f_blocked_inference.py` reports **graph-cluster**
+uncertainty for the frozen Phase 1E experiment, plus an exact
+graph-label permutation check. These are exploratory bounds from only
+four held-out topologies, not a revised post-hoc predictive result.
+
+`scripts/phase1f_qec_bp_bridge.py` provides an opt-in real-QEC
+source-pinned baseline comparison on explicitly matched classical
+binary graph/channel inputs. It requires the verified original QEC
+source and NumPy, and must not be confused with a parity reproduction
+of its full joint quantum BP model.
+
+The receipts and their limitations are documented in
+[Phase 1F](../docs/PHASE1F_GRAPH_BLOCKED_QEC_BP.md).

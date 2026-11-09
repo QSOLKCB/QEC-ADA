@@ -26,3 +26,10 @@
 /scripts/phase1e_experiment.py @EmergentMonk
 /scripts/phase1e_memory.py @EmergentMonk
 /docs/PHASE1E_SCALED_SPECTRAL_BP.md @EmergentMonk
+
+# Phase 1F pre-registered analysis and controlled executable donor boundary.
+/scripts/phase1f_blocked_inference.py @EmergentMonk
+/scripts/phase1f_qec_bp_bridge.py @EmergentMonk
+/tests/test_phase1f_inference.py @EmergentMonk
+/tests/test_phase1f_qec_bp.py @EmergentMonk
+/docs/PHASE1F_GRAPH_BLOCKED_QEC_BP.md @EmergentMonk

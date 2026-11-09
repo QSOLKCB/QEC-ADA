@@ -13,3 +13,7 @@ __pycache__/
 
 # Independent donor checkout for provenance CI
 .donor-qec/
+
+# Temporary pinned QEC donor reference checkout and generated research evidence.
+.donor-qec-bp/
+evidence/

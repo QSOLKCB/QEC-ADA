@@ -10,6 +10,9 @@ QEC reference material**. The original QEC documents have not been rewritten.
 | [PHASE1A_DECODER_ROUTING.md](PHASE1A_DECODER_ROUTING.md) | Fixed qutrit decoder, OPT reuse and classical deterministic routing |
 | [PHASE1B_CONFIGURABLE.md](PHASE1B_CONFIGURABLE.md) | Configurable GF(3) stabilizer validation, OPT binding and tests |
 | [PHASE1C_TANNER_SPECTRAL.md](PHASE1C_TANNER_SPECTRAL.md) | Native Tanner/SPECTRAL observations, sonification and Strowger replay |
+| [PHASE1D_SPARSE_SPECTRAL.md](PHASE1D_SPARSE_SPECTRAL.md) | SCC-aware recurrent-block spectral modes, IPR and edge energy |
+| [PHASE1E_SCALED_SPECTRAL_BP.md](PHASE1E_SCALED_SPECTRAL_BP.md) | Scaled sparse observatory, classical BP failures and retained negative result |
+| [PHASE1F_GRAPH_BLOCKED_QEC_BP.md](PHASE1F_GRAPH_BLOCKED_QEC_BP.md) | Topology-blocked uncertainty and actual pinned QEC BP comparison |
 | [GUI.md](GUI.md) | Universal offline browser UI and its limits |
 | [REFERENCE.md](REFERENCE.md) | Donor source, exact-copy policy and omissions |
 | [reference/qec/](reference/qec/) | Verbatim QEC documentation and labs |
@@ -36,4 +39,3 @@ Only the initial bounded GF(3) arithmetic and demo syndrome calculation are
 native implementation candidates. All other documentation is source context
 until separately ported, tested and verified.
 
-| [PHASE1E_SCALED_SPECTRAL_BP.md](PHASE1E_SCALED_SPECTRAL_BP.md) | Scaled native sparse modes, independent BP trial corpus, held-out evaluation and negative result |
