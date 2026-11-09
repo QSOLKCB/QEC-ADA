@@ -119,6 +119,27 @@ jobs:
           python3 scripts/phase1e_experiment.py verify evidence/phase1e/evidence.json
           sha256sum evidence/phase1e/evidence.json
 
+      - name: Phase 1F deterministic graph-cluster uncertainty and offline replay
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -m unittest discover -s tests -p test_phase1f_inference.py -v
+          mkdir -p evidence/phase1f
+          python3 scripts/phase1f_blocked_inference.py create \
+            evidence/phase1e/evidence.json evidence/phase1f/inference.json \
+            --resamples 512
+          python3 scripts/phase1f_blocked_inference.py verify \
+            evidence/phase1e/evidence.json evidence/phase1f/inference.json
+          sha256sum evidence/phase1f/inference.json
+
+      - name: Retain Phase 1F graph-blocked uncertainty (30 days)
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: qec-ada-phase1f-blocked-${{ github.sha }}
+          path: evidence/phase1f/inference.json
+          if-no-files-found: error
+          retention-days: 30
+
       - name: Retain synthetic Phase 1E research evidence (30 days)
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
@@ -135,6 +156,46 @@ jobs:
           python3 scripts/phase1e_memory.py --checks 8 --variables 16
           python3 scripts/phase1e_memory.py --checks 16 --variables 24
           python3 scripts/phase1e_memory.py --checks 32 --variables 64
+
+      - name: Checkout pinned QEC reference BP source (read-only)
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          repository: QSOLKCB/QEC
+          ref: 27bbc798c4e38138ca5b0fff70b15c3271a1917d
+          path: .donor-qec-bp
+          sparse-checkout: |
+            src/qec_qldpc_codes.py
+          sparse-checkout-cone-mode: false
+          persist-credentials: false
+          fetch-depth: 1
+
+      - name: Install NumPy for opt-in pinned QEC reference only
+        shell: bash
+        run: |
+          set -euo pipefail
+          sudo apt-get install -y python3-numpy
+          python3 -c 'import numpy; print("QEC reference NumPy:",numpy.__version__)'
+
+      - name: Execute actual pinned QEC BP and verify direct rerun
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 scripts/phase1f_qec_bp_bridge.py create \
+            evidence/phase1e/evidence.json evidence/phase1f/qec-bp.json \
+            --donor .donor-qec-bp --trials-per-graph 2 --execute-pinned-donor
+          python3 scripts/phase1f_qec_bp_bridge.py verify \
+            evidence/phase1e/evidence.json evidence/phase1f/qec-bp.json \
+            --donor .donor-qec-bp --execute-pinned-donor
+          python3 -m unittest discover -s tests -p test_phase1f_qec_bp.py -v
+          sha256sum evidence/phase1f/qec-bp.json
+
+      - name: Retain pinned QEC cross-decoder comparison (30 days)
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: qec-ada-phase1f-qec-bp-${{ github.sha }}
+          path: evidence/phase1f/qec-bp.json
+          if-no-files-found: error
+          retention-days: 30
 
       - name: Observational paired OPT benchmark (no speedup gate)
         run: python3 scripts/bench_qutrit.py --trials 7
