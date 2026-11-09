@@ -250,15 +250,19 @@ research path. See [Phase 1F source/protocol/evidence](docs/PHASE1F_GRAPH_BLOCKE
 
 Phase 1G admits Tanner matrices from QEC's exact source-pinned
 `create_code` rather than only our synthetic graph generator. For
-**24 bounded GF(8)-protograph CSS instances** it checks both
+**24 predeclared GF(8)-protograph CSS construction candidates** it checks both
 `H_X` and `H_Z` binary matrices, independent GF(2) CSS orthogonality,
-canonical graph identity and duplicate rejection. Only the classical
+canonical graph identity and deterministic pretrial de-duplication
+within each source family. Cross-family graph-identity duplicates
+fail closed. Only the classical
 X-error/`H_Z` slice is fed to the existing native sparse observatory
 and two *different* controlled BP implementations.
 
 The `rate_0.75` code family is held out completely. Fixed code seeds,
-lifts, BSC rates, 288 integer BP trials and 48 actual pinned-QEC
-reference cases are recorded in a SHA-256-bound reproducible cohort.
+lifts and BSC rates are frozen; **up to 288** integer BP trials
+and **up to 48** actual QEC reference cases run on uniquely
+admitted graph topologies. All duplicate exclusions and effective
+sample counts are retained in the source-bound SHA-256 cohort.
 A full verifier reexecutes the pinned generator and decoders rather
 than approving a self-consistent hash. This remains research evidence
 **from the existing QEC generator**, not a new independent published
