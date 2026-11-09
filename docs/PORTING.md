@@ -86,6 +86,22 @@ No incidental mutation of QEC's frozen baseline.
   byte-reproducible reruns; do not assert algorithmic/physical parity.
 - [Phase 1F method, receipt formats and limitations](PHASE1F_GRAPH_BLOCKED_QEC_BP.md).
 
+
+## Phase 1G — Source-verified QEC CSS graph families and held-out BP
+
+- Generate bounded GF(8)-protograph CSS parity checks through a separately
+  pinned, explicitly opted-in QEC `create_code` implementation.
+- Independently check binary symbols, GF(2) CSS orthogonality, row rank,
+  graph SHA-256 identity, unique topologies and source-containment.
+- Train on two original code-rate families; evaluate an unseen third
+  family with preregistered IPR direction and edge-density baseline.
+- Compare the original integer min-sum pilot and actual QEC floating
+  min-sum BP only on shared classical H/BSC inputs, without claiming
+  identical correction or hardware validity.
+- Retain whole-family evidence, missing-class results, unchanged
+  Phase 1E/1F negative baselines, and full source reexecution verification.
+- [Phase 1G design and limitations](PHASE1G_QEC_CSS_FAMILY.md).
+
 ## Phase 3 — Formal proofs
 
 Use GNATprove on explicit SPARK proof obligations for finite ranges,

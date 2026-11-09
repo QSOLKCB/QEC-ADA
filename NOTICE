@@ -79,3 +79,14 @@ Git blob 266dc35c7162adf6a895eb796760e2bc6724eff4.
 That executable donor remains governed by its original repository
 license and is only activated via explicit opt-in with its separately
 installed NumPy dependency.
+
+Phase 1G adds independently written MPL-2.0 source-bound research
+admission and evaluation around QEC's existing `create_code` and
+`bp_decode` at commit
+27bbc798c4e38138ca5b0fff70b15c3271a1917d,
+Git blob 266dc35c7162adf6a895eb796760e2bc6724eff4.
+The original QEC module is **executed on explicit opt-in** in a
+separate pinned checkout; no QEC code is copied into QEC-ADA.
+CSS protograph attribution remains with QEC and its original
+references. Native mathematical, routing and sonification source
+files are not changed by this Phase 1G adapter.

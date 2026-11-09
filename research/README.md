@@ -36,3 +36,16 @@ of its full joint quantum BP model.
 
 The receipts and their limitations are documented in
 [Phase 1F](../docs/PHASE1F_GRAPH_BLOCKED_QEC_BP.md).
+
+## Phase 1G: source-verifiable CSS code family cohort
+
+`scripts/phase1g_pinned_css.py` explicitly executes the pinned
+QEC `create_code` for 24 bounded CSS instances, independently checks
+binary GF(2) orthogonality and code provenance, then measures
+read-only Tanner spectrum and classical BP errors.
+`rate_0.75` is held out by entire family; training graphs are from
+`rate_0.50` and `rate_0.60`. Multiple seeds from one generator
+are not equivalent to independent external QLDPC datasets.
+
+See [Phase 1G](../docs/PHASE1G_QEC_CSS_FAMILY.md) for
+the complete experimental contract and claim limits.
