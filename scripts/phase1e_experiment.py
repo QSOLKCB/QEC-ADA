@@ -109,6 +109,14 @@ def graph_features(n: int, m: int, edges: list[tuple[int, int]],
 
 
 def verify_native_reference(native: dict, oracle: dict) -> None:
+    required = {
+        "status", "spectral_radius", "ipr", "eeec", "collatz_lower",
+        "collatz_upper", "residual_l1", "scc_count", "cyclic_scc_count",
+        "root_edge", "mode_edge_count", "dominant_tie_count", "iterations",
+        "top_edges", "edge_density",
+    }
+    if type(native) is not dict or set(native) != required:
+        raise ValueError("native spectral record membership mismatch")
     if native["status"] != oracle["status"]:
         raise ValueError("native status differs from independent oracle")
     for metric, expected in (
@@ -130,6 +138,32 @@ def verify_native_reference(native: dict, oracle: dict) -> None:
         if type(native.get(field)) is not int or \
                 native[field] != oracle[oracle_field]:
             raise ValueError(f"independent SCC mismatch: {field}")
+    if (any(type(native[key]) is not float or not math.isfinite(native[key])
+            for key in ("collatz_lower", "collatz_upper", "residual_l1",
+                        "edge_density")) or
+            not 0.0 <= native["edge_density"] <= 1.0 or
+            type(native["top_edges"]) is not list or
+            any(type(item) is not list or len(item) != 2 or
+                type(item[0]) is not int or type(item[1]) is not float or
+                not math.isfinite(item[1]) or item[1] < 0.0
+                for item in native["top_edges"])):
+        raise ValueError("malformed spectral feature/ranking")
+    expected_energies = oracle["mode_energy"]
+    top = native["top_edges"]
+    if len(top) != min(10, oracle["mode_edges"]) or len({
+            item[0] for item in top}) != len(top):
+        raise ValueError("native ranking count or uniqueness mismatch")
+    selected_ids = {item[0] for item in top}
+    for i, (edge_id, energy) in enumerate(top):
+        expected_energy = expected_energies.get(edge_id)
+        if expected_energy is None or abs(energy - expected_energy) > 2e-6:
+            raise ValueError("native top edge weight disagrees with oracle")
+        if i and top[i - 1][1] + 1e-9 < energy:
+            raise ValueError("native ranking is not decreasing")
+    if top:
+        for edge_id, energy in expected_energies.items():
+            if edge_id not in selected_ids and energy > top[-1][1] + 2e-6:
+                raise ValueError("native ranking omits a heavier edge")
     if native["status"] == "CONVERGED_NUMERIC":
         if (native["collatz_lower"] > native["spectral_radius"] + 1e-7
                 or native["collatz_upper"] + 1e-7 <
@@ -139,7 +173,9 @@ def verify_native_reference(native: dict, oracle: dict) -> None:
                 or not 1 <= native["iterations"] <= 2000):
             raise ValueError("native numerical witness not converged")
     elif (native["spectral_radius"] != 0.0 or native["ipr"] != 0.0
-          or native["mode_edge_count"] != 0):
+          or native["eeec"] != 0.0 or native["collatz_lower"] != 0.0
+          or native["collatz_upper"] != 0.0 or native["residual_l1"] != 0.0
+          or native["mode_edge_count"] != 0 or native["iterations"] != 0):
         raise ValueError("native invented a nontrivial nilpotent mode")
 
 
@@ -421,6 +457,21 @@ def main() -> int:
             print(f"graphs={args.graphs}; trials={len(artifact['trials'])}")
             print(f"verdict={primary['verdict']}")
             print(f"artifact_sha256={artifact['sha256']}")
+            for noise in noise_bps:
+                report = artifact["analysis"]["per_noise"][str(noise)]
+                ipr = report["features"]["ipr"]
+                density = report["features"]["edge_density"]
+                def show(value):
+                    return "UNDEFINED" if value is None else f"{value:.6f}"
+                print(
+                    f"noise_bps={noise} "
+                    f"heldout_failures={report['heldout_failures']}/"
+                    f"{report['heldout_trials']} "
+                    f"ipr_auroc={show(ipr['heldout_auroc'])} "
+                    f"ipr_ap={show(ipr['heldout_average_precision'])} "
+                    f"density_auroc={show(density['heldout_auroc'])} "
+                    f"heldout_graph_spearman={show(ipr['heldout_graph_spearman'])}"
+                )
         else:
             if args.path.is_symlink() or not args.path.is_file():
                 raise ValueError("evidence must be a regular, non-symlink file")

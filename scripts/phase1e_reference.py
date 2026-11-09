@@ -186,7 +186,8 @@ def reference_spectrum(n: int, m: int, edges: list[tuple[int, int]]) -> dict:
         return {"status": "NO_EDGES" if not edges else "ACYCLIC",
                 "spectral_radius": 0.0, "ipr": 0.0,
                 "eeec": 0.0, "root": 0, "ties": 0, "mode_edges": 0,
-                "scc_count": len(blocks), "cyclic_scc_count": 0}
+                "scc_count": len(blocks), "cyclic_scc_count": 0,
+                "mode_energy": {}}
     analyses = [(min(block), block, perron_reference(outgoing, block))
                 for block in cyclic]
     max_rho = max(item[2]["rho"] for item in analyses)
@@ -205,6 +206,7 @@ def reference_spectrum(n: int, m: int, edges: list[tuple[int, int]]) -> dict:
         "root": root + 1, "ties": len(tied),
         "mode_edges": len(members),
         "scc_count": len(blocks), "cyclic_scc_count": len(cyclic),
+        "mode_energy": {node + 1: value for node, value in energies.items()},
     }
 
 
