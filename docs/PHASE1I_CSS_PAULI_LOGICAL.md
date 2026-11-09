@@ -151,6 +151,58 @@ Phase 1I uses no new runtime Python dependencies, network service,
 Docker, Kubernetes or Node.js. It does not execute QEC's optional
 NumPy BP donor; Phase 1F–1H already preserve that separate baseline.
 
+## Executed Phase 1I evidence
+
+The exact Phase 1I code and CI workflow ran successfully at commit
+`f1f65b0c5cbb81b28879847c31e34b5238c2d94b` in
+[GitHub Actions run 42618686606](https://github.com/QSOLKCB/QEC-ADA/actions/runs/42618686606).
+
+- **Nine** previously source-pinned CSS matrix pairs admitted; original
+  18 external raw matrix file blobs remain untouched and unbundled.
+- **216** depolarizing Pauli trials executed (9 codes × 3 declared
+  probabilities × 8 trials) with independently replayed ideal
+  X/Z syndromes, min-sum corrections and residual Pauli cosets.
+- **14/14** dedicated Phase 1I regression tests passed, including
+  exact independent small GF(2) stabilizer-span enumeration,
+  nontrivial zero-syndrome logical errors, Pauli Y correlation,
+  unresolved syndrome classification, true-error nondisclosure and
+  a rehashed forged-logical-label rejection.
+- The original Phase 1A–1H native, source-pinned, memory, Strowger,
+  SPECTRAL and predictor-evidence gates passed in the full CI run.
+
+### Experimental outcomes: distinguish logical from unresolved
+
+| Pauli probability | Source group | Stabilizer-equivalent recovery | Confirmed nontrivial logical | Detected unresolved | Total |
+| --- | --- | ---: | ---: | ---: | ---: |
+| 4% | Simula licensed baseline | 13 | 0 | 3 | 16 |
+| 4% | Explicit-source heldout | 41 | 6 | 9 | 56 |
+| **8%** | Simula licensed baseline | **14** | **0** | **2** | **16** |
+| **8%** | Explicit-source heldout | **19** | **5** | **32** | **56** |
+| 12% | Simula licensed baseline | 8 | 2 | 6 | 16 |
+| 12% | Explicit-source heldout | 4 | 3 | 49 | 56 |
+
+At 8% in the heldout source, **five** cases are mathematically
+confirmed nontrivial logical Pauli residuals **after both ideal
+syndromes are satisfied**; **32** cases are detected nonzero
+residual syndromes and so have no well-defined post-correction
+logical coset classification in this experimental protocol.
+It is **incorrect** to call `5/56` a complete logical-failure
+rate, to call all `37/56` failed frames *logical*, or to
+exclude unresolved cases silently when quoting performance.
+The full outcome taxonomy and source-specific denominators are
+preserved in the receipt.
+
+**Receipt identity:** canonical SHA-256
+`be076afe9faaf78a80e9631287994c99af2f95dba817de360f77b3daef3d3d7d`.
+Successful full source/Pauli/syndrome/logical replay produced
+the identical receipt. This is a derived-data-only archive:
+[30-day research artifact](https://github.com/QSOLKCB/QEC-ADA/actions/runs/42618686606/artifacts/13673887554).
+
+These results are **observational ideal-syndrome CSS mathematics**,
+not circuit-level logical error-rate estimates, threshold claims,
+benchmarks of a deployed quantum device or evidence that IPR
+predicts actual physical quantum decoder failures.
+
 ## Boundaries for Phase 1J
 
 The next independent gates include **syndrome extraction noise,
