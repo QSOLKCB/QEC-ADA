@@ -9,26 +9,55 @@ on:
 permissions:
   contents: read
 
+concurrency:
+  group: qec-ada-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
 jobs:
   validate:
     runs-on: ubuntu-24.04
+    timeout-minutes: 20
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-      - name: Verify original Git blob identities
+      - name: Checkout QEC-ADA (reviewed checkout v4.2.2 SHA)
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          persist-credentials: false
+          fetch-depth: 1
+
+      - name: Checkout independently pinned public QEC donor
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          repository: QSOLKCB/QEC
+          ref: 27bbc798c4e38138ca5b0fff70b15c3271a1917d
+          path: .donor-qec
+          sparse-checkout: docs
+          sparse-checkout-cone-mode: true
+          persist-credentials: false
+          fetch-depth: 1
+
+      - name: Check local mirrored bytes and SHA-256 inventory
         run: python3 scripts/qecada.py verify
-      - name: Check docs CLI and browser-only source
+
+      - name: Independently validate donor Git tree and SHA-256 bytes
+        run: python3 scripts/verify_donor.py --donor .donor-qec
+
+      - name: Test path containment, document safety and CLI
         run: python3 -m unittest discover -s tests -v
+
       - name: Install native Ada toolchain
         run: |
           sudo apt-get update
           sudo apt-get install -y gnat gprbuild
+
       - name: Build Ada project (not a formal proof)
         run: gprbuild -p -P qec_ada.gpr
+
       - name: Execute native finite-field selftest
         run: ./build/bin/qec_ada selftest
+
       - name: Re-run tests against native CLI binary
         run: python3 -m unittest discover -s tests -v
+
       - name: Negative-input smoke test
         run: |
           if ./build/bin/qec_ada gf3 add 3 0; then

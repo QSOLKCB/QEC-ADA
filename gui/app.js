@@ -7,6 +7,14 @@
   const category = document.getElementById("category");
   const count = document.getElementById("results-count");
   const list = document.getElementById("results");
+  const preview = document.getElementById("archive-preview");
+  const previewTitle = document.getElementById("archive-title");
+  const previewText = document.getElementById("archive-source");
+  const safeSources = window.QEC_ADA_ARCHIVE_TEXT || Object.create(null);
+  document.getElementById("close-source").addEventListener("click", () => {
+    preview.hidden = true;
+    previewText.textContent = "";
+  });
   const categoryNames = [...new Set(documents.map(item => item.category))].sort();
   for (const name of categoryNames) {
     const option = document.createElement("option");
@@ -26,13 +34,35 @@
     list.replaceChildren();
     for (const item of result) {
       const li = document.createElement("li");
-      const link = document.createElement("a");
-      link.href = "../docs/reference/qec/" + item.path.split("/").map(encodeURIComponent).join("/");
-      link.textContent = titleFor(item);
-      link.setAttribute("aria-label", "Open local reference: " + item.path);
+      // An archived HTML file is executable content; never navigate to it.
+      // JavaScript is likewise shown inertly, with no dynamic-code evaluation.
+      const executableArchive = /\.(html|js)$/i.test(item.path);
       const info = document.createElement("span");
       info.textContent = item.category + " / " + item.path;
-      li.append(link, info);
+      if (executableArchive) {
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className = "source-open";
+        button.textContent = "Read source: " + titleFor(item);
+        button.setAttribute("aria-label", "Read archived source as inert text: " + item.path);
+        button.addEventListener("click", () => {
+          const content = Object.hasOwn(safeSources, item.path)
+            ? safeSources[item.path]
+            : "Source preview unavailable; use the local CLI docs show command.";
+          previewTitle.textContent = item.path;
+          previewText.textContent = content;
+          preview.hidden = false;
+          preview.scrollIntoView({ block: "start" });
+          previewText.focus();
+        });
+        li.append(button, info);
+      } else {
+        const link = document.createElement("a");
+        link.href = "../docs/reference/qec/" + item.path.split("/").map(encodeURIComponent).join("/");
+        link.textContent = titleFor(item);
+        link.setAttribute("aria-label", "Open local reference: " + item.path);
+        li.append(link, info);
+      }
       list.appendChild(li);
     }
     if (!result.length) {

@@ -4,10 +4,13 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="dark">
+  <meta http-equiv="Content-Security-Policy"
+        content="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self'; connect-src 'none'; font-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
   <meta name="description" content="QEC-ADA offline research and finite-field desk.">
   <title>QEC-ADA | Local Research Desk</title>
   <link rel="stylesheet" href="style.css">
   <script src="catalog.js" defer></script>
+  <script src="archived-text.js" defer></script>
   <script src="app.js" defer></script>
 </head>
 <body>
@@ -56,7 +59,8 @@
         </div>
         <p>Files are byte-identical to the pinned QEC originals. Search indexes
           document <strong>paths and titles</strong>, not full text. Open a result
-          to view its local source file; the first-level directory structure is preserved.</p>
+          to view its local source file; historical HTML/JS is shown as inert
+          text instead of opening an executable document.</p>
         <div class="search-controls">
           <label for="search">Search documents</label>
           <input id="search" type="search" placeholder="Try: decoder, qutrit, acoustic, switching…" autocomplete="off">
@@ -65,6 +69,12 @@
         </div>
         <p class="results-count" id="results-count" role="status" aria-live="polite"></p>
         <ul id="results" class="results" aria-label="Matching historical documents"></ul>
+        <section id="archive-preview" class="archive-preview" hidden aria-labelledby="archive-title">
+          <div class="archive-heading"><h3 id="archive-title">Archived text</h3>
+            <button id="close-source" type="button">Close preview</button></div>
+          <p>This is historical source displayed as inert text; it is not executed.</p>
+          <pre id="archive-source" tabindex="0"></pre>
+        </section>
         <p class="minor">Pinned source: QSOLKCB/QEC — 27bbc798c4e3… • Large
           release-history JSON and JPEG map are excluded from this local mirror.</p>
       </section>
