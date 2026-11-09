@@ -72,6 +72,7 @@ def generate(observation: dict) -> tuple[bytes, dict]:
     unsigned = {
         "schema": ENGINE,
         "source_observation_sha256": observation["sha256"],
+        "source_graph": observation["source"],
         "pcm_format": "signed-linear-24bit-little-endian",
         "channels": CHANNELS,
         "sample_rate_hz": SAMPLE_RATE,

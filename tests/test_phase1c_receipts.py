@@ -3,6 +3,8 @@
 from __future__ import annotations
 
 import copy
+from io import BytesIO
+import wave
 import hashlib
 import json
 import os
@@ -15,6 +17,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
 import strowger_receipt as receipts
 import tanner_spectral_export as spectral
+import tanner_sonify
 
 BIN = ROOT / "build/bin" / ("qec_research.exe" if os.name == "nt" else "qec_research")
 
@@ -144,6 +147,29 @@ class SpectralObservationTests(unittest.TestCase):
         noncommuting = spectral.observe(3, ["111000", "000111"])
         self.assertEqual(3, noncommuting["observation"]["four_cycles"])
         self.assertEqual(24, noncommuting["observation"]["nb_trace4"])
+
+    def test_sonification_is_deterministic_24bit_pcm(self):
+        observed = spectral.observe(2, ["1100", "0012"])
+        first, m1 = tanner_sonify.generate(observed)
+        second, m2 = tanner_sonify.generate(observed)
+        self.assertEqual(first, second)
+        self.assertEqual(m1, m2)
+        self.assertEqual("signed-linear-24bit-little-endian", m1["pcm_format"])
+        self.assertEqual(observed["source"], m1["source_graph"])
+        self.assertEqual(hashlib.sha256(first).hexdigest(), m1["wav_sha256"])
+        with wave.open(BytesIO(first), "rb") as reader:
+            self.assertEqual(1, reader.getnchannels())
+            self.assertEqual(3, reader.getsampwidth())
+            self.assertEqual(48_000, reader.getframerate())
+            self.assertEqual(24_000, reader.getnframes())
+        self.assertFalse(m1["claim_boundary"]["physical_eigenfrequency"])
+        self.assertFalse(m1["claim_boundary"]["spectral_app_engine_compatible"])
+
+    def test_sonification_refuses_corrupt_observation(self):
+        bad = spectral.observe(2, ["1100", "0012"])
+        bad["observation"]["variable_degrees"] = [999, 2]
+        with self.assertRaises(ValueError):
+            tanner_sonify.generate(bad)
 
     def test_bounded_bad_source_fails(self):
         for n, rows in ((0, ["01"]), (6, ["0"*12]),
