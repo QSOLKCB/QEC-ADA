@@ -81,6 +81,27 @@ runtime and RSS are not portable deterministic fixtures. The comparison
 to a hypothetical dense float64 B matrix is explicitly a storage-model
 comparison, not a measured competitor implementation.
 
+## Executed sparse-memory observations
+
+GitHub Actions run `42568151303` at commit
+`ebbeb8f923c65fa4bac8101d25e40623b479cd3c` recorded one
+native Ada process per complete-bipartite graph on hosted Ubuntu Linux.
+Each row independently checked the known K(m,n) spectral radius.
+
+| Input | Edges / directed edges | Native peak RSS | Hypothetical dense float64 B values | Process elapsed |
+| --- | ---: | ---: | ---: | ---: |
+| K₈,₁₆ | 128 / 256 | 17,964 KiB | 0.5 MiB | 4.54 ms |
+| K₁₆,₂₄ | 384 / 768 | 17,968 KiB | 4.5 MiB | 24.42 ms |
+| K₃₂,₆₄ | 2,048 / 4,096 | **18,416 KiB** | **128 MiB** | 454.42 ms |
+
+The dense column is **hypothetical allocation for B's float64 values
+alone** (`8*(2*edges)^2` bytes), not an executed dense baseline.
+The process RSS includes runtime/loader overhead and the fixed-capacity
+Ada arrays, so this table does not measure an end-to-end speedup over
+any particular dense implementation. CPU time, allocations and memory
+will vary across environments. The source and graph identities are
+retained in the CI logs and `scripts/phase1e_memory.py`.
+
 ## Controlled BP experiment — precise scientific model
 
 The separate Python `phase1e_reference.decode_min_sum` is a newly written,
