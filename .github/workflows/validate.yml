@@ -85,6 +85,25 @@ jobs:
             2 1100 0012 --wav "$out/tanner.wav" \
             --manifest "$out/tanner.manifest.json"
 
+      - name: Native sparse NB eigenmode, IPR and SCC oracle suite
+        run: python3 -m unittest discover -s tests -p test_phase1d.py -v
+
+      - name: Native spectral receipts and forgery-resistant offline replay
+        run: python3 -m unittest discover -s tests -p test_phase1d_receipts.py -v
+
+      - name: End-to-end bounded spectrum JSON creation and replay
+        shell: bash
+        run: |
+          set -euo pipefail
+          out="$(mktemp -d)"
+          trap 'rm -rf "$out"' EXIT
+          python3 scripts/nb_spectral_export.py create "$out/k23.json" \
+            3 111000 000111
+          python3 scripts/nb_spectral_export.py verify "$out/k23.json"
+          python3 scripts/nb_spectral_export.py create "$out/cycle6.json" \
+            3 110000 011000 101000
+          python3 scripts/nb_spectral_export.py verify "$out/cycle6.json"
+
       - name: Observational paired OPT benchmark (no speedup gate)
         run: python3 scripts/bench_qutrit.py --trials 7
 

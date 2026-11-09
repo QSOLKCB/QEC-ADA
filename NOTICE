@@ -45,3 +45,13 @@ The Tanner graph, non-backtracking fourth moment and native
 classical switching pilot are independently implemented; no donor
 source is copied. Credit and scopes are recorded in
 docs/PHASE1C_TANNER_SPECTRAL.md.
+
+Phase 1D independently implements sparse Tanner non-backtracking
+spectral diagnostics under QEC-ADA's MPL-2.0 licence. Source inspiration:
+QSOLKCB/QEC at 27bbc798c4e38138ca5b0fff70b15c3271a1917d
+(MPL-2.0), multimodalas/fusion-qec at
+a390f57d3da2647ef8d835a7407ad0eb03d03093 (CC BY 4.0),
+QSOLKCB/SPECTRAL at 49401fa010ed673e3d3977ccd5e06d66b0d65096
+(MIT), and QSOLKCB/OPT at
+7556dd36acd53ed3ed538fd03b1db44e5c1ec869 (Apache-2.0).
+No implementation code copied from any donor repository.

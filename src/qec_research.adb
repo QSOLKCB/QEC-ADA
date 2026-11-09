@@ -4,6 +4,7 @@ with Ada.Command_Line;
 with Ada.Strings;
 with Ada.Strings.Fixed;
 with Ada.Text_IO;
+with QEC_NB_Spectral;
 with QEC_Configurable;
 with QEC_Strowger;
 with QEC_Tanner;
@@ -13,10 +14,20 @@ procedure QEC_Research is
    use Ada.Text_IO;
    use type QEC_Configurable.Trit;
    use type QEC_Strowger.Route_Outcome;
+   use type QEC_NB_Spectral.Solve_Status;
    Invalid : exception;
 
    function Number (Value : Natural) return String is
      (Ada.Strings.Fixed.Trim (Natural'Image (Value), Ada.Strings.Both));
+
+   package Real_IO is new Ada.Text_IO.Float_IO (Long_Float);
+
+   function Decimal (Value : Long_Float) return String is
+      Result : String (1 .. 48);
+   begin
+      Real_IO.Put (To => Result, Item => Value, Aft => 12, Exp => 0);
+      return Ada.Strings.Fixed.Trim (Result, Ada.Strings.Both);
+   end Decimal;
 
    function Trit_Of (Value : Character)
      return QEC_Configurable.Trit is
@@ -100,6 +111,48 @@ procedure QEC_Research is
          end loop;
       end loop;
    end Show_Tanner;
+
+   procedure Show_Spectral is
+      D : constant QEC_Configurable.Code_Definition := Parse_Tanner;
+      G : constant QEC_Tanner.Graph_Observation := QEC_Tanner.Observe (D);
+      S : constant QEC_NB_Spectral.Spectrum := QEC_NB_Spectral.Observe (D);
+   begin
+      Put_Line ("schema=qec-ada.nb-spectral-observation.v1");
+      Put_Line ("algorithm=scc-lazy-perron-bounded-v1");
+      Put_Line ("mode_scope=selected-recurrent-block");
+      Put_Line ("status=" & QEC_NB_Spectral.Solve_Status'Image (S.Status));
+      Put_Line ("variables=" & Number (G.Sites));
+      Put_Line ("checks=" & Number (G.Checks));
+      Put_Line ("edges=" & Number (G.Edges));
+      Put_Line ("directed_edges=" & Number (S.Directed_Edges));
+      Put_Line ("four_cycles=" & Number (G.Four_Cycles));
+      Put_Line ("nb_trace4=" & Number (G.NB_Trace_4));
+      Put_Line ("scc_count=" & Number (S.SCC_Count));
+      Put_Line ("cyclic_scc_count=" & Number (S.Cyclic_SCC_Count));
+      Put_Line ("dominant_tie_count=" & Number (S.Dominant_Tie_Count));
+      Put_Line ("mode_root_edge=" & Number (S.Root_Edge));
+      Put_Line ("mode_edge_count=" & Number (S.Mode_Edge_Count));
+      Put_Line ("iterations=" & Number (S.Iterations));
+      Put_Line ("spectral_radius=" & Decimal (S.Spectral_Radius));
+      Put_Line ("collatz_lower=" & Decimal (S.Collatz_Lower));
+      Put_Line ("collatz_upper=" & Decimal (S.Collatz_Upper));
+      Put_Line ("residual_l1=" & Decimal (S.Residual_L1));
+      Put_Line ("ipr=" & Decimal (S.IPR));
+      Put_Line ("eeec=" & Decimal (S.EEEC));
+      --  Both orientations of each source check-site edge appear in
+      --  the same deterministic pair order as Phase 1C graph creation.
+      for Id in 1 .. S.Directed_Edges loop
+         Put_Line ("energy=" & Number (Id) & "," &
+                   Decimal (S.Energy (QEC_NB_Spectral.Edge_Index (Id))));
+      end loop;
+      for Rank in 1 .. S.Ranking_Count loop
+         Put_Line ("ranking=" & Number (Rank) & "," &
+           Number (S.Ranking (QEC_NB_Spectral.Edge_Index (Rank))));
+      end loop;
+      if S.Status = QEC_NB_Spectral.Not_Converged then
+         Set_Exit_Status (Failure);
+      end if;
+   end Show_Spectral;
 
    function Four_Characters
      (Index : Positive) return String is
@@ -233,10 +286,12 @@ procedure QEC_Research is
    begin
       Put_Line ("QEC-ADA research: exact bounded graph diagnostics and switching");
       Put_Line ("  qec_research tanner N ROW1 [ROW2 ... ROW4]");
+      Put_Line ("  qec_research spectral N ROW1 [ROW2 ... ROW4]");
       Put_Line ("  qec_research strowger DDDD RRRR LLLL AAAA BBBB FAULT");
       Put_Line ("Masks use 1=free, 0=busy, Q=quarantined; fault:");
       Put_Line ("  none | miss1..4 | dup1..4 | stuck1..2 | route | check | dark");
-      Put_Line ("Neither spectral moments nor route tones prove quantum correction.");
+      Put_Line ("Sparse spectral mode is a recurrent-block numerical estimate, not a hardware claim.");
+      Put_Line ("Neither spectral diagnostics nor route tones prove quantum correction.");
    end Usage;
 
 begin
@@ -246,6 +301,10 @@ begin
      and then Argument (1) = "tanner"
    then
       Show_Tanner;
+   elsif Argument_Count >= 3 and then Argument_Count <= 6
+     and then Argument (1) = "spectral"
+   then
+      Show_Spectral;
    elsif Argument_Count = 7 and then Argument (1) = "strowger" then
       Show_Route;
    else
