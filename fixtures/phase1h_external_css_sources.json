@@ -1,0 +1,157 @@
+{
+  "schema": "qec-ada.phase1h.external-css-manifest.v1",
+  "sources": {
+    "simula": {
+      "repo": "Simula-UiB/nisqec",
+      "commit": "913e0f26b07919ab73d7052159196599d34a2969",
+      "license": "CC-BY-4.0",
+      "attribution": "E. Durazo Rocha, O. A. Mostad, H.-Y. Lin, E. Rosnes, NISQEC v1.0.0 (2026), doi:10.5281/zenodo.23378284",
+      "redistribute_raw": false
+    },
+    "explicit": {
+      "repo": "lilyxy/Check-weight-constrained-quantum-codes",
+      "commit": "0e6c3e281fe044315286fbdcf5295cb16f47f90d",
+      "license": "UNSPECIFIED",
+      "attribution": "Lily Wang, Andy Zeyi Liu, Ray Li, Aleksander Kubica, Shouzhen Gu, Check-weight-constrained quantum codes: Bounds and examples, 2026, public GitHub matrix collection",
+      "redistribute_raw": false
+    }
+  },
+  "matrix_pairs": [
+    {
+      "id": "simula-tanner10",
+      "provider": "simula",
+      "format": "dense01",
+      "Hx": {
+        "path": "QT/Tan2TNCb_10_2_32/Tan2TNCb_10_2_32_Hx.txt",
+        "git_blob_sha1": "248c44145d2f3a7588c6b23268e74b21fe559b2a"
+      },
+      "Hz": {
+        "path": "QT/Tan2TNCb_10_2_32/Tan2TNCb_10_2_32_Hz.txt",
+        "git_blob_sha1": "e11b3d9c909741e7d3085d8c4f757e858770b1d1"
+      }
+    },
+    {
+      "id": "simula-tanner45",
+      "provider": "simula",
+      "format": "dense01",
+      "Hx": {
+        "path": "QT/Tan2TNCb_45_7_80/Tan2TNCb_45_7_80_Hx.txt",
+        "git_blob_sha1": "c0766731944944040fd97945394f55dde2203fd1"
+      },
+      "Hz": {
+        "path": "QT/Tan2TNCb_45_7_80/Tan2TNCb_45_7_80_Hz.txt",
+        "git_blob_sha1": "dbf08f8791c02f37313f0d560120f6b5f947df4c"
+      }
+    },
+    {
+      "id": "explicit-hgp10",
+      "provider": "explicit",
+      "format": "mtx01",
+      "Hx": {
+        "path": "codes/hgp/small_hgp_3_2_1_n10_k4_d2_pcmX.mtx",
+        "git_blob_sha1": "9f6a76a5ee1ca2ceb817c2004d2080775188ddf5"
+      },
+      "Hz": {
+        "path": "codes/hgp/small_hgp_3_2_1_n10_k4_d2_pcmZ.mtx",
+        "git_blob_sha1": "12f3d10227ea64784fe5aa45bd4cc7b2681c81a0"
+      }
+    },
+    {
+      "id": "explicit-hgp41",
+      "provider": "explicit",
+      "format": "mtx01",
+      "Hx": {
+        "path": "codes/hgp/toric_hgp_n5_n41_k1_d5_pcmX.mtx",
+        "git_blob_sha1": "103b7764ee249eba0b4fd2ac2fe6b184cdce285a"
+      },
+      "Hz": {
+        "path": "codes/hgp/toric_hgp_n5_n41_k1_d5_pcmZ.mtx",
+        "git_blob_sha1": "2df18b054a97fce4c18bfe18838309ac990b77df"
+      }
+    },
+    {
+      "id": "explicit-hgp58",
+      "provider": "explicit",
+      "format": "mtx01",
+      "Hx": {
+        "path": "codes/hgp/hamming_hgp_r3_n58_k16_d3_pcmX.mtx",
+        "git_blob_sha1": "e48b4b1394782a1968b44a36dac246895053e199"
+      },
+      "Hz": {
+        "path": "codes/hgp/hamming_hgp_r3_n58_k16_d3_pcmZ.mtx",
+        "git_blob_sha1": "92120e0ce2bc0df9ba083c76109779efc47ad96f"
+      }
+    },
+    {
+      "id": "explicit-bb72",
+      "provider": "explicit",
+      "format": "mtx01",
+      "Hx": {
+        "path": "codes/bivariate_bicycle/bb_code_6_6_n72_k12_d6_pcmX.mtx",
+        "git_blob_sha1": "cac36b0cbd3d739754d6251be6fd6b4539ec967f"
+      },
+      "Hz": {
+        "path": "codes/bivariate_bicycle/bb_code_6_6_n72_k12_d6_pcmZ.mtx",
+        "git_blob_sha1": "96b43822ded26576b19e0b297e00c47ec88785db"
+      }
+    },
+    {
+      "id": "explicit-lp75",
+      "provider": "explicit",
+      "format": "mtx01",
+      "Hx": {
+        "path": "codes/lifted_product/lcs_copies3_n75_k3_d4_pcmX.mtx",
+        "git_blob_sha1": "032161cb22e6fd3295c95186dc17bdca23e96bde"
+      },
+      "Hz": {
+        "path": "codes/lifted_product/lcs_copies3_n75_k3_d4_pcmZ.mtx",
+        "git_blob_sha1": "ad44ad9aaf9b40b4d10eacdce3a3c7c0be45811f"
+      }
+    },
+    {
+      "id": "explicit-bb108",
+      "provider": "explicit",
+      "format": "mtx01",
+      "Hx": {
+        "path": "codes/bivariate_bicycle/bb_code_9_6_n108_k8_d10_pcmX.mtx",
+        "git_blob_sha1": "4b2cb4e1b5dcb869b9b3a5d5a5609a6e975c74e1"
+      },
+      "Hz": {
+        "path": "codes/bivariate_bicycle/bb_code_9_6_n108_k8_d10_pcmZ.mtx",
+        "git_blob_sha1": "14f3b12e0bebc026bfc5ce59c4b145ef07dbfd28"
+      }
+    },
+    {
+      "id": "explicit-lp125",
+      "provider": "explicit",
+      "format": "mtx01",
+      "Hx": {
+        "path": "codes/lifted_product/lcs_copies5_n125_k5_d4_pcmX.mtx",
+        "git_blob_sha1": "09f3d8951622814fd28191b0e56b956927dceca8"
+      },
+      "Hz": {
+        "path": "codes/lifted_product/lcs_copies5_n125_k5_d4_pcmZ.mtx",
+        "git_blob_sha1": "a6f49c1557cf674fb7f7e30432b759a4d62a83c9"
+      }
+    }
+  ],
+  "evaluation": {
+    "heldout_provider": "explicit",
+    "training_provider": "simula",
+    "noise_bps": [
+      400,
+      800,
+      1200
+    ],
+    "primary_noise_bps": 800,
+    "trial_count_per_graph_and_noise": 4,
+    "max_bp_iterations": 14,
+    "qec_reference_primary_trials_per_graph": 2,
+    "bootstraps": 256,
+    "risk_direction": "higher_Ipr_is_higher_classical_frame_failure_risk",
+    "auroc_threshold": 0.65,
+    "auroc_uplift_vs_density": 0.05,
+    "noise_seed": "qecada-phase1h-external-css-001",
+    "no_fitting_on_heldout": true
+  }
+}
