@@ -176,7 +176,10 @@ class SparseSpectralTests(unittest.TestCase):
                                      f["status"])
                 else:
                     self.assertEqual("CONVERGED_NUMERIC", f["status"])
-                    self.assertAlmostEqual(1.0, float(f["spectral_radius"]),
+                    # Full K2,3 has two independent forward choices
+                    # per check visit; its NB Perron radius is sqrt(2).
+                    expected = math.sqrt(2) if mask == 63 else 1.0
+                    self.assertAlmostEqual(expected, float(f["spectral_radius"]),
                                            places=8)
 
     def test_large_bounded_complete_bipartite_k45(self):
