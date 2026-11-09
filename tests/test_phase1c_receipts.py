@@ -112,6 +112,20 @@ class IndependentReplayTests(unittest.TestCase):
             receipts.validate_bytes(receipts.canonical(p) + b"\n")
 
     @unittest.skipUnless(BIN.is_file(), "native qec_research not built")
+    def test_json_boolean_integer_type_confusion_rejected(self):
+        correct = receipts.make_receipt(self.request())
+        for target in ("claim", "trace"):
+            forged = copy.deepcopy(correct)
+            if target == "claim":
+                forged["claim_boundary"]["classical_routing_only"] = 1
+            else:
+                forged["trace"]["linefinder"] = True
+            forged["sha256"] = receipts.sha(receipts.canonical(
+                {key: value for key, value in forged.items() if key != "sha256"}))
+            with self.subTest(target=target), self.assertRaises(ValueError):
+                receipts.validate_bytes(receipts.canonical(forged) + b"\n")
+
+    @unittest.skipUnless(BIN.is_file(), "native qec_research not built")
     def test_non_overwriting_file_output(self):
         with tempfile.TemporaryDirectory() as directory:
             path = Path(directory) / "receipt.json"

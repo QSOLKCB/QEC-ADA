@@ -259,7 +259,7 @@ def validate_bytes(raw: bytes) -> dict:
         raise ValueError("receipt membership mismatch")
     if receipt["schema"] != SCHEMA or receipt["engine"] != ENGINE:
         raise ValueError("wrong schema/engine")
-    if receipt["claim_boundary"] != CLAIMS:
+    if canonical(receipt["claim_boundary"]) != canonical(CLAIMS):
         raise ValueError("changed claim boundary")
     req = receipt["request"]
     if type(req) is not dict or set(req) != {
@@ -274,7 +274,7 @@ def validate_bytes(raw: bytes) -> dict:
     if sha(canonical(unsigned)) != receipt["sha256"]:
         raise ValueError("receipt SHA-256 mismatch")
     expected = with_chain(replay(req))
-    if receipt["trace"] != expected:
+    if canonical(receipt["trace"]) != canonical(expected):
         raise ValueError("independent route/event replay mismatch")
     return receipt
 
