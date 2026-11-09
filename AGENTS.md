@@ -55,3 +55,17 @@ Use CODEOWNERS and branch protection requiring owner approvals.
 
 Never link archived HTML/JS as runnable pages from the GUI. Render copies as
 inert escaped text, with a restrictive CSP and no outbound connections.
+
+## Phase 1B extra boundary
+
+The configurable decoder (`codes/qec_configurable.*`) must validate
+commuting, independent stabilizers before constructing radius-one
+representatives. Preserve QEC's deterministic first-representative ordering
+and accept collisions only for stabilizer-equivalent errors. Each OPT plan
+must be bound to a full immutable code definition; do not add global caches
+or hash-only identity. Keep the Phase 1A implementation as an oracle and do
+not weaken pinned-donor provenance checks.
+
+A GNATprove proof applies only to the actual declarations it analyzes.
+Do not report the configurable decoder as formally proved unless its own
+obligations have been discharged and independently checked.

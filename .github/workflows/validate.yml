@@ -58,6 +58,9 @@ jobs:
       - name: Exhaustive scalar versus OPT qutrit equivalence (3^10 inputs)
         run: ./build/bin/qec_ada selftest qutrit
 
+      - name: Configurable decoder snapshot/OPT exhaustive selftest
+        run: ./build/bin/qec_ada selftest config
+
       - name: Native deterministic route selftest
         run: ./build/bin/qec_ada selftest route
 

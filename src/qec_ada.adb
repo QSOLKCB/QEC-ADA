@@ -15,6 +15,8 @@ procedure QEC_ADA is
    use Ada.Command_Line;
    use Ada.Text_IO;
    use type QEC_GF3.Trit;
+   use type QEC_Configurable.Preparation_Status;
+   use type QEC_Configurable.Syndrome_Vector;
    use type QEC_Routing.Outcome;
    Invalid_Input : exception;
 

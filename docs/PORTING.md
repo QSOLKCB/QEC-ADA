@@ -19,6 +19,16 @@
 - Run independent oracle and native executable tests on CI.
 - [Implementation scope and limitations](PHASE1A_DECODER_ROUTING.md).
 
+## Phase 1B — Configurable code definitions and exact OPT binding
+
+- Bound 1–5 qutrit sites, 1–4 commuting independent generators and an exact
+  radius-one syndrome table to an immutable code snapshot.
+- Reject duplicate/linearly dependent or noncommuting checks and ambiguous
+  bounded error sets rather than inventing representative choices.
+- Prove scalar and precomputed path parity across every effective Pauli input.
+- Introduce a separate, narrow SPARK GF(3) mathematical proof harness.
+- [Phase 1B contract](PHASE1B_CONFIGURABLE.md).
+
 ## Phase 1 — Algebraic correctness
 
 Specify and independently implement GF(2), GF(3), GF(4) algebra.
