@@ -14,6 +14,7 @@ procedure QEC_Research is
    use Ada.Text_IO;
    use type QEC_Configurable.Trit;
    use type QEC_Strowger.Route_Outcome;
+   use type QEC_NB_Spectral.Solve_Status;
    Invalid : exception;
 
    function Number (Value : Natural) return String is
@@ -24,8 +25,7 @@ procedure QEC_Research is
    function Decimal (Value : Long_Float) return String is
       Result : String (1 .. 48);
    begin
-      Real_IO.Put (To => Result, Item => Value, Fore => 1,
-                   Aft => 12, Exp => 0);
+      Real_IO.Put (To => Result, Item => Value, Aft => 12, Exp => 0);
       return Ada.Strings.Fixed.Trim (Result, Ada.Strings.Both);
    end Decimal;
 
