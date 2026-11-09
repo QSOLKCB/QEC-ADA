@@ -150,6 +150,35 @@ class ConfiguredDecoderTests(unittest.TestCase):
             residual = add(ex + ez, correction_x + correction_z)
             self.assertIn(residual, stabilizers(2, rows))
 
+    def test_zero_syndrome_logical_is_not_corrected(self):
+        # This nontrivial logical commutes with all four cyclic stabilizers
+        # but is outside their span. Zero syndrome is not correction.
+        rows = rows_cyclic()
+        self.assertEqual((0, 0, 0, 0),
+                         syndrome(5, rows, (0, 0, 0, 0, 0),
+                                  (1, 1, 2, 2, 2)))
+        self.assertNotIn((0, 0, 0, 0, 0, 1, 1, 2, 2, 2),
+                         stabilizers(5, rows))
+        p = run("decode", 5, "00000", "11222", *rows)
+        self.assertNotEqual(0, p.returncode)
+        data = lines(p.stdout)
+        self.assertEqual("0000", data["syndrome"])
+        self.assertEqual("DETECTED_UNCORRECTED", data["status"])
+
+    def test_generator_row_order_changes_syndrome_not_correctability(self):
+        rows = ("0010", "0001")
+        swapped = tuple(reversed(rows))
+        p = run("decode", 2, "10", "21", *rows)
+        q = run("decode", 2, "10", "21", *swapped)
+        self.assertEqual(0, p.returncode)
+        self.assertEqual(0, q.returncode)
+        a, b = lines(p.stdout), lines(q.stdout)
+        self.assertEqual(a["syndrome"], a["opt_syndrome"])
+        self.assertEqual(b["syndrome"], b["opt_syndrome"])
+        self.assertEqual(a["syndrome"], b["syndrome"][::-1])
+        self.assertEqual("CORRECTED", a["status"])
+        self.assertEqual("CORRECTED", b["status"])
+
     def test_single_qutrit_degenerate_stabilizer(self):
         rows = ("01",)
         table = representatives(1, rows)
