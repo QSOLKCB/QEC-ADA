@@ -226,6 +226,28 @@ jobs:
           if-no-files-found: error
           retention-days: 30
 
+      - name: Phase 1G pinned QEC CSS code-family holdout and BP cohort
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p evidence/phase1g
+          python3 scripts/phase1g_pinned_css.py create \
+            evidence/phase1g/qec_css.json \
+            --donor .donor-qec-bp --execute-pinned-donor
+          python3 scripts/phase1g_pinned_css.py verify \
+            evidence/phase1g/qec_css.json \
+            --donor .donor-qec-bp --execute-pinned-donor
+          python3 -m unittest discover -s tests -p test_phase1g.py -v
+          sha256sum evidence/phase1g/qec_css.json
+
+      - name: Retain Phase 1G pinned CSS topology and cross-BP evidence (30 days)
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: qec-ada-phase1g-css-${{ github.sha }}
+          path: evidence/phase1g/qec_css.json
+          if-no-files-found: error
+          retention-days: 30
+
       - name: Observational paired OPT benchmark (no speedup gate)
         run: python3 scripts/bench_qutrit.py --trials 7
 
