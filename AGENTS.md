@@ -163,3 +163,28 @@ noise trials. Preserve Phase 1E and 1F negative results, report
 undefined metrics as null, retain all corrections and disagreements,
 and require complete pinned-source reexecution of each receipt.
 Rate/size confounding precludes causal attribution to IPR.
+
+## Phase 1H external CSS source and research rights
+
+Do NOT vendor, relabel or copy raw parity matrices from external
+datasets into QEC-ADA or published CI artifacts. Simula UiB NISQEC
+is CC BY 4.0 with DOI 10.5281/zenodo.23378284; the separate
+Explicit QLDPC Database repository has no visible licensing grant.
+Keep exact pinned source commits and per-file Git SHA-1 objects
+in the manifest, report their authors, and avoid claiming a
+redistribution licence for source bytes without one.
+
+Matrix importers must be data-only: never import or execute external
+provider Python. Require safe path containment, normal files,
+on-disk Git blob/source-commit equivalence, strict binary syntax,
+bounded dimensions/edge counts, GF(2) CSS orthogonality,
+rank and duplicate checks. Source publisher is the holdout
+unit, not correlated BSC trials. Two publishers and seven heldout
+codes do not prove generalization.
+
+Never use Phase 1H observational IPR to mutate decoder authority,
+claim a physical quantum threshold or erase the negative Phase
+1E/1F/1G baselines. Use the optional QEC source-pinned BP bridge
+only with explicit execution approval and in the isolated reference
+lane. Verify the whole external-source dataset and source-dependent
+BP result, not just a rehashed JSON receipt.

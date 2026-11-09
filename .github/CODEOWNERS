@@ -38,3 +38,9 @@
 /scripts/phase1g_pinned_css.py @EmergentMonk
 /tests/test_phase1g.py @EmergentMonk
 /docs/PHASE1G_QEC_CSS_FAMILY.md @EmergentMonk
+
+# Phase 1H public external matrix source and evidence/provenance boundary.
+/fixtures/phase1h_external_css_sources.json @EmergentMonk
+/scripts/phase1h_external_css.py @EmergentMonk
+/tests/test_phase1h.py @EmergentMonk
+/docs/PHASE1H_EXTERNAL_CSS.md @EmergentMonk

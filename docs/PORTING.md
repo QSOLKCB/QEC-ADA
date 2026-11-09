@@ -102,6 +102,23 @@ No incidental mutation of QEC's frozen baseline.
   Phase 1E/1F negative baselines, and full source reexecution verification.
 - [Phase 1G design and limitations](PHASE1G_QEC_CSS_FAMILY.md).
 
+
+## Phase 1H — Independently sourced published CSS parity-check datasets
+
+- Pin published H_X/H_Z matrix byte identities from two public,
+  non-QEC-owner source repositories with clear licence metadata.
+- Parse dense binary and Matrix Market COO input safely without
+  executing third-party matrix-provider source or copying raw
+  copyrighted matrices into QEC-ADA.
+- Verify source commits and Git blobs; reject tampering, duplicate
+  graphs, broken CSS commutation and exceedance of native limits.
+- Compare read-only native/independent Tanner spectral modes and two
+  *different* controlled classical BP decoders with publisher-blocked
+  holdout, preregistered thresholds, and source-bound receipts.
+- Preserve Phase 1E/1F/1G negative results, missing-class policy and
+  post-exec memory measurement.
+- [Phase 1H source provenance, results and reproducibility](PHASE1H_EXTERNAL_CSS.md).
+
 ## Phase 3 — Formal proofs
 
 Use GNATprove on explicit SPARK proof obligations for finite ranges,
