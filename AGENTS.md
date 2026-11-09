@@ -81,3 +81,14 @@ The Strowger receipt validator must reconstruct route and events from
 complete request inputs instead of blessing a self-consistently rehashed
 forgery. Its Python implementation is a separate validation boundary;
 the original QEC Strowger schema is not compatible by default.
+
+## Phase 1D sparse NB invariants
+
+The spectral observer is read-only: no decoder mutation, hidden RNG,
+dense production NB matrix, arbitrary eigenvector from a nilpotent
+operator, or elevated physical-QEC claims. Verify strongly connected
+components and periodic cycles before treating a power estimate as a
+dominant radius. Record numerical convergence and local recurrent
+mode support. A low-order moment is not an eigenvalue; a component
+eigenvector may not be a full reducible-operator eigenvector.
+Independent tiny-graph oracles must remain separate and CI-enforced.

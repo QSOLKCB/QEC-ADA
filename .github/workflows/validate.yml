@@ -85,6 +85,9 @@ jobs:
             2 1100 0012 --wav "$out/tanner.wav" \
             --manifest "$out/tanner.manifest.json"
 
+      - name: Native sparse NB eigenmode, IPR and SCC oracle suite
+        run: python3 -m unittest discover -s tests -p test_phase1d.py -v
+
       - name: Observational paired OPT benchmark (no speedup gate)
         run: python3 scripts/bench_qutrit.py --trials 7
 

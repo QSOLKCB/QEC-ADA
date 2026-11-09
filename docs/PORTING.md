@@ -54,6 +54,16 @@ No incidental mutation of QEC's frozen baseline.
 - See [Phase 1C proposal](PHASE1C_STROWGER_PLAN.md).
 - No physical quantum-routing claim or automatic decoder replacement.
 
+## Phase 1D — Sparse Spectral Observatory
+
+- Native read-only Tanner directed-edge Hashimoto operator, SCC-aware
+  recurrent-mode computation, IPR, EEEC and stable edge rankings.
+- Exact finite graph/trace regression preserved and independent known
+  eigenvalue fixtures added, including periodic/disconnected cases.
+- Strict convergence reporting and no claim of universal floating-point
+  bit identity or a full reducible-graph eigenvector.
+- [Phase 1D implementation and limitations](PHASE1D_SPARSE_SPECTRAL.md).
+
 ## Phase 3 — Formal proofs
 
 Use GNATprove on explicit SPARK proof obligations for finite ranges,

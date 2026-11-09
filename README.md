@@ -141,3 +141,22 @@ The graph-to-audio demonstration produces **48 kHz signed 24-bit PCM**,
 not 16-bit, and is deliberately distinct from SPECTRAL QEC/APP's separate
 decoder event-import and render-receipt protocol. All receipt verification
 remains offline with the Python standard library.
+
+## Phase 1D — Sparse non-backtracking spectral observatory
+
+A separate native Ada graph observer computes numerical dominant
+**recurrent-component** non-backtracking spectral radii, IPR, top-energy
+concentration and stable edge-sensitivity rankings. Sparse edge
+transitions and deterministic SCC handling avoid a dense Hashimoto matrix
+and periodicity-induced failure of naive power iteration.
+
+~~~sh
+./build/bin/qec_research spectral 2 1100 0012
+./build/bin/qec_research spectral 3 111000 000111
+~~~
+
+The solver fails closed if numerical convergence is not reached. It does
+not modify the decoder or produce hardware-QEC evidence. Its mode
+vectors are local to the selected recurrent SCC, not necessarily global
+eigenvectors on reducible graphs. See
+[Phase 1D method and test contract](docs/PHASE1D_SPARSE_SPECTRAL.md).
