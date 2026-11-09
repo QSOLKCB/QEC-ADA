@@ -363,11 +363,25 @@ def verify_bytes(raw: bytes) -> dict:
         raise ValueError("spectral source identity mismatch")
     if canonical(obj["graph"]) != canonical(independent_graph(obj["source"])):
         raise ValueError("independent Tanner topology/metrics mismatch")
-    if type(obj["graph_observation_sha256"]) is not str or \
-            not re.fullmatch(r"[0-9a-f]{64}", obj["graph_observation_sha256"]):
-        raise ValueError("invalid graph observation identity")
-    # The original Phase 1C graph hash binds its own independent schema;
-    # this receipt additionally binds the entire graph through its hash.
+    graph_claim = {
+        "observable_classical_graph": True,
+        "exact_nb_fourth_moment": True,
+        "spectral_radius_measured": False,
+        "eigenvector_ipr_measured": False,
+        "decoder_modified": False,
+        "sonification_wav_generated": False,
+        "spectral_qec_app_dataset_compatible": False,
+        "physical_quantum_result": False,
+    }
+    graph_payload = {
+        "schema": "qec-ada.tanner-spectral-observation.v1",
+        "source": obj["source"],
+        "source_sha256": obj["source_sha256"],
+        "observation": obj["graph"],
+        "claim_boundary": graph_claim,
+    }
+    if obj["graph_observation_sha256"] != sha(canonical(graph_payload)):
+        raise ValueError("graph observation identity mismatch")
     if obj["sha256"] != sha(canonical(
             {k: v for k, v in obj.items() if k != "sha256"})):
         raise ValueError("spectral receipt hash mismatch")
