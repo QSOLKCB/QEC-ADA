@@ -2,6 +2,7 @@
 --  Independent native GF(3), fixed cyclic qutrit decode and classical
 --  first-free routing. Not the historical QEC Strowger receipt protocol.
 with Ada.Command_Line;
+with Ada.Exceptions;
 with Ada.Strings;
 with Ada.Strings.Fixed;
 with Ada.Text_IO;
@@ -286,18 +287,30 @@ procedure QEC_ADA is
          Again : constant QEC_Configurable.Prepared_Code :=
            QEC_Configurable.Prepare (Cyclic);
       begin
-         if QEC_Configurable.Status_Of (First) /= QEC_Configurable.Ready
-           or else QEC_Configurable.Status_Of (Second) /= QEC_Configurable.Ready
-           or else QEC_Configurable.Status_Of (Again) /= QEC_Configurable.Ready
-           or else QEC_Configurable.Leader_Count (First) /= 41
-           or else QEC_Configurable.Leader_Count (Second) /= 9
-           or else not QEC_Configurable.Exhaustive_Parity (First)
-           or else not QEC_Configurable.Exhaustive_Parity (Second)
-           or else not QEC_Configurable.Exhaustive_Parity (Again)
-           or else not QEC_Configurable.Same_Definition (First, Again)
-           or else QEC_Configurable.Same_Definition (First, Second)
-         then
-            raise Program_Error with "code snapshot or OPT equivalence";
+         if QEC_Configurable.Status_Of (First) /= QEC_Configurable.Ready then
+            raise Program_Error with "cyclic-5 status " &
+              QEC_Configurable.Preparation_Status'Image
+                (QEC_Configurable.Status_Of (First));
+         elsif QEC_Configurable.Status_Of (Second) /= QEC_Configurable.Ready then
+            raise Program_Error with "product-2 status " &
+              QEC_Configurable.Preparation_Status'Image
+                (QEC_Configurable.Status_Of (Second));
+         elsif QEC_Configurable.Status_Of (Again) /= QEC_Configurable.Ready then
+            raise Program_Error with "cyclic-5 reprepare status";
+         elsif QEC_Configurable.Leader_Count (First) /= 41 then
+            raise Program_Error with "cyclic-5 leader count";
+         elsif QEC_Configurable.Leader_Count (Second) /= 9 then
+            raise Program_Error with "product-2 leader count";
+         elsif not QEC_Configurable.Exhaustive_Parity (First) then
+            raise Program_Error with "cyclic-5 scalar/OPT parity";
+         elsif not QEC_Configurable.Exhaustive_Parity (Second) then
+            raise Program_Error with "product-2 scalar/OPT parity";
+         elsif not QEC_Configurable.Exhaustive_Parity (Again) then
+            raise Program_Error with "reprepare scalar/OPT parity";
+         elsif not QEC_Configurable.Same_Definition (First, Again) then
+            raise Program_Error with "A-B-A identity";
+         elsif QEC_Configurable.Same_Definition (First, Second) then
+            raise Program_Error with "cross-code alias";
          end if;
       end;
       Put_Line
@@ -538,7 +551,9 @@ exception
         "ERROR: exact trits 0/1/2, 5-trit Pauli halves, 4-trit syndrome, "
         & "or four-bit 0/1 masks required");
       Set_Exit_Status (Failure);
-   when Program_Error =>
-      Put_Line (Standard_Error, "FAIL: mathematical or routing invariant");
+   when E : Program_Error =>
+      Put_Line (Standard_Error,
+        "FAIL: mathematical or routing invariant: " &
+        Ada.Exceptions.Exception_Message (E));
       Set_Exit_Status (Failure);
 end QEC_ADA;
