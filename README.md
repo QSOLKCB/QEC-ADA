@@ -120,3 +120,24 @@ gprbuild -p -P qec_ada.gpr
 See [Phase 1C scope and evidence boundaries](docs/PHASE1C_TANNER_SPECTRAL.md).
 Observational diagnostics do not alter decoder execution. No universal
 eigensolver or physical QEC / audible physics claim is made.
+
+### SPECTRAL export, 24-bit sonification and Strowger receipt replay
+
+~~~sh
+uv run --no-project python scripts/tanner_spectral_export.py \
+  2 1100 0012 --output /tmp/qecada-tanner.json
+uv run --no-project python scripts/tanner_sonify.py \
+  2 1100 0012 --wav /tmp/qecada-tanner.wav \
+  --manifest /tmp/qecada-tanner-audio.json
+
+uv run --no-project python scripts/strowger_receipt.py create \
+  /tmp/qecada-route.json 1020 3333 1100 0100 0010 none \
+  --request-id demo-001
+uv run --no-project python scripts/strowger_receipt.py verify \
+  /tmp/qecada-route.json
+~~~
+
+The graph-to-audio demonstration produces **48 kHz signed 24-bit PCM**,
+not 16-bit, and is deliberately distinct from SPECTRAL QEC/APP's separate
+decoder event-import and render-receipt protocol. All receipt verification
+remains offline with the Python standard library.

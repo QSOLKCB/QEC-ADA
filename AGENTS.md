@@ -69,3 +69,15 @@ not weaken pinned-donor provenance checks.
 A GNATprove proof applies only to the actual declarations it analyzes.
 Do not report the configurable decoder as formally proved unless its own
 obligations have been discharged and independently checked.
+
+## Phase 1C observational SPECTRAL and receipt boundaries
+
+Never feed Tanner cycle heat or NB moments into decoder correction
+authority. Never rename an exact non-backtracking fourth moment as a
+spectral radius/eigenpair or attribute a graph sonification to hardware.
+The original WAV renderer is 48kHz signed 24-bit linear PCM.
+
+The Strowger receipt validator must reconstruct route and events from
+complete request inputs instead of blessing a self-consistently rehashed
+forgery. Its Python implementation is a separate validation boundary;
+the original QEC Strowger schema is not compatible by default.

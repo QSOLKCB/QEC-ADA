@@ -68,10 +68,23 @@ SPECTRAL repository: `QSOLKCB/SPECTRAL`, pinned source
 
 SPECTRAL QEC Sonification Laboratory accepts
 `cycle,qubit,error,syndrome,correction,residual` event datasets.
-A separate interoperability adapter will export *actual* native decoder
-results in that format. Tanner observations remain **separate** graph
-datasets, never disguised as measured quantum errors or sonification
-evidence.
+Phase 1C provides two **offline, reproducible Tanner adapters**:
+`scripts/tanner_spectral_export.py` generates a canonical JSON document
+containing exact native graph metrics plus an independent Python edge/cycle
+oracle; `scripts/tanner_sonify.py` renders a **48 kHz, signed 24-bit mono PCM
+WAV** from variable degrees and four-cycle participation. The audio uses
+integer-only original triangle-wave synthesis, fixed envelopes, no hidden
+randomness, imported music or cloud dependency.
+
+Its SHA-256 manifest binds the complete source graph definition, observed
+graph identity, WAV hash and precise PCM format. This is an original
+SPECTRAL-style data-to-sound mapping, not a recorded quantum signal,
+a measured eigenfrequency, or a canonical SPECTRAL QEC/APP render receipt.
+
+SPECTRAL QEC/APP's six-column decoder-event schema is **different**:
+Tanner observations must not be relabelled as decoder measurements.
+A WAV may be played locally, but cannot be mistaken for a
+SPECTRAL QEC/APP engine output or scientific observation receipt.
 
 SPECTRAL itself is MIT-licensed, the original `fusion-qec`
 architecture is CC BY 4.0, and QEC-ADA is MPL-2.0. This phase is
@@ -103,3 +116,49 @@ The existing native Ada correctness, independently checked historical
 QEC provenance, benchmark and isolated SPARK GF(3) proof suites remain
 required. The existing **28 proved SPARK GF(3) checks** do not become
 proof of the new Tanner or switching modules.
+
+## Canonical Strowger receipts and offline sonification
+
+The native Ada engine emits a bounded ordered event stream.
+`scripts/strowger_receipt.py` independently reconstructs every transition
+from the complete declared input, compares it to the native trace, and
+creates a canonical JSON/SHA-256 hash-linked receipt.
+`verify` independently replays from the receipt inputs **without calling
+the native binary**. Tampered, self-consistently rehashed event streams must
+still fail semantic replay.
+
+~~~sh
+gprbuild -p -P qec_ada.gpr
+
+# Bounded classical Strowger event stream:
+./build/bin/qec_research strowger 1020 3333 1100 0100 0010 none
+
+# Write and independently verify a new canonical receipt:
+uv run --no-project python scripts/strowger_receipt.py create \
+  /tmp/qecada-route.json 1020 3333 1100 0100 0010 none \
+  --request-id demo-001 --epoch 7
+uv run --no-project python scripts/strowger_receipt.py verify \
+  /tmp/qecada-route.json
+
+# Graph observation JSON, NOT a compatible SPECTRAL QEC/APP dataset:
+uv run --no-project python scripts/tanner_spectral_export.py \
+  2 1100 0012 --output /tmp/qecada-tanner.json
+
+# Original 48 kHz / 24-bit graph sonification, plus SHA-256 manifest:
+uv run --no-project python scripts/tanner_sonify.py \
+  2 1100 0012 --wav /tmp/qecada-tanner.wav \
+  --manifest /tmp/qecada-tanner-audio.json
+~~~
+
+Receipt schema: `qec-ada.strowger-route-receipt.v1`, **not**
+the original QEC `qec.strowger-route-receipt.v1`. Sorted-key compact
+UTF-8 JSON is SHA-256-bound, with per-event previous-hash linking and
+independent integer replay validation. A route failure has a valid
+replayable rejection receipt, not a successful connection.
+
+**Trust boundary:** Ada supplies the classical event trace; the Python
+standard-library adapter is the canonical receipt producer/verifier.
+No cryptographic hash implementation is installed in the Ada engine.
+Operator modes/authorization, persisted multi-request capacity,
+binary cross-language schema parity with QEC's original receipts,
+and full multi-stage historical switch simulation remain separate work.
