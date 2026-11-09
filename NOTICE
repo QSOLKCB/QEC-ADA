@@ -1,0 +1,19 @@
+QEC-ADA — Copyright 2026 QSOL-IMC / Trent Slade and contributors.
+Licensed under Mozilla Public License 2.0; see LICENSE.
+
+QEC-ADA is an independent Ada/SPARK implementation project. Its initial native
+GF(3) kernel, CLI and browser GUI are new work, not a mechanical source port.
+
+Historical QEC research documentation has been copied without byte changes
+from QSOLKCB/QEC, source commit 27bbc798c4e38138ca5b0fff70b15c3271a1917d, under docs/reference/qec/.
+The files retain the licence and attribution applicable at the source. Original
+Git blob SHA-1 values and exclusions are in fixtures/qec_reference_manifest.json.
+
+QEC-ADA makes no representation that archived QEC experiments, third-party
+packages, hardware measurements, or historical decoder capabilities have been
+implemented, proved, or reproduced by this new project.
+
+For QEC provenance, see docs/reference/qec/CITATION_AND_ATTRIBUTION.md and
+the donor repository's LICENCE and NOTICE records. Where a cited historical
+reference requires a source path, interpret it relative to the pinned QEC
+commit, not the QEC-ADA repository root.

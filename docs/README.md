@@ -1,0 +1,34 @@
+# QEC-ADA documentation index
+
+This directory separates **current implementation guidance** from **archived
+QEC reference material**. The original QEC documents have not been rewritten.
+
+| Start here | Purpose |
+| --- | --- |
+| [ARCHITECTURE.md](ARCHITECTURE.md) | Native design, execution and proof boundaries |
+| [PORTING.md](PORTING.md) | Incremental QEC-to-Ada migration sequence |
+| [GUI.md](GUI.md) | Universal offline browser UI and its limits |
+| [REFERENCE.md](REFERENCE.md) | Donor source, exact-copy policy and omissions |
+| [reference/qec/](reference/qec/) | Verbatim QEC documentation and labs |
+| [../research/](../research/) | New research proposals |
+| [../codes/](../codes/) | GF(3) finite-field source |
+| [../decode/](../decode/) | Native decoder boundary |
+| [../invariants/](../invariants/) | SPARK-oriented invariant contracts |
+| [../fixtures/](../fixtures/) | Manifest and reference vectors |
+
+## CLI discovery
+
+~~~sh
+uv run --no-project python scripts/qecada.py docs list --json
+uv run --no-project python scripts/qecada.py docs search decoder
+uv run --no-project python scripts/qecada.py docs show architecture/INVARIANTS.md
+~~~
+
+The CLI returns paths relative to `docs/reference/qec`, so tooling can use
+them as stable IDs independently of working directory. No network required.
+
+## Current scope
+
+Only the initial bounded GF(3) arithmetic and demo syndrome calculation are
+native implementation candidates. All other documentation is source context
+until separately ported, tested and verified.

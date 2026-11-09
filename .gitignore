@@ -1,0 +1,12 @@
+# GNAT and GPRbuild
+build/
+*.ali
+*.o
+*.exe
+# Python
+__pycache__/
+*.pyc
+# Local editors
+.idea/
+.vscode/
+.DS_Store

@@ -1,0 +1,539 @@
+{
+  "schema_version": 1,
+  "source_repository": "QSOLKCB/QEC",
+  "source_commit": "27bbc798c4e38138ca5b0fff70b15c3271a1917d",
+  "source_docs_tree": "fbbe3123f79964a26176539f47a6c68c68280553",
+  "mirror_root": "docs/reference/qec",
+  "notes": "Exact Git blob identities for every included file; original relative paths preserved. This is historical QEC documentation, not QEC-ADA implementation status.",
+  "files": [
+    {
+      "path": "ACOUSTIC_CHANNEL_CONTRACT.md",
+      "git_blob_sha1": "e4d84e5c255c14eddc0aa53bbd045cc46ef44e25",
+      "size_bytes": 4594
+    },
+    {
+      "path": "ACOUSTIC_COMPARATIVE_EVIDENCE.md",
+      "git_blob_sha1": "726f496b5e2913c504fbc8bbce444e3dc015f087",
+      "size_bytes": 15509
+    },
+    {
+      "path": "ACOUSTIC_NOISE_AND_CANCELLATION.md",
+      "git_blob_sha1": "b29d4586e3cf7ec9e5047ad22d44710bb19d3555",
+      "size_bytes": 12558
+    },
+    {
+      "path": "ACOUSTIC_OFFLINE_LAB.md",
+      "git_blob_sha1": "590a268df089ae1f794b22389c7acb2408b03eeb",
+      "size_bytes": 8617
+    },
+    {
+      "path": "ACOUSTIC_RECEIVER.md",
+      "git_blob_sha1": "27e5e41f216945de1110be887f33756b11af8913",
+      "size_bytes": 3196
+    },
+    {
+      "path": "ACOUSTIC_SYNDROME_BRIDGE.md",
+      "git_blob_sha1": "2920f19875c86262531877a0cbc238dac7ab2b2e",
+      "size_bytes": 8572
+    },
+    {
+      "path": "ACOUSTIC_TRANSPORT_REPLAY.md",
+      "git_blob_sha1": "54534ecb5571dba29e06fb5408d62c26c9a1e6f4",
+      "size_bytes": 9884
+    },
+    {
+      "path": "architecture/ALGORITHM_PATTERNS.md",
+      "git_blob_sha1": "fca8242c0e22458a363605a6b85bd4f6c8e4d866",
+      "size_bytes": 6323
+    },
+    {
+      "path": "architecture/API_CONTRACT.md",
+      "git_blob_sha1": "a17c92349da9c7514f61197c14332bee7775512d",
+      "size_bytes": 5400
+    },
+    {
+      "path": "architecture/ARCHITECTURE.md",
+      "git_blob_sha1": "4ecf26120ce693846bc1c1fa0971792d7f04a997",
+      "size_bytes": 7233
+    },
+    {
+      "path": "architecture/IMPLEMENTATION.md",
+      "git_blob_sha1": "4dddea5efcc383545fd632acec93651740642eb5",
+      "size_bytes": 4208
+    },
+    {
+      "path": "architecture/INV.md",
+      "git_blob_sha1": "eb69041ef2c9570cda41ed9d07924ace653dbd16",
+      "size_bytes": 15447
+    },
+    {
+      "path": "architecture/INVARIANTS.md",
+      "git_blob_sha1": "3d5250869faa3ab2218b1cac830c82716385e274",
+      "size_bytes": 4114
+    },
+    {
+      "path": "architecture/SYSTEM.md",
+      "git_blob_sha1": "ba447b3425e675f46f0d9ade7ab9de50fdc49395",
+      "size_bytes": 9907
+    },
+    {
+      "path": "architecture/THEORY.md",
+      "git_blob_sha1": "09675ca3ebeb01a1899539e53be274a06a7e83a0",
+      "size_bytes": 5489
+    },
+    {
+      "path": "archive/README_BEFORE_V177_1_CLEANUP.md",
+      "git_blob_sha1": "ec1684cffb6b23180520d3635cc0cae7bd0839da",
+      "size_bytes": 32618
+    },
+    {
+      "path": "archive/ROADMAP_PRE_V170.md",
+      "git_blob_sha1": "e48dbf8f1375b2f7699a581181f5d6a6d0f3b1d2",
+      "size_bytes": 1093
+    },
+    {
+      "path": "BULK_MERGE_FORK_GUIDE.md",
+      "git_blob_sha1": "4f6e55c952ba6d7054accdfbb7a1e53cc45de9fb",
+      "size_bytes": 5475
+    },
+    {
+      "path": "CAPABILITIES.md",
+      "git_blob_sha1": "70c59ec53cb95ff54f8ead334e7921a2297dd0ff",
+      "size_bytes": 3693
+    },
+    {
+      "path": "CI_VALIDATION_BOUNDARIES.md",
+      "git_blob_sha1": "0c620e41f48c44458d67f97e96894dc250c42b7e",
+      "size_bytes": 3087
+    },
+    {
+      "path": "CITATION_AND_ATTRIBUTION.md",
+      "git_blob_sha1": "316dbf6f21b1d3ee4721caabb69177dd23e3f231",
+      "size_bytes": 2589
+    },
+    {
+      "path": "contributing/AUDIT_CHECKLIST.md",
+      "git_blob_sha1": "c2d4505bfa29d921f700ae32b4ea17fe617256f1",
+      "size_bytes": 6418
+    },
+    {
+      "path": "contributing/IMPLEMENTATION_RULES.md",
+      "git_blob_sha1": "ec9ba183b0e94f966f981b038541b6a611f74bbd",
+      "size_bytes": 8368
+    },
+    {
+      "path": "contributing/UPGRADE_CHECKLIST.md",
+      "git_blob_sha1": "77abf6f6abc9f6f7ab7331d3cc577e9ce46cc151",
+      "size_bytes": 248
+    },
+    {
+      "path": "CROSS_ERA_MIGRATION_AND_SELECTION.md",
+      "git_blob_sha1": "0be8e428548e4e76e74c1bf81667b91191ce3c88",
+      "size_bytes": 7817
+    },
+    {
+      "path": "CROSSBAR_COMMON_CONTROL.md",
+      "git_blob_sha1": "0c89988d182f5d6349900c6f53aea41c162e3ce0",
+      "size_bytes": 8389
+    },
+    {
+      "path": "CROSSBAR_CONTENTION.md",
+      "git_blob_sha1": "a0ae5f3bd709afb19035742b2e8d551c68d1cbaa",
+      "size_bytes": 11081
+    },
+    {
+      "path": "CROSSBAR_CONTINUITY.md",
+      "git_blob_sha1": "33af2b11cb8547e1b3784124e530acfa0d164e88",
+      "size_bytes": 8595
+    },
+    {
+      "path": "CROSSBAR_COORDINATE_MATRIX.md",
+      "git_blob_sha1": "d85a11d34e24c1273f295ea309e87adf94fe6bc2",
+      "size_bytes": 4432
+    },
+    {
+      "path": "CROSSBAR_MULTISTAGE_SELECTION.md",
+      "git_blob_sha1": "eb3a417a85f0b082b4cb24ba2442e9c814502e64",
+      "size_bytes": 10749
+    },
+    {
+      "path": "DIGITAL_TIME_DIVISION_SWITCHING.md",
+      "git_blob_sha1": "19ac6639dc3e78cfeef0b2599860fd9e488d07ac",
+      "size_bytes": 13797
+    },
+    {
+      "path": "ESS_CALL_PROCESSING.md",
+      "git_blob_sha1": "d278b17c60b42ecffb150a1bcbae90cce8ecbd41",
+      "size_bytes": 14882
+    },
+    {
+      "path": "ESS_STORED_PROGRAM_SKELETON.md",
+      "git_blob_sha1": "27acc906436dfa071773a0d9c81a5c7d70cbae29",
+      "size_bytes": 8371
+    },
+    {
+      "path": "experiments.md",
+      "git_blob_sha1": "f49d30fdc62a98f7e98e459b554f7520b1113375",
+      "size_bytes": 4475
+    },
+    {
+      "path": "guides/EXPERIMENTS.md",
+      "git_blob_sha1": "8806233497aa4b9dd9930422f3bdedd3b707f274",
+      "size_bytes": 5807
+    },
+    {
+      "path": "guides/INSTALL.md",
+      "git_blob_sha1": "0cca92269f4ba214a964d28e18c85bf7f72b34ac",
+      "size_bytes": 3116
+    },
+    {
+      "path": "guides/QISKIT_INTEGRATION.md",
+      "git_blob_sha1": "45479b8d0fbfd4f75d5482849c9572e43ee7cde8",
+      "size_bytes": 5682
+    },
+    {
+      "path": "guides/QUICKSTART.md",
+      "git_blob_sha1": "54405b4c4f1e62589a77a461a6d46b1a18e6c471",
+      "size_bytes": 1646
+    },
+    {
+      "path": "guides/USAGE_GUIDE.md",
+      "git_blob_sha1": "c4a4ad8d257de211e8d2b0fc2041dcf74ca71bc3",
+      "size_bytes": 5799
+    },
+    {
+      "path": "guides/USAGE.md",
+      "git_blob_sha1": "73e9e8904087bc17ad6d38b4db7700cab6336c7b",
+      "size_bytes": 3735
+    },
+    {
+      "path": "INTEROP_POLICY.md",
+      "git_blob_sha1": "97782a410320d2b6804e878fd2810d53259ffcd0",
+      "size_bytes": 3753
+    },
+    {
+      "path": "IRC_BOT_GUIDE.md",
+      "git_blob_sha1": "98edd67e689aa530f0fd01b50273a764bd6a8ae7",
+      "size_bytes": 1726
+    },
+    {
+      "path": "labs/acoustic-evidence.html",
+      "git_blob_sha1": "fe4a36eb77000c19282c40c0551c1db6c86fe8f2",
+      "size_bytes": 8793
+    },
+    {
+      "path": "labs/acoustic-evidence.js",
+      "git_blob_sha1": "764080a95d902e108ad304212f7285c4737c13f4",
+      "size_bytes": 25082
+    },
+    {
+      "path": "labs/digital/index.html",
+      "git_blob_sha1": "a124e8276cce15d1ad8af256e9258ada377d3770",
+      "size_bytes": 38899
+    },
+    {
+      "path": "labs/packet/index.html",
+      "git_blob_sha1": "14030d6b31c367647d81620867e7b462b910acaa",
+      "size_bytes": 47308
+    },
+    {
+      "path": "LEGAL_THIRD_PARTY.md",
+      "git_blob_sha1": "e4ca137198e6fe577fa9a9e3baabf7cdde34816e",
+      "size_bytes": 4687
+    },
+    {
+      "path": "migration_v3.0.1.md",
+      "git_blob_sha1": "88aabab1fdb006b9f711adc621e96956f537dfba",
+      "size_bytes": 1354
+    },
+    {
+      "path": "MIRROR_REPOS_GUIDE.md",
+      "git_blob_sha1": "b2383394b526bb1f69e7355ea708088e20f55574",
+      "size_bytes": 3658
+    },
+    {
+      "path": "NB_EIGENSOLVER_REPRODUCIBILITY.md",
+      "git_blob_sha1": "7508ea49e5d27d3807ce8f78aeaab5fa96db186f",
+      "size_bytes": 3637
+    },
+    {
+      "path": "nb_gradient_mutation.md",
+      "git_blob_sha1": "5dce5163193d047008615aa2dd954ff05effa694",
+      "size_bytes": 2179
+    },
+    {
+      "path": "NEXUS_QEC_BRIDGE.md",
+      "git_blob_sha1": "e7185c13d157a8d175ad22778d2248827663bb4a",
+      "size_bytes": 9513
+    },
+    {
+      "path": "nvidia_coherent_memory.md",
+      "git_blob_sha1": "9ca1217a0fd8f9fd167bab2345b71eaf934e5c0a",
+      "size_bytes": 20189
+    },
+    {
+      "path": "PACKET_FABRIC_AND_SOFTSWITCH.md",
+      "git_blob_sha1": "1b94da367358598092037550f460eb437a7e480b",
+      "size_bytes": 16350
+    },
+    {
+      "path": "PANEL_SEPARATED_CONTROL_EXCHANGE.md",
+      "git_blob_sha1": "4e3923039d56473e99887ddeee9e5cba91ff77d8",
+      "size_bytes": 3323
+    },
+    {
+      "path": "phase_diagrams.md",
+      "git_blob_sha1": "5185a9e004178560d38fca57e18c6c6c4c218553",
+      "size_bytes": 4541
+    },
+    {
+      "path": "proof_artifact_schema.md",
+      "git_blob_sha1": "d013427d60b1b106dd11766e305fc15cdd6ea915",
+      "size_bytes": 651
+    },
+    {
+      "path": "QEC_v1.6_Benchmarking_Overview.md",
+      "git_blob_sha1": "cbbadaf325c8aba9208672256a187028fa3a7540",
+      "size_bytes": 1744
+    },
+    {
+      "path": "QUQUART_FER_BATTERY.md",
+      "git_blob_sha1": "6a3a82e948c2a2494f80db57d4992d6df3ee907b",
+      "size_bytes": 6918
+    },
+    {
+      "path": "QUQUART_FOUR_STATE_QEC.md",
+      "git_blob_sha1": "27d9a167a730b500f07348f71c4865f53049cad4",
+      "size_bytes": 4894
+    },
+    {
+      "path": "QUTRIT_CONSTRUCTION_BENCHMARK.md",
+      "git_blob_sha1": "9dcfe3a4887effc7e465b7e45fcf64bbd9368b86",
+      "size_bytes": 9098
+    },
+    {
+      "path": "QUTRIT_DECODER_BENCHMARKS.md",
+      "git_blob_sha1": "6e5776633b88d3f86dcc43dfb66d459d87127e15",
+      "size_bytes": 6659
+    },
+    {
+      "path": "QUTRIT_HARMONIC_QEC.md",
+      "git_blob_sha1": "0b6fce1de7462c03349666dbc5bffe38f7e60daa",
+      "size_bytes": 5233
+    },
+    {
+      "path": "README.md",
+      "git_blob_sha1": "37486fbd429578dfccd67f3ebf9ab2dc1b8babc4",
+      "size_bytes": 3856
+    },
+    {
+      "path": "releases/CHANGELOG.md",
+      "git_blob_sha1": "d488865110740929a26023dedce5aba85e68120f",
+      "size_bytes": 11338
+    },
+    {
+      "path": "releases/RELEASE_NOTES.md",
+      "git_blob_sha1": "e7ef50636a0457ef60ab2a79d9c4e5a00ae36b65",
+      "size_bytes": 3999
+    },
+    {
+      "path": "replications/NEXUS_HISTORICAL_SOURCE_BOUNDARY.md",
+      "git_blob_sha1": "d7e7df4d8644634b661d2256bdefce9e319f45bb",
+      "size_bytes": 1287
+    },
+    {
+      "path": "replications/nexus_v4_0_1_qbraid_receipt.json",
+      "git_blob_sha1": "39511b4ccd512fba844881c3272fc52f1731567f",
+      "size_bytes": 2957
+    },
+    {
+      "path": "replications/NEXUS_V4_0_1_QBRAID.md",
+      "git_blob_sha1": "57aff1a3a7ebd87dec14fcd5290dfc9b56228e2f",
+      "size_bytes": 5071
+    },
+    {
+      "path": "replications/qbraid_v170_1_0_receipt.json",
+      "git_blob_sha1": "9848adafbf5daa799d8ff5bdce6d4f2ba40140dc",
+      "size_bytes": 2943
+    },
+    {
+      "path": "replications/QBRAID_V170_1_0_REPLICATION.md",
+      "git_blob_sha1": "7640b6d17d10366dc082fb5ff5edc194488926f6",
+      "size_bytes": 3103
+    },
+    {
+      "path": "reports/v5.5_spectral_boundary_alignment.md",
+      "git_blob_sha1": "9cc5a794d43da03d85349faff05fd7ff6e453149",
+      "size_bytes": 5337
+    },
+    {
+      "path": "reports/v5.6_spectral_trapping_sets.md",
+      "git_blob_sha1": "1a92fbae1afc79a5e490112407d5fb4db93b777f",
+      "size_bytes": 5971
+    },
+    {
+      "path": "reports/v5.7_bp_phase_space_and_ternary_topology.md",
+      "git_blob_sha1": "33886da25a959ebf225542158f67fc56ae4c7ffd",
+      "size_bytes": 7145
+    },
+    {
+      "path": "reports/v5.8_ternary_basin_analysis.md",
+      "git_blob_sha1": "bd8c9330a81ef03b90b99816206385ef08ff5dcf",
+      "size_bytes": 6517
+    },
+    {
+      "path": "reports/v5.9_decoder_phase_diagrams.md",
+      "git_blob_sha1": "e8e810add858c3b38047b765f067c39303abb8b1",
+      "size_bytes": 6854
+    },
+    {
+      "path": "reports/v6_bp_stability_spectra.md",
+      "git_blob_sha1": "04bdc8559a5b433300a1480a9ae2d7e92a742f78",
+      "size_bytes": 8601
+    },
+    {
+      "path": "REPRODUCIBILITY.md",
+      "git_blob_sha1": "104e7d114c1bbb3601a15c06627a7f6aeb767459",
+      "size_bytes": 3723
+    },
+    {
+      "path": "research/CSS_AND_DELIVERY_EXPERIMENTS.md",
+      "git_blob_sha1": "c772ff963e9047f9c957290db3ec7ca9b555f43f",
+      "size_bytes": 5056
+    },
+    {
+      "path": "research/qec-v170.3.0-independent-fer-verification/CITATION.cff",
+      "git_blob_sha1": "c4194ae817f3978144638b09366e12a781181e1b",
+      "size_bytes": 874
+    },
+    {
+      "path": "research/qec-v170.3.0-independent-fer-verification/package_manifest.json",
+      "git_blob_sha1": "b81b49836d30c105a65c0368c2f8f6341bb74a77",
+      "size_bytes": 929
+    },
+    {
+      "path": "research/qec-v170.3.0-independent-fer-verification/README.md",
+      "git_blob_sha1": "fa6d502306599a62ba105f7c9888b3b6d14d0945",
+      "size_bytes": 1687
+    },
+    {
+      "path": "research/qec-v170.3.0-independent-fer-verification/REPORT.md",
+      "git_blob_sha1": "b467b4f86210ff7665817dc95d33e36de89d4424",
+      "size_bytes": 16668
+    },
+    {
+      "path": "research/qec-v170.3.0-independent-fer-verification/verification_receipt.json",
+      "git_blob_sha1": "a0c3dd644f9e7147024e883a3e696e6d7a888188",
+      "size_bytes": 2566
+    },
+    {
+      "path": "research/qec-v170.3.0-independent-fer-verification/zenodo_metadata.json",
+      "git_blob_sha1": "6f2e018460a08bb01cd8a5e48796e4fff2da692e",
+      "size_bytes": 2809
+    },
+    {
+      "path": "research/qec-v170.3.0-independent-fer-verification/ZENODO_UPLOAD_GUIDE.md",
+      "git_blob_sha1": "855b88067643742cdf7b81ee3ce7c6f16bb18846",
+      "size_bytes": 1478
+    },
+    {
+      "path": "research/qec-v170.3.0-independent-fer-verification/ZENODO_UPLOAD_SHA256.txt",
+      "git_blob_sha1": "6a58117ff4c8b9dd4377217217521d9a8ce11888",
+      "size_bytes": 119
+    },
+    {
+      "path": "research/QUTRIT_CSS_DECOUPLING_CONFORMANCE.md",
+      "git_blob_sha1": "57de06ba891e00d0e28c5f4b040617065304fed6",
+      "size_bytes": 6544
+    },
+    {
+      "path": "roadmap/ROADMAP.md",
+      "git_blob_sha1": "e67efdb3de675c2e8350a175938a426ae9595d3e",
+      "size_bytes": 39672
+    },
+    {
+      "path": "roadmap/SWITCHING_ARTIFACT_REGISTRY.md",
+      "git_blob_sha1": "95fe4a42db63fa4998f83eb69bcafbda08ed5389",
+      "size_bytes": 11206
+    },
+    {
+      "path": "roadmap/SWITCHING_SAFETY_AND_ACCEPTANCE.md",
+      "git_blob_sha1": "9345e933d5a81a11a22eb64c3f76ba8c31d0af87",
+      "size_bytes": 7219
+    },
+    {
+      "path": "roadmap/TELECOM_SWITCHING_REFERENCES.md",
+      "git_blob_sha1": "77c34c3256ecd8f861b5165a8cab90f786482b68",
+      "size_bytes": 3578
+    },
+    {
+      "path": "security/PHASE621_OPERATIONAL_TRUST_ENFORCEMENT.md",
+      "git_blob_sha1": "71eddcd18d65abdc46f654357412881fa9179a27",
+      "size_bytes": 4081
+    },
+    {
+      "path": "security/PHASE622_REPLAY_AND_REVOCATION.md",
+      "git_blob_sha1": "05f5a2b9fa9252209195dbe8d055481b3adcd7a9",
+      "size_bytes": 5016
+    },
+    {
+      "path": "security/PHASE623_END_TO_END_ADVERSARIAL_TRIAL.md",
+      "git_blob_sha1": "c881a0138cee35ff8a64806d6ca2d9f0e4c35c8c",
+      "size_bytes": 4380
+    },
+    {
+      "path": "sonification/COSMOVIRUS_E8_PHI_SONIFICATION.md",
+      "git_blob_sha1": "b84e632a7ec26c97bab519fe27c2190d25aecf1a",
+      "size_bytes": 3693
+    },
+    {
+      "path": "spectral_basin_visualization.md",
+      "git_blob_sha1": "2408e5ea7f8aee78ba81c4c0cf2024f3afca8447",
+      "size_bytes": 1348
+    },
+    {
+      "path": "STROWGER_SYNDROME_EXCHANGE.md",
+      "git_blob_sha1": "29a4c59694f050221a111b2c9281c8e31a9b2c23",
+      "size_bytes": 4414
+    },
+    {
+      "path": "surface_memory_correlation.md",
+      "git_blob_sha1": "273fe304b4d9cc43dc1746e5e9aede49f040fe58",
+      "size_bytes": 7362
+    },
+    {
+      "path": "SWITCH_EQUIVALENCE_BATTERY.md",
+      "git_blob_sha1": "c06bb8da3e1c3073d7a6c978999235f3c5e876fb",
+      "size_bytes": 10500
+    },
+    {
+      "path": "trapping_set_prediction.md",
+      "git_blob_sha1": "92c3d766a8bbab70e92ab82a351d613ab9865192",
+      "size_bytes": 1809
+    },
+    {
+      "path": "v3.8.0_structural_geometry_plan.md",
+      "git_blob_sha1": "ddf76e9819b6bd14ad27b4ef50c43df366f5e0a8",
+      "size_bytes": 448
+    },
+    {
+      "path": "v3.8.1_structural_geometry_evaluation.md",
+      "git_blob_sha1": "18b3f1e5c115d849710bd1c44199c506e1123b1e",
+      "size_bytes": 277
+    }
+  ],
+  "excluded": [
+    {
+      "path": "releases/release_history.json",
+      "git_blob_sha1": "f5c4bdaef325a545e3ea10eac6e0714e47be16e9",
+      "size_bytes": 2866122,
+      "reason": "Large historical release-history dataset deliberately not copied; retrieve from pinned source"
+    },
+    {
+      "path": "roadmap/QEC_DETERMINISTIC_SWITCHING_MIND_MAP.jpg",
+      "git_blob_sha1": "a49028a5168d430b359d14f5339587820323534c",
+      "size_bytes": 12524,
+      "reason": "Binary JPEG retrieval unavailable through connected GitHub reader"
+    }
+  ]
+}
