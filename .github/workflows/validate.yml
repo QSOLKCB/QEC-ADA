@@ -248,6 +248,57 @@ jobs:
           if-no-files-found: error
           retention-days: 30
 
+      - name: Read-only checkout Simula UiB NISQEC matrix dataset (CC-BY-4.0)
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          repository: Simula-UiB/nisqec
+          ref: 913e0f26b07919ab73d7052159196599d34a2969
+          path: .donor-nisqec
+          sparse-checkout: |
+            QT/Tan2TNCb_10_2_32
+            QT/Tan2TNCb_45_7_80
+          sparse-checkout-cone-mode: true
+          persist-credentials: false
+          fetch-depth: 1
+
+      - name: Read-only checkout explicit QLDPC matrix source (licence unspecified)
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          repository: lilyxy/Check-weight-constrained-quantum-codes
+          ref: 0e6c3e281fe044315286fbdcf5295cb16f47f90d
+          path: .donor-explicit-qldpc
+          sparse-checkout: |
+            codes/hgp
+            codes/bivariate_bicycle
+            codes/lifted_product
+          sparse-checkout-cone-mode: true
+          persist-credentials: false
+          fetch-depth: 1
+
+      - name: Pinned external QLDPC CSS pairs and publisher-blocked evaluation
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p evidence/phase1h
+          python3 scripts/phase1h_external_css.py create \
+            evidence/phase1h/external_css.json \
+            --simula .donor-nisqec --explicit .donor-explicit-qldpc \
+            --qec .donor-qec-bp --execute-pinned-qec
+          python3 scripts/phase1h_external_css.py verify \
+            evidence/phase1h/external_css.json \
+            --simula .donor-nisqec --explicit .donor-explicit-qldpc \
+            --qec .donor-qec-bp --execute-pinned-qec
+          python3 -m unittest discover -s tests -p test_phase1h.py -v
+          sha256sum evidence/phase1h/external_css.json
+
+      - name: Retain derived-only external CSS research evidence (30 days)
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: qec-ada-phase1h-${{ github.sha }}
+          path: evidence/phase1h/external_css.json
+          if-no-files-found: error
+          retention-days: 30
+
       - name: Observational paired OPT benchmark (no speedup gate)
         run: python3 scripts/bench_qutrit.py --trials 7
 
