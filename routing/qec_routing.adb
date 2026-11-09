@@ -13,7 +13,7 @@ package body QEC_Routing is
    end First_Free;
 
    function Route
-     (Address : Digits;
+     (Address : Address_Word;
       Linefinders, First_Bank, Second_Bank : Free_Map)
       return Selection is
       L : constant Natural := First_Free (Linefinders);

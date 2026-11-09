@@ -142,16 +142,16 @@ procedure QEC_ADA is
    procedure Check_Routing is
       Zero : constant QEC_Routing.Free_Map := (others => False);
       All_Free : constant QEC_Routing.Free_Map := (others => True);
-      Digits : constant QEC_Routing.Digits := (1, 2, 0, 1);
+      Address_Word : constant QEC_Routing.Address_Word := (1, 2, 0, 1);
    begin
-      if QEC_Routing.Route (Digits, Zero, All_Free, All_Free).Status
+      if QEC_Routing.Route (Address_Word, Zero, All_Free, All_Free).Status
            /= QEC_Routing.No_Linefinder
-        or else QEC_Routing.Route (Digits, All_Free, Zero, All_Free).Status
+        or else QEC_Routing.Route (Address_Word, All_Free, Zero, All_Free).Status
            /= QEC_Routing.No_First_Trunk
-        or else QEC_Routing.Route (Digits, All_Free, All_Free, Zero).Status
+        or else QEC_Routing.Route (Address_Word, All_Free, All_Free, Zero).Status
            /= QEC_Routing.No_Second_Trunk
         or else QEC_Routing.Route
-          (Digits, All_Free, All_Free, All_Free).Linefinder /= 1
+          (Address_Word, All_Free, All_Free, All_Free).Linefinder /= 1
       then
          raise Program_Error with "routing first-free and fail-closed";
       end if;
@@ -296,7 +296,7 @@ begin
      and then Argument (1) = "route"
    then
       declare
-         Address : constant QEC_Routing.Digits :=
+         Address : constant QEC_Routing.Address_Word :=
            (Parse_Trit (2), Parse_Trit (3),
             Parse_Trit (4), Parse_Trit (5));
          Linefinders : constant QEC_Routing.Free_Map := Parse_Mask (6);

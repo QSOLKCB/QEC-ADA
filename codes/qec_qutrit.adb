@@ -112,15 +112,15 @@ package body QEC_Qutrit is
       --  Independently enumerate all 3**4 stabilizer combinations;
       --  this is exact and avoids floating-point elimination/rank.
       Trial : Pauli;
-      Digits : Natural;
+      Address_Word : Natural;
       Coefficient : Trit;
    begin
       for Combination in 0 .. 80 loop
          Trial := Zero;
-         Digits := Combination;
+         Address_Word := Combination;
          for Row in Check_Index loop
-            Coefficient := Trit (Digits mod 3);
-            Digits := Digits / 3;
+            Coefficient := Trit (Address_Word mod 3);
+            Address_Word := Address_Word / 3;
             for Site in Site_Index loop
                Trial.X (Site) := Trial.X (Site)
                  + Coefficient * Check_X (Row, Site);

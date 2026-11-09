@@ -5,7 +5,7 @@ with QEC_GF3;
 package QEC_Routing is
    subtype Slot is Positive range 1 .. 4;
    type Free_Map is array (Slot) of Boolean;
-   type Digits is array (Positive range 1 .. 4) of QEC_GF3.Trit;
+   type Address_Word is array (Positive range 1 .. 4) of QEC_GF3.Trit;
    type Outcome is (Committed, No_Linefinder, No_First_Trunk,
                     No_Second_Trunk);
    type Selection is record
@@ -23,7 +23,7 @@ package QEC_Routing is
    --  No partial route or resource mutation is published on failure.
    function First_Free (Map : Free_Map) return Natural;
    function Route
-     (Address : Digits;
+     (Address : Address_Word;
       Linefinders, First_Bank, Second_Bank : Free_Map)
       return Selection;
 end QEC_Routing;
