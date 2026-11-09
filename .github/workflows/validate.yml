@@ -107,6 +107,19 @@ jobs:
       - name: Scaled native sparse spectral analytic and memory-capacity tests
         run: python3 -m unittest discover -s tests -p test_phase1e_scale.py -v
 
+      - name: Controlled binary BP experiments and graph-blocked evidence replay
+        shell: bash
+        run: |
+          set -euo pipefail
+          out="$(mktemp -d)"
+          trap 'rm -rf "$out"' EXIT
+          python3 -m unittest discover -s tests -p test_phase1e_bp.py -v
+          python3 scripts/phase1e_experiment.py run "$out/phase1e.json" \
+            --graphs 12 --trials 6 --variables 24 --checks 16 \
+            --seed qecada-phase1e-001 --noise-bps 400,800,1200
+          python3 scripts/phase1e_experiment.py verify "$out/phase1e.json"
+          sha256sum "$out/phase1e.json"
+
       - name: Observational paired OPT benchmark (no speedup gate)
         run: python3 scripts/bench_qutrit.py --trials 7
 
