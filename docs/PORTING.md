@@ -46,6 +46,14 @@ fixtures. Port one small decoder operation at a time. Validate syndrome,
 representative selection, invalid-input rejection and byte-level outputs.
 No incidental mutation of QEC's frozen baseline.
 
+## Phase 1C — Classical Strowger replay (proposed)
+
+- Use explicit immutable topology and source-bound initial state.
+- Add canonical event streams, deterministic pulses, no hidden work,
+  route/dark/check tone verification and independent receipt replay.
+- See [Phase 1C proposal](PHASE1C_STROWGER_PLAN.md).
+- No physical quantum-routing claim or automatic decoder replacement.
+
 ## Phase 3 — Formal proofs
 
 Use GNATprove on explicit SPARK proof obligations for finite ranges,
