@@ -17,3 +17,7 @@ __pycache__/
 # Temporary pinned QEC donor reference checkout and generated research evidence.
 .donor-qec-bp/
 evidence/
+
+# External matrix source checkouts, never included in QEC-ADA commits.
+.donor-nisqec/
+.donor-explicit-qldpc/

@@ -34,3 +34,15 @@ independently **reexecutes** the exact-source-bound cohort. These
 integration tests activate only with a separately pinned QEC checkout,
 NumPy and a completed receipt, without modifying core Ada regression
 results.
+
+## Phase 1H external CSS admission gates
+
+`test_phase1h.py` exercises strict dense binary and Matrix Market
+COO parsing, CSS GF(2) orthogonality and rank, exact source
+manifests, one-class metrics, and execution opt-in. In the pinned
+reference CI lane it also verifies all nine external H_X/H_Z
+matrix pairs, whole-publisher leakage separation, complete BP
+traces and the **full source-reexecution** of the receipt.
+The raw third-party matrices are never committed or uploaded;
+the derived-only artifact is not a redistribution grant for
+unlicensed source data.

@@ -90,3 +90,26 @@ separate pinned checkout; no QEC code is copied into QEC-ADA.
 CSS protograph attribution remains with QEC and its original
 references. Native mathematical, routing and sonification source
 files are not changed by this Phase 1G adapter.
+
+Phase 1H introduces independently written MPL-2.0 strict parsing,
+exact GF(2) CSS validation, publisher-blocked evaluation and
+source-bound replay for public, independently maintained
+parity-check matrices. No original data file or source implementation
+from these projects is copied into this repository.
+
+Source A: NISQEC: Noisy Intermediate-Scale Quantum Error Correction
+by Eugenio Durazo Rocha, Olai A. Mostad, Hsuan-Yin Lin and Eirik
+Rosnes, 2026, DOI 10.5281/zenodo.23378284, licensed CC BY 4.0;
+pinned Simula-UiB/nisqec commit
+913e0f26b07919ab73d7052159196599d34a2969.
+
+Source B: Check-weight-constrained quantum codes: Bounds and examples,
+public QLDPC matrix collection by Lily Wang, Andy Zeyi Liu,
+Ray Li, Aleksander Kubica and Shouzhen Gu, pinned
+lilyxy/Check-weight-constrained-quantum-codes commit
+0e6c3e281fe044315286fbdcf5295cb16f47f90d.
+No repository licence is identified for Source B. QEC-ADA
+neither redistributes its raw matrices nor asserts a licence
+to do so. Source Git blobs and attribution are recorded in
+fixtures/phase1h_external_css_sources.json. QEC's separate,
+opt-in pinned BP reference remains under its original licence.
