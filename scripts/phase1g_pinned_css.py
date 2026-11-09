@@ -47,6 +47,7 @@ CLAIMS = {
     "source_code_execution_requires_opt_in": True,
     "native_gf3_decoder_unchanged": True,
     "original_phase1e_negative_baseline_preserved": True,
+    "duplicate_topologies_pretrial_deduplicated": True,
     "cross_decoder_update_equations_identical": False,
     "generalizable_prediction_validated": False,
     "physical_quantum_hardware_evidence": False,
@@ -127,9 +128,15 @@ def css_orthogonal(x: list[int], z: list[int]) -> bool:
                for a in x for b in z)
 
 
-def create_source_codes(module, np) -> list[dict]:
-    """Immutable family-split preregistration, no heldout-driven selection."""
+def create_source_codes(module, np) -> tuple[list[dict], list[dict]]:
+    """Predeclared 24 candidates; deterministic first-topology ownership.
+
+    Duplicate *within-family* seeds are recorded, not trialled as
+    independent graphs. A duplicate across families is a hard split leak.
+    Exclusions occur before noise/decoder outcomes are computed.
+    """
     codes = []
+    exclusions: list[dict] = []
     topology_owner: dict[str, int] = {}
     for family in ORDER:
         for lift in LIFTS[family]:
@@ -149,10 +156,18 @@ def create_source_codes(module, np) -> list[dict]:
                 source_bytes = ref.canonical_graph(nz, mz, hz)
                 source_hash = digest(source_bytes)
                 if source_hash in topology_owner:
-                    raise ValueError(
-                        "duplicate Tanner topology: refusing pseudoreplication "
-                        f"of ids {topology_owner[source_hash]} and {len(codes)}"
-                    )
+                    first_id = topology_owner[source_hash]
+                    if codes[first_id]["family"] != family:
+                        raise ValueError(
+                            "train/heldout or cross-family duplicate topology"
+                        )
+                    exclusions.append({
+                        "family": family, "lift": lift, "seed": seed,
+                        "hz_graph_sha256": source_hash,
+                        "same_as_admitted_code_id": first_id,
+                        "reason": "EXACT_DUPLICATE_TOPOLOGY_PRE_TRIAL",
+                    })
+                    continue
                 topology_owner[source_hash] = len(codes)
                 codes.append({
                     "id": len(codes),
@@ -171,10 +186,11 @@ def create_source_codes(module, np) -> list[dict]:
                         "n": nz, "m": mz, "edges": hz,
                     })),
                 })
-    if len(codes) != 24 or \
-            sum(code["split"] == "heldout" for code in codes) != 8:
-        raise ValueError("source family/block split mismatch")
-    return codes
+    if len(codes) + len(exclusions) != 24 or \
+            sum(code["split"] == "heldout" for code in codes) < 4 or \
+            sum(code["split"] == "train" for code in codes) < 8:
+        raise ValueError("source candidate admission coverage mismatch")
+    return codes, exclusions
 
 
 def trial_rows(codes: list[dict], seed: str):
@@ -220,7 +236,8 @@ def measure_qec(module, np, codes, trials):
         results.append(qec.run_case(
             module.bp_decode, np, graph, input_row, ITERATIONS
         ))
-    if len(results) != 8 * len(NOISE_BPS) * QEC_TRIALS:
+    heldout_count = sum(c["split"] == "heldout" for c in codes)
+    if len(results) != heldout_count * len(NOISE_BPS) * QEC_TRIALS:
         raise ValueError("QEC reference matched-sample coverage mismatch")
     return results
 
@@ -292,6 +309,8 @@ def graph_bootstrap(codes, trials, noise, seed, resamples=BOOTSTRAPS):
 
 def analyze(codes, trials, qec_records, source_identity):
     analysis = {}
+    train_count = sum(code["split"] == "train" for code in codes)
+    heldout_count = sum(code["split"] == "heldout" for code in codes)
     for noise in NOISE_BPS:
         train = [r for r in trials if
                  codes[r["code_id"]]["split"] == "train"
@@ -299,7 +318,8 @@ def analyze(codes, trials, qec_records, source_identity):
         held = [r for r in trials if
                 codes[r["code_id"]]["split"] == "heldout"
                 and r["noise_bps"] == noise]
-        if len(train) != 16 * TRIALS or len(held) != 8 * TRIALS:
+        if len(train) != train_count * TRIALS or \
+                len(held) != heldout_count * TRIALS:
             raise ValueError("family split counts incorrect")
         metrics = {}
         for feature in FEATURES:
@@ -318,8 +338,8 @@ def analyze(codes, trials, qec_records, source_identity):
         references = [r for r in qec_records
                       if r["noise_bps"] == noise]
         analysis[str(noise)] = {
-            "train_code_instances": 16,
-            "heldout_code_instances": 8,
+            "train_code_instances": train_count,
+            "heldout_code_instances": heldout_count,
             "train_failures": sum(r["bp"]["frame_failure"] for r in train),
             "heldout_failures": sum(r["bp"]["frame_failure"] for r in held),
             "train_trials": len(train),
@@ -363,7 +383,7 @@ def analyze(codes, trials, qec_records, source_identity):
 
 def make(donor: Path) -> dict:
     module, np, source_digest = import_pinned(donor)
-    codes = create_source_codes(module, np)
+    codes, exclusions = create_source_codes(module, np)
     # Every topology from genuine pinned QEC CSS construction.
     with tempfile.TemporaryDirectory(prefix="qecada-1g-") as folder:
         path = Path(folder) / "graph.txt"
@@ -397,6 +417,9 @@ def make(donor: Path) -> dict:
             "python_version": sys.version.split()[0],
             "numpy_version": np.__version__,
             "rate_families": list(ORDER),
+            "candidate_configurations": 24,
+            "admitted_unique_topologies": len(codes),
+            "duplicate_configurations_excluded": len(exclusions),
             "lifting_sizes": {key: list(LIFTS[key]) for key in ORDER},
             "construction_seeds": list(SEEDS),
             "heldout_rule": "rate_0.75_only",
@@ -409,6 +432,7 @@ def make(donor: Path) -> dict:
         },
         "baseline_phase1e_sha256": BASELINE_SHA,
         "topologies": codes,
+        "duplicate_candidates": exclusions,
         "bp_trials": trials,
         "qec_reference_records": qec_cases,
         "evaluation": report,
@@ -427,7 +451,8 @@ def verify(raw: bytes, donor: Path) -> dict:
     source = json.loads(raw.decode("utf-8"), object_pairs_hook=unique_pairs)
     if type(source) is not dict or set(source) != {
         "schema", "generator", "baseline_phase1e_sha256",
-        "topologies", "bp_trials", "qec_reference_records",
+        "topologies", "duplicate_candidates", "bp_trials",
+        "qec_reference_records",
         "evaluation", "claim_boundary", "sha256",
     } or source["schema"] != SCHEMA:
         raise ValueError("cohort receipt schema mismatch")
@@ -464,7 +489,11 @@ def main() -> int:
             with args.output.open("xb") as destination:
                 destination.write(canonical(receipt) + b"\n")
             print("PASS verified pinned QEC/CSS topology cohort")
-            print("code_instances=" + str(len(receipt["topologies"])))
+            print("predeclared_candidates=24")
+            print("unique_code_topologies=" +
+                  str(len(receipt["topologies"])))
+            print("pre_trial_exact_duplicate_exclusions=" +
+                  str(len(receipt["duplicate_candidates"])))
             print("bp_trials=" + str(len(receipt["bp_trials"])))
             print("qec_reference_cases=" + str(
                 len(receipt["qec_reference_records"])))
